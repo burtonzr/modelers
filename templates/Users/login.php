@@ -1,14 +1,15 @@
 <div class="users form">
     <?= $this->Flash->render() ?>
-    <h3>Login</h3>
+    <h1 style="text-align: center;">Login</h1>
     <?= $this->Form->create(null, array('class' => 'class', 'autocomplete' => false)) ?>
     <fieldset>
-        <legend><?= __('Please enter your username and password') ?></legend>
+        <legend style="font-size: 18px;"><?= __('Please enter your username and password') ?></legend>
         <?= $this->Form->control('email', ['required' => true]) ?>
         <?= $this->Form->control('password', ['required' => true, 'autocomplete' => false]) ?>
     </fieldset>
-    <?= $this->Form->submit(__('Login')); ?>
-    <?= $this->Form->end() ?>
-
-    <?= $this->Html->link("Add User", ['action' => 'add']) ?>
+    <?php
+        echo $this->Form->button('Login', ['class' => 'loginButton btn btn-danger btn-block']);
+        /*echo $this->Html->link('Register', ['action' => 'add', ['class' => 'btn btn-success']]);*/
+        echo $this->Form->end();
+    ?>
 </div>

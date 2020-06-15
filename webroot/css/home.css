@@ -22,15 +22,22 @@ img {
 h1 {
     font-weight: bold;
 }
+
 ul {
     list-style-type: none;
     margin: 0 0 30px 0;
     padding-left: 25px;
 }
+
 a {
     color: #0071BC;
-    text-decoration: underline;
+    text-decoration: none;
 }
+
+a:hover {
+    text-decoration: none;
+}
+
 hr {
     border-bottom: 1px solid #e7e7e7;
     border-top: 0;
@@ -62,11 +69,17 @@ hr {
     color: #88c671;
     content: "\0056";
 }
+
 .problem:before {
     color: #d33d44;
     content: "\0057";
 }
+
 .cake-error {
     padding: 10px;
     margin: 10px 0;
+}
+
+.loginButton {
+    font-size: 18px;
 }
