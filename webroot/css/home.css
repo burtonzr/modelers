@@ -65,6 +65,7 @@ hr {
     -moz-osx-font-smoothing: grayscale;
     vertical-align: -1px;
 }
+
 .success:before {
     color: #88c671;
     content: "\0056";
@@ -88,4 +89,9 @@ hr {
 .registerButton {
     font-size: 18px;
     padding: .375rem .75rem;
+}
+
+body > nav {
+    margin-top: -60px;
+    margin-bottom: 20px;
 }

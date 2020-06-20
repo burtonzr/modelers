@@ -58,10 +58,10 @@
                         <a class="nav-link" href="#">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Login / Create Account</a>
+                        <a class="nav-link" href="http://localhost/modelers/users/login">Login / Create Account</a>
                     </li>
                     <li class="nav-item">
-                        <?= $this->Html->link(__('List Users'), ['action' => 'index'], ['class' => 'nav-link']) ?>
+                        <?= $this->Html->link(__('Users'), ['action' => 'index'], ['class' => 'nav-link']) ?>
                     </li>
                 </ul>
             </div>

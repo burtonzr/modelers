@@ -25,7 +25,12 @@ class AppController extends Controller {
             'loginRedirect' => [
                 'controller' => 'Users',
                 'action' => 'index'
-            ]
+            ],
+            'logoutRedirect' => [
+                'controller' => 'Users',
+                'action' => 'login'
+            ],
+            'storage' => 'Session'
         ]);
 
         //$this->loadComponent('FormProtection');
