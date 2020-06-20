@@ -1,33 +1,55 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\User $user
- */
-?>
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List Users'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+            <h1 style="text-align: center;">Create Account</h1>
         </div>
     </aside>
-    <div class="column-responsive column-80">
-        <div class="users form content">
-            <?= $this->Form->create($user) ?>
-            <fieldset>
-                <legend><?= __('Add User') ?></legend>
+    <div class="container content">
+        <?= $this->Form->create($user) ?>
+        <div class="row">
+            <div class="col-12 col-sm-6 mt-3">
                 <?php
-                    echo $this->Form->control('forum_user');
-                    echo $this->Form->control('email');
-                    echo $this->Form->control('public_yn');
                     echo $this->Form->control('name');
-                    echo $this->Form->control('last_ip');
-                    echo $this->Form->control('status_id', ['options' => $statuses]);
+                ?>
+            </div>
+            <div class="col-12 col-sm-6 mt-3">
+                <?php
+                    echo $this->Form->control('email');
+                ?>
+            </div>  
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6 mt-3">
+                <?php
                     echo $this->Form->control('password');
                 ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
+            </div>
+            <div class="col-12 col-sm-6 mt-3">
+                <?php
+                    echo $this->Form->control('forum_user');
+                ?>
+            </div>  
         </div>
+        <div class="row">
+            <div class="col-12 col-sm-6 mt-3">
+                <?php
+                    echo $this->Form->control('last_ip');
+                ?>
+            </div>
+            <div class="col-12 col-sm-6 mt-5" style="padding-top: 30px;">
+                <?php
+                    echo $this->Form->control('public_yn');
+                ?>
+            </div>  
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6 mt-3">
+                <?php
+                    echo $this->Form->control('status_id', ['options' => $statuses]);
+                ?>
+            </div>
+        </div>
+        <?= $this->Form->button(__('Create Account'), ['class' => 'loginButton btn btn-danger btn-block mt-3']) ?>
+        <?= $this->Form->end() ?>
     </div>
 </div>

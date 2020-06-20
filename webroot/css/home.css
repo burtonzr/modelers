@@ -81,5 +81,11 @@ hr {
 }
 
 .loginButton {
+    font-size: 20px;
+    text-transform: capitalize;
+}
+
+.registerButton {
     font-size: 18px;
+    padding: .375rem .75rem;
 }
