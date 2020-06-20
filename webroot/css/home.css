@@ -10,15 +10,19 @@
     font-weight: normal;
     font-style: normal;
 }
+
 body {
     padding: 60px 0;
 }
+
 header {
     margin-bottom: 60px;
 }
+
 img {
     margin-bottom: 30px;
 }
+
 h1 {
     font-weight: bold;
 }
@@ -47,14 +51,17 @@ hr {
 .text-center {
     text-align: center;
 }
+
 .links a {
     margin-right: 10px;
 }
+
 .release-name {
     color: #D33C43;
     font-weight: 400;
     font-style: italic;
 }
+
 .bullet:before {
     font-family: 'cakefont', sans-serif;
     font-size: 18px;
@@ -91,7 +98,26 @@ hr {
     padding: .375rem .75rem;
 }
 
+.logout {
+    padding: 0 3.0rem;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    height: 3.8rem;
+    letter-spacing: .1rem;
+    line-height: 3.8rem;
+    border: 0.1rem solid #ffc107;
+    border-radius: .4rem;
+}
+
 body > nav {
     margin-top: -60px;
     margin-bottom: 20px;
+}
+
+.nav-item {
+    padding: 8px;
+    font-size: 15px;
 }

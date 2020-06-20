@@ -1,5 +1,5 @@
 <?php
-    $cakeDescription = 'CakePHP: the rapid development php framework';
+    $cakeDescription = 'The Model Gallery';
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,15 +29,14 @@
         <?= $this->fetch('script') ?>
     </head>
     <body>
-        <nav class="navbar navbar-expand-sm bg-danger navbar-dark">
-            <a class="navbar-brand" href="/">The Model Gallery</a>
+        <nav class="navbar navbar-expand-md bg-danger navbar-dark">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/modelers">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Reviews</a>
@@ -45,23 +44,36 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Features</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Gallery</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Gallery
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Aircraft</a>
+                            <a class="dropdown-item" href="#">Armor</a>
+                            <a class="dropdown-item" href="#">Automotive</a>
+                            <a class="dropdown-item" href="#">Dioramas</a>
+                            <a class="dropdown-item" href="#">Figures</a>
+                            <a class="dropdown-item" href="#">Naval</a>
+                            <a class="dropdown-item" href="#">Spacecraft / Sci-Fi</a>
+                            <a class="dropdown-item" href="#">Trains</a>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Forum</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Archives</a>
+                        <a target="_blank" class="nav-link" href="http://www.modelshipgallery.com/gallery/index-gallery.html">Archives</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost/modelers/users/login">Login / Create Account</a>
+                        <a class="nav-link" href="http://localhost/modelers/users/login">Login / Register</a>
                     </li>
                     <li class="nav-item">
-                        <?= $this->Html->link(__('Users'), ['action' => 'index'], ['class' => 'nav-link']) ?>
+                        <a class="nav-link" href="http://localhost/modelers/users">Users</a>
+                        <!--- $this->Html->link(__('Users'), ['action' => 'index'], ['class' => 'nav-link']) --->
                     </li>
                 </ul>
             </div>
