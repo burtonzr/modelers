@@ -13,7 +13,7 @@
             echo $this->Form->end();
         ?>
         <?php
-            echo $this->Html->link(__('New User'), ['action' => 'add'], ['class' => 'registerButton btn btn-success btn-block']);
+            echo $this->Html->link(__('Create Account'), ['action' => 'add'], ['class' => 'registerButton btn btn-success btn-block']);
         ?>
     </div>
 </div>

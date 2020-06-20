@@ -14,7 +14,7 @@
         );
     endif;
 
-    $cakeDescription = 'CakePHP: the rapid development PHP framework';
+    $cakeDescription = 'The Model Gallery';
 ?>
 <!DOCTYPE html>
 <html>
@@ -51,10 +51,10 @@
                     <a class="nav-link" href="/modelers">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Reviews</a>
+                    <a class="nav-link" href="/modelers/pages/review">Reviews</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
+                    <a class="nav-link" href="/modelers/pages/feature">Features</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -72,7 +72,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Forum</a>
+                    <a target="_blank" class="nav-link" href="http://www.shipmodels.info/mws_forum/index.php">Forum</a>
                 </li>
                 <li class="nav-item">
                     <a target="_blank" class="nav-link" href="http://www.modelshipgallery.com/gallery/index-gallery.html">Archives</a>
@@ -81,10 +81,14 @@
                     <a class="nav-link" href="#">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost/modelers/users/login">Login / Register</a>
+                    <a>
+                        <?php echo $this->Html->link('Login / Register', array('controller' => 'users', 'action' => 'login'), array('title' => 'Login / Register','class' => 'nav-link'));?>
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost/modelers/users">Users</a>
+                    <a>
+                        <?php echo $this->Html->link('Users', array('controller' => 'users', 'action' => 'index'), array('title' => 'Users', 'class' => 'nav-link'));?>
+                    </a> 
                 </li>
             </ul>
         </div>
