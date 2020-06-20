@@ -1,5 +1,8 @@
 <?php
     $cakeDescription = 'The Model Gallery';
+
+    $c_name = $this->request->getParam('controller');
+    $a_name = $this->request->getParam('action');
 ?>
 <!DOCTYPE html>
 <html>
@@ -44,20 +47,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/modelers/pages/feature">Features</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Gallery
+                    <li class="nav-item">
+                        <a>
+                            <?php 
+                                echo $this->Html->link('Gallery', array('controller' => 'ModelTypes', 'action' => 'index'), array('title' => 'Gallery', 'class' => 'nav-link'));
+                            ?>
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Aircraft</a>
-                            <a class="dropdown-item" href="#">Armor</a>
-                            <a class="dropdown-item" href="#">Automotive</a>
-                            <a class="dropdown-item" href="#">Dioramas</a>
-                            <a class="dropdown-item" href="#">Figures</a>
-                            <a class="dropdown-item" href="#">Naval</a>
-                            <a class="dropdown-item" href="#">Spacecraft / Sci-Fi</a>
-                            <a class="dropdown-item" href="#">Trains</a>
-                        </div>
                     </li>
                     <li class="nav-item">
                         <a target="_blank" class="nav-link" href="http://www.shipmodels.info/mws_forum/index.php">Forum</a>
@@ -66,7 +61,7 @@
                         <a target="_blank" class="nav-link" href="http://www.modelshipgallery.com/gallery/index-gallery.html">Archives</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="/modelers/pages/contact">Contact</a>
                     </li>
                     <li class="nav-item">
                         <a>

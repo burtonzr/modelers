@@ -13,14 +13,12 @@ $routes->scope('/', function (RouteBuilder $builder) {
     ]));
 
     $builder->applyMiddleware('csrf');
-
     $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
     $builder->connect('/pages/contact', ['controller' => 'Pages', 'action' => 'display', 'contact']);
     $builder->connect('/pages/feature', ['controller' => "Pages", 'action' => 'display', 'feature']);
     $builder->connect('/pages/review', ['controller' => 'Pages', 'action' => 'display', 'review']);
-
     $builder->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
-
+    $builder->connect('/submissions', ['controller' => 'Submissions', 'action' => 'index']);
     $builder->connect('/users/login', ['controller' => 'Users', 'action' => 'login']);
     $builder->connect('/users/logout', ['controller' => 'Users', 'action' => 'logout']);
     $builder->connect('/users', ['controller' => 'Users', 'action' => 'index']);
