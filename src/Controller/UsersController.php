@@ -3,11 +3,14 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\Controller\Controller;
+use Cake\Event\EventInterface;
+
 class UsersController extends AppController {
     
     public function index() {
         $this->paginate = [
-            'contain' => ['Statuses', 'UserGroups']
+            'contain' => ['Statuses']
         ];
         $users = $this->paginate($this->Users);
 
@@ -81,5 +84,11 @@ class UsersController extends AppController {
 
     public function logout() {
         return $this->redirect($this->Auth->logout());
+    }
+
+    public function beforeFilter(EventInterface $event) {
+        parent::beforeFilter($event);
+
+        $this->Auth->allow(['add']);
     }
 }

@@ -74,12 +74,19 @@
                 </li>
                 <li class="nav-item">
                     <a>
-                        <?php echo $this->Html->link('Login / Register', array('controller' => 'users', 'action' => 'login'), array('title' => 'Login / Register','class' => 'nav-link'));?>
+                        <?php echo $this->Html->link('Users', array('controller' => 'users', 'action' => 'index'), array('title' => 'Users', 'class' => 'nav-link'));?>
+                    </a> 
+                </li>
+                <li class="nav-item">
+                    <a>
+                        <?php 
+                            echo $this->Html->link('Login', array('controller' => 'users', 'action' => 'login'), array('title' => 'Login','class' => 'nav-link'));
+                        ?>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a>
-                        <?php echo $this->Html->link('Users', array('controller' => 'users', 'action' => 'index'), array('title' => 'Users', 'class' => 'nav-link'));?>
+                        <?php echo $this->Html->link('Register', array('controller' => 'users', 'action' => 'add'), array('title' => 'Register', 'class' => 'nav-link'));?>
                     </a> 
                 </li>
             </ul>
