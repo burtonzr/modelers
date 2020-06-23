@@ -47,7 +47,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav">
-                <li class="nav-item">
+                <li class="nav-item">   
                     <a class="nav-link" href="/modelers">Home</a>
                 </li>
                 <li class="nav-item">

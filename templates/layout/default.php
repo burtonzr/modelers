@@ -1,8 +1,5 @@
 <?php
     $cakeDescription = 'The Model Gallery';
-
-    $c_name = $this->request->getParam('controller');
-    $a_name = $this->request->getParam('action');
 ?>
 <!DOCTYPE html>
 <html>

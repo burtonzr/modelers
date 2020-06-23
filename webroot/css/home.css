@@ -121,3 +121,8 @@ body > nav {
     padding: 8px;
     font-size: 15px;
 }
+
+#user-table > thead > tr > th:nth-child(5) > a {
+    pointer-events: none;
+    cursor: default;
+}
