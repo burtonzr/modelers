@@ -3,21 +3,11 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-/**
- * ModelTypes Controller
- *
- * @property \App\Model\Table\ModelTypesTable $ModelTypes
- * @method \App\Model\Entity\ModelType[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
- */
-class ModelTypesController extends AppController
-{
-    /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|null|void Renders view
-     */
-    public function index()
-    {
+use Cake\Event\EventInterface;
+
+class ModelTypesController extends AppController {
+    
+    public function index() {
         $this->paginate = [
             'contain' => ['Statuses'],
         ];
@@ -26,15 +16,7 @@ class ModelTypesController extends AppController
         $this->set(compact('modelTypes'));
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Model Type id.
-     * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
+    public function view($id = null) {
         $modelType = $this->ModelTypes->get($id, [
             'contain' => ['Statuses', 'SubmissionCategories', 'SubmissionFields', 'Submissions'],
         ]);
@@ -42,13 +24,7 @@ class ModelTypesController extends AppController
         $this->set(compact('modelType'));
     }
 
-    /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
-     */
-    public function add()
-    {
+    public function add() {
         $modelType = $this->ModelTypes->newEmptyEntity();
         if ($this->request->is('post')) {
             $modelType = $this->ModelTypes->patchEntity($modelType, $this->request->getData());
@@ -63,15 +39,7 @@ class ModelTypesController extends AppController
         $this->set(compact('modelType', 'statuses'));
     }
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id Model Type id.
-     * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function edit($id = null)
-    {
+    public function edit($id = null) {
         $modelType = $this->ModelTypes->get($id, [
             'contain' => [],
         ]);
@@ -95,8 +63,7 @@ class ModelTypesController extends AppController
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
-    {
+    public function delete($id = null) {
         $this->request->allowMethod(['post', 'delete']);
         $modelType = $this->ModelTypes->get($id);
         if ($this->ModelTypes->delete($modelType)) {
@@ -106,5 +73,11 @@ class ModelTypesController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function beforeFilter(EventInterface $event) {
+        parent::beforeFilter($event);
+
+        $this->Auth->allow(['index']);
     }
 }
