@@ -126,3 +126,12 @@ body > nav {
     pointer-events: none;
     cursor: default;
 }
+
+.grid {
+    height: 400px;
+}
+
+.img-container {
+    height: 270px !important;
+    overflow: hidden;
+}
