@@ -42,13 +42,10 @@
                 ?>
             </div>  
         </div>
-        <div class="row">
-            <div class="col-12 col-sm-6 mt-3">
-                <?php
-                    echo $this->Form->control('status_id', ['options' => $statuses]);
-                ?>
-            </div>
-        </div>
+        <?php
+            echo $this->Form->control('status_id', ['default' => 4, 'type' => 'hidden']);
+            echo $this->Form->control('UserGroupID', array('default' => 1, 'type' => 'hidden'));
+        ?>
         <?= $this->Form->button(__('Create Account'), ['class' => 'loginButton btn btn-danger btn-block mt-3']) ?>
         <?= $this->Form->end() ?>
     </div>
