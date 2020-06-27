@@ -1,10 +1,26 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\ModelType[]|\Cake\Collection\CollectionInterface $modelTypes
- */
-?>
-<div class="modelTypes index content">
+<div class="container-fluid">
+    <h1 style="font-weight: 400;" class="text-center"><?= __('Model Types') ?></h1>
+    <div class="row mt-5">
+        <?php foreach ($modelTypes as $modelType): ?>
+            <div class="col-12 col-sm-6 content">
+                <h3 class="text-center" style="text-transform: capitalize;"><?= $this->Html->link(__(h($modelType->code)), ['action' => 'view', $modelType->id]) ?></h3>
+                <img src="http://www.modelersgallery.com/dev-alcapwin/img/gallery/defaults/spacecraft.jpg" />
+            </div>
+        <?php endforeach; ?>
+    </div>
+    <div class="paginator mt-5">
+        <ul class="pagination">
+            <?= $this->Paginator->first('<< ' . __('first')) ?>
+            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->numbers() ?>
+            <?= $this->Paginator->next(__('next') . ' >') ?>
+            <?= $this->Paginator->last(__('last') . ' >>') ?>
+        </ul>
+        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
+    </div>
+</div>
+
+    <?php /* ?>
     <?= $this->Html->link(__('New Model Type'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <h3><?= __('Model Types') ?></h3>
     <div class="table-responsive">
@@ -39,14 +55,5 @@
             </tbody>
         </table>
     </div>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
-    </div>
-</div>
+    <?php // */ ?>
+
