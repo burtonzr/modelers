@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <h1 style="font-weight: 400;" class="text-center"><?= __('Model Types') ?></h1>
+    <h1 class="pagetitle text-center"><?= __('Model Types') ?></h1>
     <div class="row mt-5">
         <?php foreach ($modelTypes as $modelType): ?>
             <div class="col-sm-12 col-md-6 content mt-5 grid modeltypes">

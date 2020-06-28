@@ -18,6 +18,7 @@ class User extends Entity {
         'created' => true,
         'modified' => true,
         'password' => true,
+        'UserGroupID' => true,
         'status' => true,
         'submissions' => true,
         'password' => true,

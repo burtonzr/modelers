@@ -131,6 +131,10 @@ body > nav {
     height: 400px;
 }
 
+.pagetitle {
+    font-weight: 400;
+}
+
 .img-container {
     height: 270px !important;
     overflow: hidden;

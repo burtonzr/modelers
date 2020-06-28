@@ -1,7 +1,7 @@
 <div class="row">
     <aside class="column">
         <div class="side-nav">
-            <h1 style="text-align: center;">Create Account</h1>
+            <h1 class="pagetitle text-center">Create Account</h1>
         </div>
     </aside>
     <div class="container content">
@@ -44,7 +44,7 @@
         </div>
         <?php
             echo $this->Form->control('status_id', ['default' => 4, 'type' => 'hidden']);
-            echo $this->Form->control('UserGroupID', array('default' => 1, 'type' => 'hidden'));
+            echo $this->Form->control('UserGroupID', ['default' => 1, 'type' => 'hidden']);
         ?>
         <?= $this->Form->button(__('Create Account'), ['class' => 'loginButton btn btn-danger btn-block mt-3']) ?>
         <?= $this->Form->end() ?>
