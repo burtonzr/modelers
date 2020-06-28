@@ -135,3 +135,13 @@ body > nav {
     height: 270px !important;
     overflow: hidden;
 }
+
+@media only screen and (min-width: 760px) {
+    .modeltypes:nth-child(odd) {
+        margin-left: -10px;
+    }
+    
+    .modeltypes:nth-child(even) {
+        margin-left: 10px;
+    }
+}

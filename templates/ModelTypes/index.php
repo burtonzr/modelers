@@ -2,26 +2,28 @@
     <h1 style="font-weight: 400;" class="text-center"><?= __('Model Types') ?></h1>
     <div class="row mt-5">
         <?php foreach ($modelTypes as $modelType): ?>
-            <div class="col-12 col-sm-6 content mt-5 grid">
-                <h3 class="text-center" style="text-transform: capitalize;"><?= $this->Html->link(__(h($modelType->code)), ['action' => 'view', $modelType->id]) ?></h3>
-                <div class="img-container">
-                    <?php if($modelType->id == 1) { ?>
-                        <img src="img/naval.jpg" class="img-fluid" />
-                    <?php } else if ($modelType->id == 2) { ?>
-                        <img src="img/aircraft.jpg" class="img-fluid" />
-                    <?php } else if ($modelType->id == 3) { ?>
-                        <img src="img/automotive.jpg" class="img-fluid" />
-                    <?php } else if ($modelType->id == 4) { ?>
-                        <img src="img/armor.jpg" class="img-fluid" />
-                    <?php } else if ($modelType->id == 5) { ?>
-                        <img src="img/figures.jpg" class="img-fluid" />
-                    <?php } else if ($modelType->id == 6) { ?>
-                        <img src="img/trains.jpg" class="img-fluid" />
-                    <?php } else if ($modelType->id == 7) { ?>
-                        <img src="img/dioramas.jpg" class="img-fluid" />
-                    <?php } else if ($modelType->id == 8) { ?>
-                        <img src="img/spacecraft.jpg" class="img-fluid" />
-                    <?php } ?>
+            <div class="col-sm-12 col-md-6 content mt-5 grid modeltypes">
+                <div class="inner">
+                    <h3 class="text-center" style="text-transform: capitalize;"><?= $this->Html->link(__(h($modelType->code)), ['action' => 'view', $modelType->id]) ?></h3>
+                    <div class="img-container">
+                        <?php if($modelType->id == 1) { ?>
+                            <img src="img/naval.jpg" class="img-fluid" />
+                        <?php } else if ($modelType->id == 2) { ?>
+                            <img src="img/aircraft.jpg" class="img-fluid" />
+                        <?php } else if ($modelType->id == 3) { ?>
+                            <img src="img/automotive.jpg" class="img-fluid" />
+                        <?php } else if ($modelType->id == 4) { ?>
+                            <img src="img/armor.jpg" class="img-fluid" />
+                        <?php } else if ($modelType->id == 5) { ?>
+                            <img src="img/figures.jpg" class="img-fluid" />
+                        <?php } else if ($modelType->id == 6) { ?>
+                            <img src="img/trains.jpg" class="img-fluid" />
+                        <?php } else if ($modelType->id == 7) { ?>
+                            <img src="img/dioramas.jpg" class="img-fluid" />
+                        <?php } else if ($modelType->id == 8) { ?>
+                            <img src="img/spacecraft.jpg" class="img-fluid" />
+                        <?php } ?>
+                    </div>
                 </div>
             </div>
         <?php endforeach; ?>
