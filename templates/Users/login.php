@@ -1,6 +1,6 @@
 <div class="users form">
     <?= $this->Flash->render() ?>
-    <h1 style="text-align: center;">Login</h1>
+    <h1 class="pagetitle text-center">Login</h1>
     <div class="container content">
         <?= $this->Form->create(null, array('class' => 'class', 'autocomplete' => false)) ?>
         <fieldset>

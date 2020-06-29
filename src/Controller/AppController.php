@@ -32,6 +32,8 @@ class AppController extends Controller {
             ],
             'storage' => 'Session'
         ]);
+
+        $this->set('email', $this->Auth->user('email'));
  
         //$this->loadComponent('FormProtection');
     }
