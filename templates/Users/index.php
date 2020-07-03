@@ -1,7 +1,3 @@
-<?php
-    echo $this->Html->link(__('Logout'), ['action' => 'logout'], ['class' => 'ml-5 logout float-right btn btn-warning']); 
-    echo $this->Html->link(__('Create Account'), ['action' => 'add'], ['class' => 'button float-right']);
-?>
 <h1 style="text-align: center;" class="mt-5">Users</h1>
 <div class="table-responsive">
     <table class="table table-striped table-hover" id="user-table">

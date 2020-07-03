@@ -36,13 +36,13 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/modelers">Home</a>
+                        <a class="nav-link" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/modelers/pages/review">Reviews</a>
+                        <a class="nav-link" href="/pages/review">Reviews</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/modelers/pages/feature">Features</a>
+                        <a class="nav-link" href="/pages/feature">Features</a>
                     </li>
                     <li class="nav-item">
                         <a>
@@ -58,14 +58,19 @@
                         <a target="_blank" class="nav-link" href="http://www.modelshipgallery.com/gallery/index-gallery.html">Archives</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/modelers/pages/contact">Contact</a>
+                        <a class="nav-link" href="/pages/contact">Contact</a>
                     </li>
                     <li class="nav-item">
                         <a>
                             <?php echo $this->Html->link('Users', array('controller' => 'users', 'action' => 'index'), array('title' => 'Users', 'class' => 'nav-link'));?>
                         </a> 
                     </li>
-                    <?php if(!$email): ?>
+                    <?php if(!$email) { ?>
+                        <li class="nav-item">
+                            <a>
+                                <?php echo $this->Html->link('Register', array('controller' => 'users', 'action' => 'add'), array('title' => 'Register', 'class' => 'nav-link'));?>
+                            </a> 
+                        </li>
                         <li class="nav-item">
                             <a>
                                 <?php 
@@ -73,12 +78,15 @@
                                 ?>
                             </a>
                         </li>
-                    <?php endif; ?>
-                    <li class="nav-item">
-                        <a>
-                            <?php echo $this->Html->link('Register', array('controller' => 'users', 'action' => 'add'), array('title' => 'Register', 'class' => 'nav-link'));?>
-                        </a> 
-                    </li>
+                    <?php } else { ?>
+                        <li class="nav-item">
+                            <a>
+                                <?php 
+                                    echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout'), array('title' => 'Logout', 'class' => 'nav-link'));
+                                ?>
+                            </a>
+                        </li>
+                    <?php } ?>
                 </ul>
             </div>
         </nav>

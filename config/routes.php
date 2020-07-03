@@ -11,7 +11,7 @@ $routes->scope('/', function (RouteBuilder $builder) {
     $builder->registerMiddleware('csrf', new CsrfProtectionMiddleware([
         'httpOnly' => true,
     ]));
-
+    
     $builder->applyMiddleware('csrf');
     $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
     $builder->connect('/pages/contact', ['controller' => 'Pages', 'action' => 'display', 'contact']);

@@ -71,14 +71,18 @@ class UsersController extends AppController {
 
     // Login
     public function login() {
-        if($this->request->is('post')) {
-            $user = $this->Auth->identify();
-            if($user) {
-                $this->Auth->setUser($user);
-                return $this->redirect($this->Auth->redirectUrl());
-            } else {
-                $this->Flash->error('Your email or password is incorrect. ');
+        if($this->Auth->user('email') == null) {
+            if($this->request->is('post')) {
+                $user = $this->Auth->identify();
+                if($user) {
+                    $this->Auth->setUser($user);
+                    return $this->redirect($this->Auth->redirectUrl());
+                } else {
+                    $this->Flash->error('Your email or password is incorrect. ');
+                }
             }
+        } else {
+            return $this->redirect(array('controller' => 'ModelTypes', 'action' => 'index'));
         }
     }
 
