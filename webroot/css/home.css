@@ -131,8 +131,17 @@ body > nav {
     height: 400px;
 }
 
+.gridSubmissions {
+    height: 150px;
+}
+
 .pagetitle {
     font-weight: 400;
+}
+
+.model_types_view {
+    font-size: 15px;
+    width: 150px;
 }
 
 .img-container {

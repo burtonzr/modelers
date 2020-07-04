@@ -1,56 +1,30 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\ModelType $modelType
- */
-?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Edit Model Type'), ['action' => 'edit', $modelType->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Model Type'), ['action' => 'delete', $modelType->id], ['confirm' => __('Are you sure you want to delete # {0}?', $modelType->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Model Types'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Model Type'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+<div class="container-fluid">
+    <h1 class="pagetitle text-center"><?= h($modelType->title) ?> Categories</h1>
+    <div class="row text-center">
+        <div class="col-12 col-sm-4">
+            <?= $this->Html->link(__('Edit Model Type'), ['action' => 'edit', $modelType->id], ['class' => 'model_types_view p-3 mt-4 btn btn-warning']) ?>
         </div>
-    </aside>
-    <div class="column-responsive column-80">
+        <div class="col-12 col-sm-4">
+            <?= $this->Html->link(__('Model Types'), ['action' => 'index'], ['class' => 'model_types_view p-3 mt-4 btn btn-info']) ?>
+        </div>
+        <div class="col-12 col-sm-4">
+            <?= $this->Html->link(__('New Model Type'), ['action' => 'add'], ['class' => 'model_types_view p-3 mt-4 btn btn-success']) ?>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <?php if (!empty($modelType->submission_categories)) : ?>
+            <?php foreach ($modelType->submission_categories as $submissionCategories): ?>
+                <div class="col-sm-12 col-md-6 content mt-5 gridSubmissions modeltypes">
+                    <div class="inner">
+                        <h3 class="text-center" style="text-transform: capitalize; margin-top: 40px;"><?= $this->Html->link(h($submissionCategories->title), ['controller' => 'SubmissionCategories', 'action' => 'view', $submissionCategories->id]) ?></h3>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
+    <div class="column-responsive column-80 mt-5">
         <div class="modelTypes view content">
-            <h3><?= h($modelType->title) ?></h3>
-            <table>
-                <tr>
-                    <th><?= __('Code') ?></th>
-                    <td><?= h($modelType->code) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Title') ?></th>
-                    <td><?= h($modelType->title) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Status') ?></th>
-                    <td><?= $modelType->has('status') ? $this->Html->link($modelType->status->title, ['controller' => 'Statuses', 'action' => 'view', $modelType->status->id]) : '' ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($modelType->id) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Created') ?></th>
-                    <td><?= h($modelType->created) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Modified') ?></th>
-                    <td><?= h($modelType->modified) ?></td>
-                </tr>
-            </table>
-            <div class="text">
-                <strong><?= __('Description') ?></strong>
-                <blockquote>
-                    <?= $this->Text->autoParagraph(h($modelType->description)); ?>
-                </blockquote>
-            </div>
             <div class="related">
-                <h4><?= __('Related Submission Categories') ?></h4>
                 <?php if (!empty($modelType->submission_categories)) : ?>
                 <div class="table-responsive">
                     <table>
