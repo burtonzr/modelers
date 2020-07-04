@@ -3,14 +3,9 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-/**
- * SubmissionCategories Controller
- *
- * @property \App\Model\Table\SubmissionCategoriesTable $SubmissionCategories
- * @method \App\Model\Entity\SubmissionCategory[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
- */
-class SubmissionCategoriesController extends AppController
-{
+use Cake\Event\EventInterface;
+
+class SubmissionCategoriesController extends AppController {
     /**
      * Index method
      *
@@ -92,15 +87,7 @@ class SubmissionCategoriesController extends AppController
         $this->set(compact('submissionCategory', 'parentSubmissionCategories', 'modelTypes', 'statuses'));
     }
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id Submission Category id.
-     * @return \Cake\Http\Response|null|void Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function delete($id = null)
-    {
+    public function delete($id = null) {
         $this->request->allowMethod(['post', 'delete']);
         $submissionCategory = $this->SubmissionCategories->get($id);
         if ($this->SubmissionCategories->delete($submissionCategory)) {
@@ -110,5 +97,11 @@ class SubmissionCategoriesController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function beforeFilter(EventInterface $event) {
+        parent::beforeFilter($event);
+
+        $this->Auth->allow(['index', 'view']);
     }
 }

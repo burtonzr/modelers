@@ -1,6 +1,11 @@
 <div class="container-fluid">
     <h1 class="pagetitle text-center"><?= __('Model Types') ?></h1>
     <div class="row mt-5">
+        <div class="col-12 col-sm-4">
+            <?= $this->Html->link(__('New Model Type'), ['action' => 'add'], ['class' => 'model_types_view p-3 mt-4 btn btn-success']) ?>
+        </div>
+    </div>
+    <div class="row mt-5">
         <?php foreach ($modelTypes as $modelType): ?>
             <div class="col-sm-12 col-md-6 content mt-5 grid modeltypes">
                 <div class="inner">
