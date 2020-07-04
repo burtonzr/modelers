@@ -8,6 +8,7 @@
                 <th><?= $this->Paginator->sort('email') ?></th>
                 <th><?= $this->Paginator->sort('name') ?></th>
                 <th><?= $this->Paginator->sort('User Group') ?></th>
+                <th><?= $this->Paginator->sort('User Group Name') ?></th>
                 <th><?= $this->Paginator->sort('status_id') ?></th>
                 <th><?= $this->Paginator->sort('created') ?></th>
                 <th><?= $this->Paginator->sort('modified') ?></th>
@@ -25,6 +26,7 @@
                     <td><?= h($user->email) ?></td>
                     <td><?= h($user->name) ?></td>
                     <td><?= h($user->UserGroupID) ?></td>
+                    <td><?= $user->has('usergroup') ? $this->Html->link($user->usergroup->name, ['controller' => 'UserGroups', 'action' => 'view', $user->usergroup->id]) : '' ?></td>
                     <td><?= $user->has('status') ? $this->Html->link($user->status->title, ['controller' => 'Statuses', 'action' => 'view', $user->status->id]) : '' ?></td>
                     <td><?= h($user->created) ?></td>
                     <td><?= h($user->modified) ?></td>

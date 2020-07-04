@@ -30,14 +30,8 @@ use Cake\Validation\Validator;
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class UsersTable extends Table
-{
-    /**
-     * Initialize method
-     *
-     * @param array $config The configuration for the Table.
-     * @return void
-     */
+class UsersTable extends Table {
+    
     public function initialize(array $config): void {
         parent::initialize($config);
 
@@ -52,19 +46,17 @@ class UsersTable extends Table
             'joinType' => 'INNER',
         ]);
 
+        $this->belongsTo('UserGroups', [
+            'foreignKey' => 'UserGroupID',
+            'joinType' => 'INNER'
+        ]);
+
         $this->hasMany('Submissions', [
             'foreignKey' => 'user_id',
         ]);
     }
 
-    /**
-     * Default validation rules.
-     *
-     * @param \Cake\Validation\Validator $validator Validator instance.
-     * @return \Cake\Validation\Validator
-     */
-    public function validationDefault(Validator $validator): Validator
-    {
+    public function validationDefault(Validator $validator): Validator {
         $validator
             ->nonNegativeInteger('id')
             ->allowEmptyString('id', null, 'create');
@@ -100,17 +92,10 @@ class UsersTable extends Table
         return $validator;
     }
 
-    /**
-     * Returns a rules checker object that will be used for validating
-     * application integrity.
-     *
-     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
-     * @return \Cake\ORM\RulesChecker
-     */
-    public function buildRules(RulesChecker $rules): RulesChecker
-    {
+    public function buildRules(RulesChecker $rules): RulesChecker {
         $rules->add($rules->isUnique(['email']));
         $rules->add($rules->existsIn(['status_id'], 'Statuses'));
+        $rules->add($rules->existsIn(['UserGroupID'], 'UserGroups'));
 
         return $rules;
     }
