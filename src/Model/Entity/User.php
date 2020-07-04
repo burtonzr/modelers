@@ -20,6 +20,7 @@ class User extends Entity {
         'password' => true,
         'UserGroupID' => true,
         'status' => true,
+        'usergroup' => true,
         'submissions' => true,
         'password' => true,
     ];

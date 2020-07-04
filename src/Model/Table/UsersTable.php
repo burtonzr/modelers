@@ -46,7 +46,7 @@ class UsersTable extends Table {
             'joinType' => 'INNER',
         ]);
 
-        $this->belongsTo('UserGroups', [
+        $this->belongsTo('Usergroups', [
             'foreignKey' => 'UserGroupID',
             'joinType' => 'INNER'
         ]);
@@ -95,7 +95,7 @@ class UsersTable extends Table {
     public function buildRules(RulesChecker $rules): RulesChecker {
         $rules->add($rules->isUnique(['email']));
         $rules->add($rules->existsIn(['status_id'], 'Statuses'));
-        $rules->add($rules->existsIn(['UserGroupID'], 'UserGroups'));
+        $rules->add($rules->existsIn(['UserGroupID'], 'Usergroups'));
 
         return $rules;
     }

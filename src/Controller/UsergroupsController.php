@@ -23,17 +23,9 @@ class UsergroupsController extends AppController
         $this->set(compact('usergroups'));
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Usergroup id.
-     * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
+    public function view($id = null) {
         $usergroup = $this->Usergroups->get($id, [
-            'contain' => [],
+            'contain' => ['Users'],
         ]);
 
         $this->set(compact('usergroup'));

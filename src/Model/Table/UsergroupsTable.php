@@ -25,31 +25,21 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\Usergroup[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
  * @method \App\Model\Entity\Usergroup[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
-class UsergroupsTable extends Table
-{
-    /**
-     * Initialize method
-     *
-     * @param array $config The configuration for the Table.
-     * @return void
-     */
-    public function initialize(array $config): void
-    {
+class UsergroupsTable extends Table {
+    
+    public function initialize(array $config): void {
         parent::initialize($config);
 
         $this->setTable('usergroups');
         $this->setDisplayField('ID');
         $this->setPrimaryKey('ID');
+
+        $this->hasMany('Users', [
+            'foreignKey' => 'UserGroupID',
+        ]);
     }
 
-    /**
-     * Default validation rules.
-     *
-     * @param \Cake\Validation\Validator $validator Validator instance.
-     * @return \Cake\Validation\Validator
-     */
-    public function validationDefault(Validator $validator): Validator
-    {
+    public function validationDefault(Validator $validator): Validator {
         $validator
             ->integer('ID')
             ->allowEmptyString('ID', null, 'create');

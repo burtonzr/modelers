@@ -8,5 +8,6 @@ use Cake\ORM\Entity;
 class Usergroup extends Entity {
     protected $_accessible = [
         'Name' => true,
+        'users' => true,
     ];
 }

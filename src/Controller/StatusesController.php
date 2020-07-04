@@ -9,15 +9,9 @@ namespace App\Controller;
  * @property \App\Model\Table\StatusesTable $Statuses
  * @method \App\Model\Entity\Status[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class StatusesController extends AppController
-{
-    /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|null|void Renders view
-     */
-    public function index()
-    {
+class StatusesController extends AppController {
+    
+    public function index() {
         $statuses = $this->paginate($this->Statuses);
 
         $this->set(compact('statuses'));
