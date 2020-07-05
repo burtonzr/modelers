@@ -60,11 +60,13 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/pages/contact">Contact</a>
                     </li>
-                    <li class="nav-item">
-                        <a>
-                            <?php echo $this->Html->link('Users', array('controller' => 'users', 'action' => 'index'), array('title' => 'Users', 'class' => 'nav-link'));?>
-                        </a> 
-                    </li>
+                    <?php if($UserGroupID == 3): ?>
+                        <li class="nav-item">
+                            <a>
+                                <?php echo $this->Html->link('Users', array('controller' => 'users', 'action' => 'index'), array('title' => 'Users', 'class' => 'nav-link'));?>
+                            </a> 
+                        </li>
+                    <?php endif; ?>
                     <?php if(!$email) { ?>
                         <li class="nav-item">
                             <a>

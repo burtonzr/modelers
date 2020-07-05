@@ -37,13 +37,7 @@ class SubmissionCategoriesController extends AppController {
         $this->set(compact('submissionCategory'));
     }
 
-    /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
-     */
-    public function add()
-    {
+    public function add() {
         $submissionCategory = $this->SubmissionCategories->newEmptyEntity();
         if ($this->request->is('post')) {
             $submissionCategory = $this->SubmissionCategories->patchEntity($submissionCategory, $this->request->getData());
@@ -60,15 +54,7 @@ class SubmissionCategoriesController extends AppController {
         $this->set(compact('submissionCategory', 'parentSubmissionCategories', 'modelTypes', 'statuses'));
     }
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id Submission Category id.
-     * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function edit($id = null)
-    {
+    public function edit($id = null) {
         $submissionCategory = $this->SubmissionCategories->get($id, [
             'contain' => [],
         ]);
