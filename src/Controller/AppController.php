@@ -32,7 +32,8 @@ class AppController extends Controller {
             ],
             'storage' => 'Session'
         ]);
-
+        
+        $this->set('id', $this->Auth->user('id'));
         $this->set('email', $this->Auth->user('email'));
         $this->set('UserGroupID', $this->Auth->user('UserGroupID'));
  

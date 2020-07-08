@@ -93,6 +93,11 @@
                 <?php } else { ?>
                     <li class="nav-item">
                         <a>
+                            <?php echo $this->Html->link('My Profile', array('controller' => 'users', 'action' => 'view/', $id), array('title' => 'My Profile', 'class' => 'nav-link'));?>
+                        </a> 
+                    </li>
+                    <li class="nav-item">
+                        <a>
                             <?php 
                                 echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout'), array('title' => 'Logout', 'class' => 'nav-link'));
                             ?>
