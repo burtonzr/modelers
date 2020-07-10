@@ -5,8 +5,8 @@
         <?= $this->Form->create(null, array('class' => 'class', 'autocomplete' => false)) ?>
         <fieldset>
             <legend style="font-size: 18px;"><?= __('Please enter your username and password') ?></legend>
-            <?= $this->Form->control('email', ['required' => true]) ?>
-            <?= $this->Form->control('password', ['required' => true, 'autocomplete' => false]) ?>
+            <?= $this->Form->control('email', ['required' => true, 'autocomplete' => 'off']) ?>
+            <?= $this->Form->control('password', ['required' => true, 'autocomplete' => 'off']) ?>
         </fieldset>
         <?php
             echo $this->Form->button('Login', ['class' => 'loginButton btn btn-danger btn-block mt-3']);
