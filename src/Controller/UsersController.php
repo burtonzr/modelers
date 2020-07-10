@@ -9,7 +9,7 @@ use Cake\Event\EventInterface;
 class UsersController extends AppController {
     
     public function index() {
-        if($this->Auth->user('UserGroupID') == 3) {
+        if($this->Auth->user('UserGroupID') == 2 || $this->Auth->user('UserGroupID') == 3) {
             $this->paginate = [
                 'contain' => ['Statuses', 'Usergroups']
             ];
@@ -22,15 +22,25 @@ class UsersController extends AppController {
     }
 
     public function view($id = null) {
-        $user = $this->Users->get($id, [
-            'contain' => ['Statuses', 'Submissions'],
-        ]);
-
-        $this->set(compact('user'));
+        if($this->Auth->user('UserGroupID') == 3) {
+            $user = $this->Users->get($id, [
+                'contain' => ['Statuses', 'Submissions'],
+            ]);
+    
+            $this->set(compact('user'));
+        } else if($this->Auth->user('id') == $id) {
+            $user = $this->Users->get($id, [
+                'contain' => ['Statuses', 'Submissions'],
+            ]);
+    
+            $this->set(compact('user'));
+        } else {
+            return $this->redirect(array('controller' => 'ModelTypes', 'action' => 'index'));
+        }
     }
 
     public function add() {
-        if($this->Auth->user('UserGroupID') == 3) {
+        if($this->Auth->user('email') == null) {
             $user = $this->Users->newEmptyEntity();
             if ($this->request->is('post')) {
                 $user = $this->Users->patchEntity($user, $this->request->getData());
@@ -61,20 +71,25 @@ class UsersController extends AppController {
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
-        $statuses = $this->Users->Statuses->find('list', ['limit' => 200]);
-        $this->set(compact('user', 'statuses'));
+        $statuses   = array('1' => 'Active', '2' => 'Removed', '3' => 'Suspended', '4' => 'Pending', '5' => 'Banned');
+        $usergroups = array('1' => 'User', '2' => 'Moderator', '3' => 'Admin');
+        $this->set(compact('user', 'statuses', 'usergroups'));
     }
 
     public function delete($id = null) {
-        $this->request->allowMethod(['post', 'delete']);
-        $user = $this->Users->get($id);
-        if ($this->Users->delete($user)) {
-            $this->Flash->success(__('The user has been deleted.'));
-        } else {
-            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
-        }
+        if($this->Auth->user('UserGroupID') == 3) {
+            $this->request->allowMethod(['post', 'delete']);
+            $user = $this->Users->get($id);
+            if ($this->Users->delete($user)) {
+                $this->Flash->success(__('The user has been deleted.'));
+            } else {
+                $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+            }
 
-        return $this->redirect(['action' => 'index']);
+            return $this->redirect(['action' => 'index']);
+        } else {
+            return $this->redirect(array('controller' => 'ModelTypes', 'action' => 'index'));
+        }
     }
 
     // Login

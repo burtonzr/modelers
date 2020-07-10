@@ -19,7 +19,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-
+        
+        <?= $this->Html->script('users.js') ?>
         <?= $this->Html->css('milligram.min.css') ?>
         <?= $this->Html->css('cake.css') ?>
         <?= $this->Html->css('home.css') ?>
@@ -60,13 +61,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/pages/contact">Contact</a>
                     </li>
-                    <?php if($UserGroupID == 3): ?>
-                        <li class="nav-item">
-                            <a>
-                                <?php echo $this->Html->link('Users', array('controller' => 'users', 'action' => 'index'), array('title' => 'Users', 'class' => 'nav-link'));?>
-                            </a> 
-                        </li>
-                    <?php endif; ?>
                     <?php if(!$email) { ?>
                         <li class="nav-item">
                             <a>
@@ -81,6 +75,13 @@
                             </a>
                         </li>
                     <?php } else { ?>
+                        <?php if($UserGroupID == 3 || $UserGroupID == 2): ?>
+                            <li class="nav-item">
+                                <a>
+                                    <?php echo $this->Html->link('Users', array('controller' => 'users', 'action' => 'index'), array('title' => 'Users', 'class' => 'nav-link'));?>
+                                </a> 
+                            </li>
+                        <?php endif; ?>
                         <li class="nav-item">
                             <a>
                                 <?php echo $this->Html->link('My Profile', array('controller' => 'users', 'action' => 'view/', $id), array('title' => 'My Profile', 'class' => 'nav-link'));?>

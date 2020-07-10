@@ -38,51 +38,47 @@ class SubmissionCategoriesController extends AppController {
     }
 
     public function add() {
-        $submissionCategory = $this->SubmissionCategories->newEmptyEntity();
-        if ($this->request->is('post')) {
-            $submissionCategory = $this->SubmissionCategories->patchEntity($submissionCategory, $this->request->getData());
-            if ($this->SubmissionCategories->save($submissionCategory)) {
-                $this->Flash->success(__('The submission category has been saved.'));
+        if($this->Auth->user('UserGroupID') == 3) {
+            $submissionCategory = $this->SubmissionCategories->newEmptyEntity();
+            if ($this->request->is('post')) {
+                $submissionCategory = $this->SubmissionCategories->patchEntity($submissionCategory, $this->request->getData());
+                if ($this->SubmissionCategories->save($submissionCategory)) {
+                    $this->Flash->success(__('The submission category has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                    return $this->redirect(['action' => 'index']);
+                }
+                $this->Flash->error(__('The submission category could not be saved. Please, try again.'));
             }
-            $this->Flash->error(__('The submission category could not be saved. Please, try again.'));
+            $parentSubmissionCategories = $this->SubmissionCategories->ParentSubmissionCategories->find('list', ['limit' => 200]);
+            $modelTypes = $this->SubmissionCategories->ModelTypes->find('list', ['limit' => 200]);
+            $statuses = $this->SubmissionCategories->Statuses->find('list', ['limit' => 200]);
+            $this->set(compact('submissionCategory', 'parentSubmissionCategories', 'modelTypes', 'statuses'));
+        } else {
+            return $this->redirect(array('controller' => 'ModelTypes', 'action' => 'index'));
         }
-        $parentSubmissionCategories = $this->SubmissionCategories->ParentSubmissionCategories->find('list', ['limit' => 200]);
-        $modelTypes = $this->SubmissionCategories->ModelTypes->find('list', ['limit' => 200]);
-        $statuses = $this->SubmissionCategories->Statuses->find('list', ['limit' => 200]);
-        $this->set(compact('submissionCategory', 'parentSubmissionCategories', 'modelTypes', 'statuses'));
     }
 
     public function edit($id = null) {
-        $submissionCategory = $this->SubmissionCategories->get($id, [
-            'contain' => [],
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $submissionCategory = $this->SubmissionCategories->patchEntity($submissionCategory, $this->request->getData());
-            if ($this->SubmissionCategories->save($submissionCategory)) {
-                $this->Flash->success(__('The submission category has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+        if($this->Auth->user('UserGroupID') == 3) {
+            $submissionCategory = $this->SubmissionCategories->get($id, [
+                'contain' => [],
+            ]);
+            if ($this->request->is(['patch', 'post', 'put'])) {
+                $submissionCategory = $this->SubmissionCategories->patchEntity($submissionCategory, $this->request->getData());
+                if ($this->SubmissionCategories->save($submissionCategory)) {
+                    $this->Flash->success(__('The submission category has been saved.'));
+    
+                    return $this->redirect(['action' => 'index']);
+                }
+                $this->Flash->error(__('The submission category could not be saved. Please, try again.'));
             }
-            $this->Flash->error(__('The submission category could not be saved. Please, try again.'));
-        }
-        $parentSubmissionCategories = $this->SubmissionCategories->ParentSubmissionCategories->find('list', ['limit' => 200]);
-        $modelTypes = $this->SubmissionCategories->ModelTypes->find('list', ['limit' => 200]);
-        $statuses = $this->SubmissionCategories->Statuses->find('list', ['limit' => 200]);
-        $this->set(compact('submissionCategory', 'parentSubmissionCategories', 'modelTypes', 'statuses'));
-    }
-
-    public function delete($id = null) {
-        $this->request->allowMethod(['post', 'delete']);
-        $submissionCategory = $this->SubmissionCategories->get($id);
-        if ($this->SubmissionCategories->delete($submissionCategory)) {
-            $this->Flash->success(__('The submission category has been deleted.'));
+            $parentSubmissionCategories = $this->SubmissionCategories->ParentSubmissionCategories->find('list', ['limit' => 200]);
+            $modelTypes = $this->SubmissionCategories->ModelTypes->find('list', ['limit' => 200]);
+            $statuses = $this->SubmissionCategories->Statuses->find('list', ['limit' => 200]);
+            $this->set(compact('submissionCategory', 'parentSubmissionCategories', 'modelTypes', 'statuses'));
         } else {
-            $this->Flash->error(__('The submission category could not be deleted. Please, try again.'));
+            return $this->redirect(array('controller' => 'ModelTypes', 'action' => 'index'));
         }
-
-        return $this->redirect(['action' => 'index']);
     }
 
     public function beforeFilter(EventInterface $event) {

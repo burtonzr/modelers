@@ -72,11 +72,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/pages/contact">Contact</a>
                 </li>
-                <li class="nav-item">
-                    <a>
-                        <?php echo $this->Html->link('Users', array('controller' => 'users', 'action' => 'index'), array('title' => 'Users', 'class' => 'nav-link'));?>
-                    </a> 
-                </li>
                 <?php if(!$email) { ?>
                     <li class="nav-item">
                         <a>
@@ -91,6 +86,13 @@
                         </a>
                     </li>
                 <?php } else { ?>
+                    <?php if($UserGroupID == 2 || $UserGroupID == 3) { ?>
+                        <li class="nav-item">
+                            <a>
+                                <?php echo $this->Html->link('Users', array('controller' => 'users', 'action' => 'index'), array('title' => 'Users', 'class' => 'nav-link'));?>
+                            </a> 
+                        </li>
+                    <?php } ?>
                     <li class="nav-item">
                         <a>
                             <?php echo $this->Html->link('My Profile', array('controller' => 'users', 'action' => 'view/', $id), array('title' => 'My Profile', 'class' => 'nav-link'));?>
@@ -109,7 +111,7 @@
     </nav>
     <header>
         <div class="container text-center">
-            <h1>
+            <h1 class="pagetitle text-center">
                 The Model Gallery
             </h1>
         </div>

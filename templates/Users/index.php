@@ -1,6 +1,6 @@
-<h1 style="text-align: center;" class="mt-5">Users</h1>
+<h1 class="pagetitle text-center">Users</h1>
 <div class="table-responsive">
-    <table class="table table-striped table-hover" id="user-table">
+    <table class="table table-striped table-hover">
         <thead>
             <tr>
                 <th style="display: none;"><?= $this->Paginator->sort('id') ?></th>
@@ -12,9 +12,11 @@
                 <th><?= $this->Paginator->sort('created') ?></th>
                 <th><?= $this->Paginator->sort('modified') ?></th>
                 <th style="display: none;"><?= $this->Paginator->sort('password') ?></th>
-                <th class="actions"><?= __('View') ?></th>
-                <th class="actions"><?= __('Edit') ?></th>
-                <th class="actions"><?= __('Delete') ?></th>
+                <th class="actions"><?= __('Update') ?></th>
+                <?php if($UserGroupID == 3) { ?>
+                    <th class="actions"><?= __('Account') ?></th>
+                    <th class="actions"><?= __('Remove') ?></th>
+                <?php } ?>
             </tr>
         </thead>
         <tbody>
@@ -24,14 +26,18 @@
                     <td><?= $this->Number->format($user->forum_user) ?></td>
                     <td><?= h($user->email) ?></td>
                     <td><?= h($user->name) ?></td>
-                    <td><?= $user->has('usergroup') ? $this->Html->link($user->usergroup->Name, ['controller' => 'Usergroups', 'action' => 'view', $user->usergroup->id]) : '' ?></td>
-                    <td><?= $user->has('status') ? $this->Html->link($user->status->title, ['controller' => 'Statuses', 'action' => 'view', $user->status->id]) : '' ?></td>
+                    <td><?= h($user->usergroup->Name) /*$user->has('usergroup') ? $this->Html->link($user->usergroup->Name, ['controller' => 'Usergroups', 'action' => 'view', $user->usergroup->id]) : ''*/ ?></td>
+                    <td><?= h($user->status->title) ?></td>
                     <td><?= h($user->created) ?></td>
                     <td><?= h($user->modified) ?></td>
                     <td style="display: none;"><?= h($user->password) ?></td>
-                    <td><?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?></td>
                     <td><?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?></td>
-                    <td><?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?></td>
+                    <?php 
+                        if($UserGroupID == 3) {
+                    ?>
+                        <td><?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?></td>
+                        <td><?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?></td>
+                    <?php } ?>
                 </tr>
             <?php endforeach; ?>
         </tbody>
