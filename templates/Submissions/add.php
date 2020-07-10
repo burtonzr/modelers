@@ -1,36 +1,72 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Submission $submission
- */
-?>
+<h1 class="pagetitle text-center">Create Submission</h1>
 <div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List Submissions'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
-    <div class="column-responsive column-80">
-        <div class="submissions form content">
-            <?= $this->Form->create($submission) ?>
-            <fieldset>
-                <legend><?= __('Add Submission') ?></legend>
-                <?php
-                    echo $this->Form->control('user_id', ['options' => $users]);
-                    echo $this->Form->control('subject');
-                    echo $this->Form->control('model_type_id', ['options' => $modelTypes]);
-                    echo $this->Form->control('submission_category_id', ['options' => $submissionCategories, 'empty' => true]);
-                    echo $this->Form->control('manufacturer_id', ['options' => $manufacturers, 'empty' => true]);
-                    echo $this->Form->control('description');
-                    echo $this->Form->control('scale_id', ['options' => $scales]);
-                    echo $this->Form->control('main_image');
-                    echo $this->Form->control('status_id', ['options' => $statuses]);
-                    echo $this->Form->control('approved', ['empty' => true]);
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
-        </div>
+    <div class="col-12">
+        <?= $this->Html->link(__('List Submissions'), ['action' => 'index'], ['class' => 'model_types_view p-3 mt-4 btn btn-info']) ?>
     </div>
 </div>
+<div class="container content mt-5">
+    <?= $this->Form->create($submission) ?>
+    <div class="row">
+        <div class="col-12 col-sm-6 mt-3">
+            <?php
+                echo $this->Form->control('user_id', ['options' => $users]);
+            ?>
+        </div>
+        <div class="col-12 col-sm-6 mt-3">
+            <?php
+                echo $this->Form->control('subject');
+            ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 mt-3">
+            <?php
+                echo $this->Form->control('model_type_id', ['options' => $modelTypes]);
+            ?>
+        </div>
+        <div class="col-12 col-sm-6 mt-3">
+            <?php
+                echo $this->Form->control('submission_category_id', ['options' => $submissionCategories, 'empty' => true]);
+            ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 mt-3">
+            <?php
+                echo $this->Form->control('manufacturer_id', ['options' => $manufacturers, 'empty' => true]);
+            ?>
+        </div><div class="col-12 col-sm-6 mt-3">
+            <?php
+                echo $this->Form->control('description');
+            ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 mt-3">
+            <?php  
+                echo $this->Form->control('scale_id', ['options' => $scales]);
+            ?>
+        </div>
+        <div class="col-12 col-sm-6 mt-3">
+            <?php
+                echo $this->Form->control('main_image');
+            ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 mt-3">
+            <?php  
+                echo $this->Form->control('status_id', ['options' => $statuses]);
+            ?>
+        </div>
+        <div class="col-12 col-sm-6 mt-3">
+            <?php
+                echo $this->Form->control('approved', ['empty' => true]);
+            ?>
+        </div>
+    </div>
+    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->end() ?>
+</div>
+
+
