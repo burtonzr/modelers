@@ -29,7 +29,7 @@
                     echo $this->Form->control('manufacturer_id', ['options' => $manufacturers, 'empty' => true]);
                     echo $this->Form->control('description');
                     echo $this->Form->control('scale_id', ['options' => $scales]);
-                    echo $this->Form->control('main_image');
+                    echo $this->Form->control('image_path');
                     echo $this->Form->control('status_id', ['options' => $statuses]);
                     echo $this->Form->control('approved', ['empty' => true]);
                 ?>

@@ -25,11 +25,11 @@ class SubmissionsFixture extends TestFixture
         'manufacturer_id' => ['type' => 'integer', 'length' => 10, 'unsigned' => true, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'description' => ['type' => 'text', 'length' => null, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
         'scale_id' => ['type' => 'integer', 'length' => 10, 'unsigned' => true, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
-        'main_image' => ['type' => 'integer', 'length' => 10, 'unsigned' => true, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'status_id' => ['type' => 'integer', 'length' => 10, 'unsigned' => true, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'created' => ['type' => 'datetime', 'length' => null, 'precision' => null, 'null' => true, 'default' => null, 'comment' => ''],
         'approved' => ['type' => 'datetime', 'length' => null, 'precision' => null, 'null' => true, 'default' => null, 'comment' => ''],
         'modified' => ['type' => 'datetime', 'length' => null, 'precision' => null, 'null' => true, 'default' => null, 'comment' => ''],
+        'image_path' => ['type' => 'string', 'length' => 255, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
         '_indexes' => [
             'fk_submissions_model_type_id' => ['type' => 'index', 'columns' => ['model_type_id'], 'length' => []],
             'fk_submissions_status_id' => ['type' => 'index', 'columns' => ['status_id'], 'length' => []],
@@ -64,11 +64,11 @@ class SubmissionsFixture extends TestFixture
                 'manufacturer_id' => 1,
                 'description' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
                 'scale_id' => 1,
-                'main_image' => 1,
                 'status_id' => 1,
-                'created' => '2020-06-14 16:20:35',
-                'approved' => '2020-06-14 16:20:35',
-                'modified' => '2020-06-14 16:20:35',
+                'created' => '2020-07-11 01:15:56',
+                'approved' => '2020-07-11 01:15:56',
+                'modified' => '2020-07-11 01:15:56',
+                'image_path' => 'Lorem ipsum dolor sit amet',
             ],
         ];
         parent::init();

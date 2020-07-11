@@ -27,6 +27,19 @@ class SubmissionsController extends AppController {
             $submission = $this->Submissions->newEmptyEntity();
             if ($this->request->is('post')) {
                 $submission = $this->Submissions->patchEntity($submission, $this->request->getData());
+
+                if(!$submission->getErrors()) {
+                    $image      = $this->request->getData('image_path');
+                    $name       = $image->getClientFilename();
+                    $targetPath = WWW_ROOT.'img'.DS.$name;
+
+                    if($name) {
+                        $image->moveTo($targetPath);
+                    }
+
+                    $submission->image_path = $name;
+                }
+
                 if ($this->Submissions->save($submission)) {
                     $this->Flash->success(__('The submission has been saved.'));
 

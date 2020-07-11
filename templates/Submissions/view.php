@@ -53,7 +53,7 @@
         </tr>
         <tr>
             <th><?= __('Main Image') ?></th>
-            <td><?= $this->Number->format($submission->main_image) ?></td>
+            <td><?= h($submission->image_path) ?></td>
         </tr>
         <tr>
             <th><?= __('Created') ?></th>

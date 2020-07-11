@@ -1,6 +1,12 @@
 <div class="container-fluid">
     <h1 class="pagetitle text-center"><?= h($submissionCategory->title) ?></h1>
     <div class="row text-center">
+        <div class="col-12 col-sm-4">
+            <?= $this->Html->link(__('Go Back'), array('controller' => 'ModelTypes', 'action' => 'view', $submissionCategory->model_type_id), ['class' => 'model_types_view p-3 mt-4 btn btn-info']) ?>
+        </div>
+        <div class="col-12 col-sm-3">
+            <?= $this->Html->link(__('New Submission'), array('controller' => 'Submissions', 'action' => 'add'), ['class' => 'model_types_view p-3 mt-4 btn btn-success']) ?>
+        </div>
         <?php 
             if($UserGroupID == 3) {
         ?>
@@ -8,9 +14,6 @@
                 <?= $this->Html->link(__('Edit Category'), ['action' => 'edit'], ['class' => 'model_types_view p-3 mt-4 btn btn-warning']) ?>
             </div>
         <?php } ?>
-        <div class="col-12 col-sm-4">
-            <?= $this->Html->link(__('Go Back'), array('controller' => 'ModelTypes', 'action' => 'view', $submissionCategory->model_type_id), ['class' => 'model_types_view p-3 mt-4 btn btn-info']) ?>
-        </div>
         <?php if (!empty($submissionCategory->submissions)) : ?>
             <div class="container mt-5">
                 <?php foreach ($submissionCategory->submissions as $submissions) : ?>

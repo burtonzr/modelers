@@ -16,11 +16,11 @@ use Cake\ORM\Entity;
  * @property int|null $manufacturer_id
  * @property string|null $description
  * @property int $scale_id
- * @property int|null $main_image
  * @property int $status_id
  * @property \Cake\I18n\FrozenTime|null $created
  * @property \Cake\I18n\FrozenTime|null $approved
  * @property \Cake\I18n\FrozenTime|null $modified
+ * @property string|null $image_path
  *
  * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\ModelType $model_type
@@ -50,11 +50,11 @@ class Submission extends Entity
         'manufacturer_id' => true,
         'description' => true,
         'scale_id' => true,
-        'main_image' => true,
         'status_id' => true,
         'created' => true,
         'approved' => true,
         'modified' => true,
+        'image_path' => true,
         'user' => true,
         'model_type' => true,
         'submission_category' => true,

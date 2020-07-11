@@ -42,13 +42,7 @@ class ImagesController extends AppController
         $this->set(compact('image'));
     }
 
-    /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
-     */
-    public function add()
-    {
+    public function add() {
         $image = $this->Images->newEmptyEntity();
         if ($this->request->is('post')) {
             $image = $this->Images->patchEntity($image, $this->request->getData());

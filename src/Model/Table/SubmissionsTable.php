@@ -107,12 +107,21 @@ class SubmissionsTable extends Table
             ->allowEmptyString('description');
 
         $validator
-            ->nonNegativeInteger('main_image')
-            ->allowEmptyFile('main_image');
-
-        $validator
             ->dateTime('approved')
             ->allowEmptyDateTime('approved');
+
+        $validator
+            ->allowEmptyFile('image_path')
+            ->add( 'image_path', [
+                'mimeType' => [
+                    'rule' => [ 'mimeType', [ 'image/jpg', 'image/png', 'image/jpeg' ] ],
+                    'message' => 'Please upload only jpg and png.',
+                ],
+                'fileSize' => [
+                    'rule' => [ 'fileSize', '<=', '1MB' ],
+                    'message' => 'Image file size must be less than 1MB.',
+                ]
+            ]);
 
         return $validator;
     }

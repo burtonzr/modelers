@@ -5,7 +5,7 @@
     </div>
 </div>
 <div class="container content mt-5">
-    <?= $this->Form->create($submission) ?>
+    <?= $this->Form->create($submission, array('enctype' => 'multipart/form-data')); ?>
     <div class="row">
         <div class="col-12 col-sm-6 mt-3">
             <?php
@@ -49,7 +49,7 @@
         </div>
         <div class="col-12 col-sm-6 mt-3">
             <?php
-                echo $this->Form->control('main_image');
+                echo $this->Form->control('image_path', array('type' => 'file'));
             ?>
         </div>
     </div>
@@ -65,7 +65,7 @@
             ?>
         </div>
     </div>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button(__('Add Submission'), ['class' => 'loginButton btn btn-success btn-block mt-3']) ?>
     <?= $this->Form->end() ?>
 </div>
 
