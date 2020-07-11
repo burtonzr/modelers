@@ -8,44 +8,9 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
-/**
- * Submissions Model
- *
- * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
- * @property \App\Model\Table\ModelTypesTable&\Cake\ORM\Association\BelongsTo $ModelTypes
- * @property \App\Model\Table\SubmissionCategoriesTable&\Cake\ORM\Association\BelongsTo $SubmissionCategories
- * @property \App\Model\Table\ManufacturersTable&\Cake\ORM\Association\BelongsTo $Manufacturers
- * @property \App\Model\Table\ScalesTable&\Cake\ORM\Association\BelongsTo $Scales
- * @property \App\Model\Table\StatusesTable&\Cake\ORM\Association\BelongsTo $Statuses
- * @property \App\Model\Table\ImagesTable&\Cake\ORM\Association\HasMany $Images
- * @property \App\Model\Table\SubmissionFieldValuesTable&\Cake\ORM\Association\HasMany $SubmissionFieldValues
- *
- * @method \App\Model\Entity\Submission newEmptyEntity()
- * @method \App\Model\Entity\Submission newEntity(array $data, array $options = [])
- * @method \App\Model\Entity\Submission[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Submission get($primaryKey, $options = [])
- * @method \App\Model\Entity\Submission findOrCreate($search, ?callable $callback = null, $options = [])
- * @method \App\Model\Entity\Submission patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Submission[] patchEntities(iterable $entities, array $data, array $options = [])
- * @method \App\Model\Entity\Submission|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Submission saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Submission[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
- * @method \App\Model\Entity\Submission[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
- * @method \App\Model\Entity\Submission[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
- * @method \App\Model\Entity\Submission[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
- *
- * @mixin \Cake\ORM\Behavior\TimestampBehavior
- */
-class SubmissionsTable extends Table
-{
-    /**
-     * Initialize method
-     *
-     * @param array $config The configuration for the Table.
-     * @return void
-     */
-    public function initialize(array $config): void
-    {
+class SubmissionsTable extends Table {
+   
+    public function initialize(array $config): void {
         parent::initialize($config);
 
         $this->setTable('submissions');

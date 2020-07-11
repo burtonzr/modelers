@@ -4,7 +4,7 @@
         <div class="col-12 col-sm-4">
             <?= $this->Html->link(__('Go Back'), array('controller' => 'ModelTypes', 'action' => 'view', $submissionCategory->model_type_id), ['class' => 'model_types_view p-3 mt-4 btn btn-info']) ?>
         </div>
-        <div class="col-12 col-sm-3">
+        <div class="col-12 col-sm-4">
             <?= $this->Html->link(__('New Submission'), array('controller' => 'Submissions', 'action' => 'add'), ['class' => 'model_types_view p-3 mt-4 btn btn-success']) ?>
         </div>
         <?php 
@@ -19,17 +19,13 @@
                 <?php foreach ($submissionCategory->submissions as $submissions) : ?>
                     <div class="col-sm-12 col-md-6 content mt-5 grid modeltypes">
                         <div class="inner">
-                            <h3 class="text-center" style="text-transform: capitalize;"><?= $this->Html->link(__(h($submissions->manufacturer_id)), ['controller' => 'Submissions', 'action' => 'view', $submissions->id]) ?></h3>
+                            <h3 class="text-center" style="text-transform: capitalize;"><?= $this->Html->link(__(h($submissions->subject)), ['controller' => 'Submissions', 'action' => 'view', $submissions->id]) ?></h3>
                             <div class="img-container">
-                                <?php if (!empty($submission->images)) : ?>
-                                    <h1>hello</h1>
-                                <?php endif; ?>
-                                <img src="<?= h($submissions->main_image) ?>" class="img-fluid" />
+                                <img src="img/aircraft.jpg" class="img-fluid" />
                             </div>
                             <!---
                             <?= h($submissions->id) ?>
                             <td><?= h($submissions->user_id) ?></td>
-                            <td><?= h($submissions->subject) ?></td>
                             <td><?= h($submissions->model_type_id) ?></td>
                             <td><?= h($submissions->submission_category_id) ?></td>
                             <td></td>
