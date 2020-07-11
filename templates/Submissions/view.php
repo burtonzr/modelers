@@ -17,6 +17,7 @@
         </div>
     <?php } ?>
 </div>
+<img src="img/<?= h($submission->image_path) ?>" class="img-fluid" />
 <div class="container content mt-5">
     <table>
         <tr>

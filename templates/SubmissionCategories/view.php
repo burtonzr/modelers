@@ -17,12 +17,9 @@
         <?php if (!empty($submissionCategory->submissions)) : ?>
             <div class="container mt-5">
                 <?php foreach ($submissionCategory->submissions as $submissions) : ?>
-                    <div class="col-sm-12 col-md-6 content mt-5 grid modeltypes">
+                    <div class="col-sm-12 col-md-6 content mt-5 grid">
                         <div class="inner">
                             <h3 class="text-center" style="text-transform: capitalize;"><?= $this->Html->link(__(h($submissions->subject)), ['controller' => 'Submissions', 'action' => 'view', $submissions->id]) ?></h3>
-                            <div class="img-container">
-                                <img src="img/aircraft.jpg" class="img-fluid" />
-                            </div>
                             <!---
                             <?= h($submissions->id) ?>
                             <td><?= h($submissions->user_id) ?></td>

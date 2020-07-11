@@ -71,8 +71,10 @@ class UsersController extends AppController {
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
+
         $statuses   = array('1' => 'Active', '2' => 'Removed', '3' => 'Suspended', '4' => 'Pending', '5' => 'Banned');
-        $usergroups = array('1' => 'User', '2' => 'Moderator', '3' => 'Admin');
+        $usergroups = $this->Users->Usergroups->find()->select(['Name']);
+        $usergroups = $usergroups->extract('Name')->toArray();
         $this->set(compact('user', 'statuses', 'usergroups'));
     }
 

@@ -73,11 +73,12 @@ class SubmissionsController extends AppController {
             }
             $this->Flash->error(__('The submission could not be saved. Please, try again.'));
         }
-        $users = $this->Submissions->Users->find('list', ['limit' => 200]);
-        $modelTypes = $this->Submissions->ModelTypes->find('list', ['limit' => 200]);
+        $users                = $this->Submissions->Users->find('list', ['limit' => 200]);
+        $modelTypes           = $this->Submissions->ModelTypes->find('list', ['limit' => 200]);
         $submissionCategories = $this->Submissions->SubmissionCategories->find('list', ['limit' => 200]);
-        $manufacturers = $this->Submissions->Manufacturers->find('list', ['limit' => 200]);
-        $scales = $this->Submissions->Scales->find('list', ['limit' => 200]);
+        $manufacturers        = $this->Submissions->Manufacturers->find('list', ['limit' => 200]);
+        $scales               = $this->Submissions->Scales->find()->select(['scale']);
+        $scales               = $scales->extract('scale')->toArray();
         $statuses = $this->Submissions->Statuses->find('list', ['limit' => 200]);
         $this->set(compact('submission', 'users', 'modelTypes', 'submissionCategories', 'manufacturers', 'scales', 'statuses'));
     }
