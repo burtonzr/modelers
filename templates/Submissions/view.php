@@ -1,4 +1,4 @@
-<h1 class="pagetitle text-center"><?= h($submission->id) ?></h1>
+<h1 class="pagetitle text-center"><?= h($submission->subject) ?></h1>
 <div class="row text-center">
     <div class="col-12 col-sm-3 mt-3">
         <?= $this->Html->link(__('Go Back'), array('controller' => 'SubmissionCategories', 'action' => 'view', $submission->submission_category->id), ['class' => 'model_types_view p-3 mt-4 btn btn-info']) ?>
@@ -7,11 +7,15 @@
         <?= $this->Html->link(__('New Submission'), ['action' => 'add'], ['class' => 'model_types_view p-3 mt-4 btn btn-success']) ?>
     </div>
     <?php
-        if($UserGroupID == 2 || $UserGroupID == 3) { ?>
+        if($UserGroupID == 2 || $UserGroupID == 3) { 
     ?>
         <div class="col-12 col-sm-3 mt-3">
             <?= $this->Html->link(__('Edit Submission'), ['action' => 'edit', $submission->id], ['class' => 'model_types_view p-3 mt-4 btn btn-warning']) ?>
         </div>
+    <?php } ?>
+    <?php
+        if($UserGroupID == 3) {
+    ?>
         <div class="col-12 col-sm-3 mt-3">
             <?= $this->Form->postLink(__('Delete Submission'), ['action' => 'delete', $submission->id], ['confirm' => __('Are you sure you want to delete # {0}?', $submission->id), 'class' => 'model_types_view p-3 mt-4 btn btn-danger']) ?>
         </div>
