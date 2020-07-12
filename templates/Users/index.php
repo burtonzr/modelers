@@ -13,8 +13,8 @@
                 <th><?= $this->Paginator->sort('modified') ?></th>
                 <th style="display: none;"><?= $this->Paginator->sort('password') ?></th>
                 <th class="actions"><?= __('Update') ?></th>
+                <th class="actions"><?= __('Account') ?></th>
                 <?php if($UserGroupID == 3) { ?>
-                    <th class="actions"><?= __('Account') ?></th>
                     <th class="actions"><?= __('Remove') ?></th>
                 <?php } ?>
             </tr>
@@ -32,10 +32,10 @@
                     <td><?= h($user->modified) ?></td>
                     <td style="display: none;"><?= h($user->password) ?></td>
                     <td><?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?></td>
+                    <td><?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?></td>
                     <?php 
                         if($UserGroupID == 3) {
                     ?>
-                        <td><?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?></td>
                         <td><?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?></td>
                     <?php } ?>
                 </tr>

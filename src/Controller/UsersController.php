@@ -22,7 +22,7 @@ class UsersController extends AppController {
     }
 
     public function view($id = null) {
-        if($this->Auth->user('UserGroupID') == 3) {
+        if($this->Auth->user('UserGroupID') == 3 || $this->Auth->user('UserGroupID') == 2) {
             $user = $this->Users->get($id, [
                 'contain' => ['Statuses', 'Submissions'],
             ]);
@@ -101,10 +101,11 @@ class UsersController extends AppController {
                 $user = $this->Auth->identify();
                 if($user) {
                     $this->Auth->setUser($user);
-                    if($this->Auth->user('UserGroupID') == 3) {
+                    if($this->Auth->user('UserGroupID') == 3 || $this->Auth->user('UserGroupID') == 2) {
                         return $this->redirect($this->Auth->redirectUrl());
                     } else if ($this->Auth->user('status_id') == 21) {
                         $this->Flash->error('You have been banned from logging into the application.');
+                        return $this->redirect($this->Auth->logout());
                     } else {
                         return $this->redirect(array('controller' => 'ModelTypes', 'action' => 'index'));
                     }
