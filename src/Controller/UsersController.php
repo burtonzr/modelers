@@ -72,7 +72,7 @@ class UsersController extends AppController {
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
 
-        $statuses   = array('1' => 'Active', '2' => 'Removed', '3' => 'Suspended', '4' => 'Pending', '5' => 'Banned');
+        $statuses   = array('1' => 'Active', '2' => 'Removed', '3' => 'Suspended', '4' => 'Pending', '21' => 'Banned');
         $usergroups = $this->Users->Usergroups->find()->select(['Name']);
         $usergroups = $usergroups->extract('Name')->toArray();
         $this->set(compact('user', 'statuses', 'usergroups'));
@@ -103,6 +103,8 @@ class UsersController extends AppController {
                     $this->Auth->setUser($user);
                     if($this->Auth->user('UserGroupID') == 3) {
                         return $this->redirect($this->Auth->redirectUrl());
+                    } else if ($this->Auth->user('status_id') == 21) {
+                        $this->Flash->error('You have been banned from logging into the application.');
                     } else {
                         return $this->redirect(array('controller' => 'ModelTypes', 'action' => 'index'));
                     }

@@ -36,6 +36,7 @@ class AppController extends Controller {
         $this->set('id', $this->Auth->user('id'));
         $this->set('email', $this->Auth->user('email'));
         $this->set('UserGroupID', $this->Auth->user('UserGroupID'));
+        $this->set('status_id', $this->Auth->user('status_id'));
  
         //$this->loadComponent('FormProtection');
     }
