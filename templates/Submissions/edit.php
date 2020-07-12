@@ -36,19 +36,7 @@
             </div>
             <div class="col-12 col-sm-6 mt-3">
                 <?php
-                    echo $this->Form->control('submission_category_id', ['options' => $submissionCategories, 'empty' => true]);
-                ?>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 col-sm-6 mt-3">
-                <?php
                     echo $this->Form->control('manufacturer_id', ['options' => $manufacturers, 'empty' => true]);
-                ?>
-            </div>
-            <div class="col-12 col-sm-6 mt-3">
-                <?php
-                    echo $this->Form->control('description');
                 ?>
             </div>
         </div>
@@ -56,22 +44,32 @@
     <div class="row">
         <div class="col-12 col-sm-6 mt-3">
             <?php
+                echo $this->Form->control('submission_category_id', ['options' => $submissionCategories, 'empty' => true]);
+            ?>
+        </div>
+        <div class="col-12 col-sm-6 mt-3">
+            <?php
+                echo $this->Form->control('description');
+            ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 mt-3">
+            <?php
                 echo $this->Form->control('scale_id', ['options' => $scales]);
             ?>
         </div>
-        <?php if($UserGroupID == 3) { ?>
-            <div class="col-12 col-sm-6 mt-3">
-                <?php
-                    echo $this->Form->control('image_path');
-                ?>
-            </div>
-        <?php } ?>
+        <div class="col-12 col-sm-6 mt-3">
+            <?php
+                echo $this->Form->control('status_id', ['options' => $statuses]);
+            ?>
+        </div>
     </div>
     <?php if($UserGroupID == 3) { ?>
         <div class="row">
             <div class="col-12 col-sm-6 mt-3">
                 <?php
-                    echo $this->Form->control('status_id', ['options' => $statuses]);
+                    echo $this->Form->control('image_path');
                 ?>
             </div>
             <div class="col-12 col-sm-6 mt-3">
