@@ -103,6 +103,15 @@ class UsersController extends AppController {
                     $this->Auth->setUser($user);
                     if($this->Auth->user('UserGroupID') == 3 || $this->Auth->user('UserGroupID') == 2) {
                         return $this->redirect($this->Auth->redirectUrl());
+                    } else if($this->Auth->user('status_id') == 2) {
+                        $this->Flash->error('Your account has been removed from the system.');
+                        return $this->redirect($this->Auth->logout());
+                    } else if($this->Auth->user('status_id') == 3) {
+                        $this->Flash->error('Your account has been suspended. Your account is viewable, but no longer accessible.');
+                        return $this->redirect($this->Auth->logout());
+                    } else if ($this->Auth->user('status_id') == 4) {
+                        $this->Flash->error('You created an account, but you have not been approved by a moderator or admin yet. Try again later. ');
+                        return $this->redirect($this->Auth->logout());
                     } else if ($this->Auth->user('status_id') == 21) {
                         $this->Flash->error('You have been banned from logging into the application.');
                         return $this->redirect($this->Auth->logout());

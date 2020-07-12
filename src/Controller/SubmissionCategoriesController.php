@@ -6,13 +6,8 @@ namespace App\Controller;
 use Cake\Event\EventInterface;
 
 class SubmissionCategoriesController extends AppController {
-    /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|null|void Renders view
-     */
-    public function index()
-    {
+    
+    public function index() {
         $this->paginate = [
             'contain' => ['ParentSubmissionCategories', 'ModelTypes', 'Statuses'],
         ];
@@ -21,15 +16,7 @@ class SubmissionCategoriesController extends AppController {
         $this->set(compact('submissionCategories'));
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Submission Category id.
-     * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
+    public function view($id = null) {
         $submissionCategory = $this->SubmissionCategories->get($id, [
             'contain' => ['ParentSubmissionCategories', 'ModelTypes', 'Statuses', 'ChildSubmissionCategories', 'Submissions'],
         ]);
