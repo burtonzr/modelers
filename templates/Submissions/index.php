@@ -1,9 +1,3 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Submission[]|\Cake\Collection\CollectionInterface $submissions
- */
-?>
 <div class="submissions index content">
     <?= $this->Html->link(__('New Submission'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <h3><?= __('Submissions') ?></h3>
@@ -28,7 +22,6 @@
             </thead>
             <tbody>
                 <?php foreach ($submissions as $submission): ?>
-                <img src="img/<?= h($submission->image_path) ?>" class="img-fluid" />
                 <tr>
                     <td><?= $this->Number->format($submission->id) ?></td>
                     <td><?= $submission->has('user') ? $this->Html->link($submission->user->name, ['controller' => 'Users', 'action' => 'view', $submission->user->id]) : '' ?></td>

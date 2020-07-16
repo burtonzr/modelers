@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\Event\EventInterface;
+
 class SubmissionsController extends AppController {
 
     public function index() {
@@ -93,5 +95,11 @@ class SubmissionsController extends AppController {
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function beforeFilter(EventInterface $event) {
+        parent::beforeFilter($event);
+
+        $this->Auth->allow(['index', 'view']);
     }
 }

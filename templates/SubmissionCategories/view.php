@@ -15,30 +15,14 @@
             </div>
         <?php } ?>
         <?php if (!empty($submissionCategory->submissions)) : ?>
-            <div class="container mt-5">
+            <div class="row mt-5">
                 <?php foreach ($submissionCategory->submissions as $submissions) : ?>
-                    <div class="col-sm-12 col-md-6 content mt-5 grid">
+                    <div class="col-sm-12 col-md-6 content mt-5 grid modeltypes">
                         <div class="inner">
-                            <h3 class="text-center" style="text-transform: capitalize;"><?= $this->Html->link(__(h($submissions->subject)), ['controller' => 'Submissions', 'action' => 'view', $submissions->id]) ?></h3>
-                            <!---
-                            <?= h($submissions->id) ?>
-                            <td><?= h($submissions->user_id) ?></td>
-                            <td><?= h($submissions->model_type_id) ?></td>
-                            <td><?= h($submissions->submission_category_id) ?></td>
-                            <td></td>
-                            <td><?= h($submissions->description) ?></td>
-                            <td><?= h($submissions->scale_id) ?></td>
-                            <td></td>
-                            <td><?= h($submissions->status_id) ?></td>
-                            <td><?= h($submissions->created) ?></td>
-                            <td><?= h($submissions->approved) ?></td>
-                            <td><?= h($submissions->modified) ?></td>
-                            <td class="actions">
-                                
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Submissions', 'action' => 'edit', $submissions->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Submissions', 'action' => 'delete', $submissions->id], ['confirm' => __('Are you sure you want to delete # {0}?', $submissions->id)]) ?>
-                            </td>
-                            --->
+                            <h4 class="text-center" style="text-transform: capitalize;"><?= h($submissions->scale_id) ?> <?= $this->Html->link(__(h($submissions->subject)), ['controller' => 'Submissions', 'action' => 'view', $submissions->id]) ?> by <?= h($submissions->user_id) ?></h4>
+                            <div class="img-container">
+                                <img src="../../img/<?= h($submissions->image_path) ?>" class="img-fluid" />
+                            </div>
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -46,3 +30,7 @@
         <?php endif; ?>
     </div>
 </div>
+<!---
+<?= $this->Html->link(__('Edit'), ['controller' => 'Submissions', 'action' => 'edit', $submissions->id]) ?>
+<?= $this->Form->postLink(__('Delete'), ['controller' => 'Submissions', 'action' => 'delete', $submissions->id], ['confirm' => __('Are you sure you want to delete # {0}?', $submissions->id)]) ?>
+--->
