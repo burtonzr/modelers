@@ -9,54 +9,43 @@
     <div class="row">
         <div class="col-12 col-sm-6 mt-3">
             <?php
-                echo $this->Form->control('user_id', ['options' => $users]);
-            ?>
-        </div>
-        <div class="col-12 col-sm-6 mt-3">
-            <?php
                 echo $this->Form->control('subject');
             ?>
         </div>
-    </div>
-    <div class="row">
         <div class="col-12 col-sm-6 mt-3">
             <?php
                 echo $this->Form->control('model_type_id', ['options' => $modelTypes]);
             ?>
         </div>
+    </div>
+    <div class="row">
         <div class="col-12 col-sm-6 mt-3">
             <?php
                 echo $this->Form->control('submission_category_id', ['options' => $submissionCategories, 'empty' => true]);
             ?>
         </div>
-    </div>
-    <div class="row">
         <div class="col-12 col-sm-6 mt-3">
             <?php
                 echo $this->Form->control('manufacturer_id', ['options' => $manufacturers]);
             ?>
-        </div><div class="col-12 col-sm-6 mt-3">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 mt-3">
             <?php
                 echo $this->Form->control('description');
             ?>
         </div>
-    </div>
-    <div class="row">
         <div class="col-12 col-sm-6 mt-3">
             <?php  
                 echo $this->Form->control('scale_id', ['options' => $scales]);
             ?>
         </div>
-        <div class="col-12 col-sm-6 mt-3">
-            <?php
-                echo $this->Form->control('image_path', array('type' => 'file'));
-            ?>
-        </div>
     </div>
     <div class="row">
         <div class="col-12 col-sm-6 mt-3">
-            <?php  
-                echo $this->Form->control('status_id', ['options' => $statuses]);
+            <?php
+                echo $this->Form->control('image_path', array('type' => 'file'));
             ?>
         </div>
         <div class="col-12 col-sm-6 mt-3">
@@ -65,6 +54,10 @@
             ?>
         </div>
     </div>
+    <?php
+        echo $this->Form->control('user_id', ['default' => $id, 'type' => 'hidden']);
+        echo $this->Form->control('status_id', ['default' => 15, 'type' => 'hidden']);
+    ?>
     <?= $this->Form->button(__('Add Submission'), ['class' => 'loginButton btn btn-success btn-block mt-3']) ?>
     <?= $this->Form->end() ?>
 </div>
