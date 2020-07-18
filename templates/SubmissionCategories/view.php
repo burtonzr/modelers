@@ -17,14 +17,33 @@
         <?php if (!empty($submissionCategory->submissions)) : ?>
             <div class="row mt-5">
                 <?php foreach ($submissionCategory->submissions as $submissions) : ?>
-                    <div class="col-sm-12 col-md-6 content mt-5 grid modeltypes">
-                        <div class="inner">
-                            <h4 class="text-center" style="text-transform: capitalize;"><?= h($submissions->scale_id) ?> <?= $this->Html->link(__(h($submissions->subject)), ['controller' => 'Submissions', 'action' => 'view', $submissions->id]) ?> by <?= h($submissions->user_id) ?></h4>
-                            <div class="img-container">
-                                <img src="../../img/<?= h($submissions->image_path) ?>" class="img-fluid" />
+                    <?php if ($submissions->status_id == 16): ?>
+                        <div class="col-sm-12 col-md-6 content mt-5 grid modeltypes">
+                            <div class="inner">
+                                <h4 class="text-center" style="text-transform: capitalize;">
+                                    <?php
+                                        foreach($scalesData as $scale) {
+                                            if($submissions->scale_id == $scale['id']) {
+                                                echo $scale['scale'];
+                                            }
+                                        }
+                                    ?>
+                                    <?= $this->Html->link(__(h($submissions->subject)), ['controller' => 'Submissions', 'action' => 'view', $submissions->id]) ?> 
+                                    by 
+                                    <?php 
+                                        foreach($data as $user) { 
+                                            if($submissions->user_id == $user['id']) {
+                                                echo $user['name'];
+                                            }
+                                        }
+                                    ?>
+                                </h4>
+                                <div class="img-container">
+                                    <img src="../../img/<?= h($submissions->image_path) ?>" class="img-fluid" />
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <?php endif; ?>
                 <?php endforeach; ?>
             </div>
         <?php endif; ?>

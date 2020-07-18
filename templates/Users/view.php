@@ -45,21 +45,23 @@
         <?php foreach ($user->submissions as $submissions) : ?>
             <div class="col-sm-12 col-md-6 content mt-5 grid modeltypes">
                 <div class="inner">
-                    <h3 class="text-center" style="text-transform: capitalize;"><?= $this->Html->link(__('View'), ['controller' => 'Submissions', 'action' => 'view', $submissions->id]) ?></h3>
+                    <h3 class="text-center" style="text-transform: capitalize;"><?= $this->Html->link(__(h($submissions->subject)), ['controller' => 'Submissions', 'action' => 'view', $submissions->id]) ?></h3>
                     <div class="img-container">
                         <img src="../../img/<?= h($submissions->image_path) ?>" class="img-fluid" />
                     </div>
+                    
+                    <!---
+                    <?= h($submissions->description) ?>
                     <?= h($submissions->user_id) ?>
-                    <?= h($submissions->subject) ?>
                     <?= h($submissions->model_type_id) ?>
                     <?= h($submissions->submission_category_id) ?>
                     <?= h($submissions->manufacturer_id) ?>
-                    <?= h($submissions->description) ?>
                     <?= h($submissions->scale_id) ?>
                     <?= h($submissions->status_id) ?>
                     <?= h($submissions->created) ?>
                     <?= h($submissions->approved) ?>
                     <?= h($submissions->modified) ?>
+                    --->
                 </div>
             </div>
         <?php endforeach; ?>

@@ -23,40 +23,40 @@ class SubmissionsTable extends Table {
             'foreignKey' => 'user_id',
             'joinType' => 'INNER',
         ]);
+
         $this->belongsTo('ModelTypes', [
             'foreignKey' => 'model_type_id',
             'joinType' => 'INNER',
         ]);
+
         $this->belongsTo('SubmissionCategories', [
             'foreignKey' => 'submission_category_id',
         ]);
+
         $this->belongsTo('Manufacturers', [
             'foreignKey' => 'manufacturer_id',
         ]);
+
         $this->belongsTo('Scales', [
             'foreignKey' => 'scale_id',
             'joinType' => 'INNER',
         ]);
+
         $this->belongsTo('Statuses', [
             'foreignKey' => 'status_id',
             'joinType' => 'INNER',
         ]);
+
         $this->hasMany('Images', [
             'foreignKey' => 'submission_id',
         ]);
+
         $this->hasMany('SubmissionFieldValues', [
             'foreignKey' => 'submission_id',
         ]);
     }
 
-    /**
-     * Default validation rules.
-     *
-     * @param \Cake\Validation\Validator $validator Validator instance.
-     * @return \Cake\Validation\Validator
-     */
-    public function validationDefault(Validator $validator): Validator
-    {
+    public function validationDefault(Validator $validator): Validator {
         $validator
             ->nonNegativeInteger('id')
             ->allowEmptyString('id', null, 'create');
@@ -91,15 +91,7 @@ class SubmissionsTable extends Table {
         return $validator;
     }
 
-    /**
-     * Returns a rules checker object that will be used for validating
-     * application integrity.
-     *
-     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
-     * @return \Cake\ORM\RulesChecker
-     */
-    public function buildRules(RulesChecker $rules): RulesChecker
-    {
+    public function buildRules(RulesChecker $rules): RulesChecker {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
         $rules->add($rules->existsIn(['model_type_id'], 'ModelTypes'));
         $rules->add($rules->existsIn(['submission_category_id'], 'SubmissionCategories'));

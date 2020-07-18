@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Cake\Event\EventInterface;
+use Cake\ORM\TableRegistry;
 
 class SubmissionCategoriesController extends AppController {
     
@@ -20,6 +21,13 @@ class SubmissionCategoriesController extends AppController {
         $submissionCategory = $this->SubmissionCategories->get($id, [
             'contain' => ['ParentSubmissionCategories', 'ModelTypes', 'Statuses', 'ChildSubmissionCategories', 'Submissions'],
         ]);
+        
+        $this->loadModel('Users');
+        $this->loadModel('Scales');
+        $sqlScales = $this->Scales->query('SELECT s.scale_id, scales.scale FROM `submission_categories` AS sc LEFT JOIN `submissions` AS s ON s.submission_category_id = sc.id LEFT JOIN `scales` ON s.scale_id = scales.id');
+        $sql       = $this->Users->query("SELECT u.Name, s.user_id FROM `submission_categories` AS sc LEFT JOIN `submissions` AS s ON s.submission_category_id = sc.id LEFT JOIN `users` AS u ON u.id = s.user_id");
+        $this->set('data', $sql);
+        $this->set('scalesData',  $sqlScales);
 
         $this->set(compact('submissionCategory'));
     }

@@ -33,16 +33,9 @@ use Cake\Validation\Validator;
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class SubmissionCategoriesTable extends Table
-{
-    /**
-     * Initialize method
-     *
-     * @param array $config The configuration for the Table.
-     * @return void
-     */
-    public function initialize(array $config): void
-    {
+class SubmissionCategoriesTable extends Table {
+    
+    public function initialize(array $config): void {
         parent::initialize($config);
 
         $this->setTable('submission_categories');
@@ -55,31 +48,28 @@ class SubmissionCategoriesTable extends Table
             'className' => 'SubmissionCategories',
             'foreignKey' => 'parent_id',
         ]);
+
         $this->belongsTo('ModelTypes', [
             'foreignKey' => 'model_type_id',
             'joinType' => 'INNER',
         ]);
+
         $this->belongsTo('Statuses', [
             'foreignKey' => 'status_id',
             'joinType' => 'INNER',
         ]);
+
         $this->hasMany('ChildSubmissionCategories', [
             'className' => 'SubmissionCategories',
             'foreignKey' => 'parent_id',
         ]);
+
         $this->hasMany('Submissions', [
             'foreignKey' => 'submission_category_id',
         ]);
     }
 
-    /**
-     * Default validation rules.
-     *
-     * @param \Cake\Validation\Validator $validator Validator instance.
-     * @return \Cake\Validation\Validator
-     */
-    public function validationDefault(Validator $validator): Validator
-    {
+    public function validationDefault(Validator $validator): Validator {
         $validator
             ->nonNegativeInteger('id')
             ->allowEmptyString('id', null, 'create');
@@ -114,8 +104,7 @@ class SubmissionCategoriesTable extends Table
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
-    public function buildRules(RulesChecker $rules): RulesChecker
-    {
+    public function buildRules(RulesChecker $rules): RulesChecker {
         $rules->add($rules->existsIn(['parent_id'], 'ParentSubmissionCategories'));
         $rules->add($rules->existsIn(['model_type_id'], 'ModelTypes'));
         $rules->add($rules->existsIn(['status_id'], 'Statuses'));
