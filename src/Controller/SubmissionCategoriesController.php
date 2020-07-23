@@ -45,8 +45,8 @@ class SubmissionCategoriesController extends AppController {
                 $this->Flash->error(__('The submission category could not be saved. Please, try again.'));
             }
             $parentSubmissionCategories = $this->SubmissionCategories->ParentSubmissionCategories->find('list', ['limit' => 200]);
-            $modelTypes = $this->SubmissionCategories->ModelTypes->find('list', ['limit' => 200]);
-            $statuses = $this->SubmissionCategories->Statuses->find('list', ['limit' => 200]);
+            $modelTypes                 = $this->SubmissionCategories->ModelTypes->find('list', ['limit' => 200]);
+            $statuses                   = $this->SubmissionCategories->Statuses->find('list', ['limit' => 200]);
             $this->set(compact('submissionCategory', 'parentSubmissionCategories', 'modelTypes', 'statuses'));
         } else {
             return $this->redirect(array('controller' => 'ModelTypes', 'action' => 'index'));

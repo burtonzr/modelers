@@ -1,3 +1,4 @@
+<?= $this->Html->script('submissions.js') ?>
 <h1 class="pagetitle text-center">Create Submission</h1>
 <div class="row">
     <div class="col-12">
@@ -14,21 +15,51 @@
         </div>
         <div class="col-12 col-sm-6 mt-3">
             <?php
-                echo $this->Form->control('model_type_id', ['options' => $modelTypes]);
+                echo $this->Form->control('model_type_id', ['id' => 'model-type-id', 'options' => $modelTypes, 'empty' => true]);
             ?>
         </div>
     </div>
     <div class="row">
-        <div class="col-12 col-sm-6 mt-3">
+        <div class="col-12 col-sm-6 mt-3" id="submission-category-hidden">
             <?php
                 echo $this->Form->control('submission_category_id', ['options' => $submissionCategories, 'empty' => true]);
             ?>
         </div>
         <div class="col-12 col-sm-6 mt-3">
-            <?php
-                echo $this->Form->control('manufacturer_id', ['options' => $manufacturers]);
-            ?>
+            <div id="scales-naval"></div>
         </div>
+        <?php
+                    echo $this->Element('scales_naval');
+                ?>
+        <!--
+        <div class="col-12 col-sm-6 mt-3" id="scale-hidden">-->
+            <?php  
+                
+                
+                    
+                        /*
+                        if($output['id'] == "1") {
+                            echo $this->Form->control('scale_id', ['options' => $scalesNaval, 'empty' => true]);
+                        }
+                        if($output['id'] == "2") {
+                            echo $this->Form->control('scale_id', ['options' => $scalesAircraft, 'empty' => true]);
+                        }
+                        if($output['id'] == "3") {
+                            echo $this->Form->control('scale_id', ['options' => $scalesAutomotive, 'empty' => true]);
+                        }
+                        if($output['id'] == "4") {
+                            echo $this->Form->control('scale_id', ['options' => $scalesArmor, 'empty' => true]);
+                        }   
+                        if($output['id'] == "6") {
+                            echo $this->Form->control('scale_id', ['options' => $scalesTrains, 'empty' => true]);
+                        }
+                        if($output['id'] == "7") {
+                            echo $this->Form->control('scale_id', ['options' => $scalesDioramas, 'empty' => true]);
+                        }
+                    
+               */
+            ?>
+        <!--</div>-->
     </div>
     <div class="row">
         <div class="col-12 col-sm-6 mt-3">
@@ -37,8 +68,8 @@
             ?>
         </div>
         <div class="col-12 col-sm-6 mt-3">
-            <?php  
-                echo $this->Form->control('scale_id', ['options' => $scales]);
+            <?php
+                echo $this->Form->control('manufacturer_id', ['options' => $manufacturers, 'empty' => true]);
             ?>
         </div>
     </div>
@@ -61,5 +92,4 @@
     <?= $this->Form->button(__('Add Submission'), ['class' => 'loginButton btn btn-success btn-block mt-3']) ?>
     <?= $this->Form->end() ?>
 </div>
-
 
