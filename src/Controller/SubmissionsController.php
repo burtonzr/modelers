@@ -55,23 +55,9 @@ class SubmissionsController extends AppController {
             $modelTypes           = $this->Submissions->ModelTypes->find('list', ['limit' => 200]);
             $submissionCategories = $this->Submissions->SubmissionCategories->find('list', ['limit' => 200]);
             $manufacturers        = $this->Submissions->Manufacturers->find('list', ['limit' => 200]);
-            $scalesAircraftIDs    = array(8, 9, 10, 11, 12, 13, 14);
-            $scalesNaval          = $this->Submissions->Scales->find('all', array('conditions' => $scalesAircraftIDs))->select(['scale'])->where(['model_type_id' => 1]);
-            $scalesNaval          = $scalesNaval->extract('scale')->toArray();   
-            $scalesAircraft       = $this->Submissions->Scales->find('all', array('conditions' => $scalesAircraftIDs))->select(['scale'])->where(['model_type_id' => 2]);
-            $scalesAircraft       = $scalesAircraft->extract('scale')->toArray();
-            $scalesAutomotive     = $this->Submissions->Scales->find('all', array('conditions' => $scalesAircraftIDs))->select(['scale'])->where(['model_type_id' => 3]);
-            $scalesAutomotive     = $scalesAutomotive->extract('scale')->toArray();
-            $scalesArmor          = $this->Submissions->Scales->find('all', array('conditions' => $scalesAircraftIDs))->select(['scale'])->where(['model_type_id' => 4]);
-            $scalesArmor          = $scalesArmor->extract('scale')->toArray();
-            $scalesTrains         = $this->Submissions->Scales->find('all', array('conditions' => $scalesAircraftIDs))->select(['scale'])->where(['model_type_id' => 6]);
-            $scalesTrains         = $scalesTrains->extract('scale')->toArray();
-            $scalesDioramas       = $this->Submissions->Scales->find('all', array('conditions' => $scalesAircraftIDs))->select(['scale'])->where(['model_type_id' => 7]);
-            $scalesDioramas       = $scalesDioramas->extract('scale')->toArray();
             $statuses             = $this->Submissions->Statuses->find('list', ['limit' => 200]);
             $this->set(compact('submission', 'users', 'modelTypes', 
-                'submissionCategories', 'manufacturers', 'scalesNaval', 'scalesAircraft', 'scalesAutomotive',
-                'scalesArmor', 'scalesTrains', 'scalesDioramas', 'statuses'));
+                'submissionCategories', 'manufacturers', 'statuses'));
         } else {
             return $this->redirect(array('controller' => 'Users', 'action' => 'login'));
         }
@@ -82,6 +68,41 @@ class SubmissionsController extends AppController {
         $scalesNaval          = $this->Submissions->Scales->find('all', array('conditions' => $scalesAircraftIDs))->select(['scale'])->where(['model_type_id' => 1]);
         $scalesNaval          = $scalesNaval->extract('scale')->toArray();   
         $this->set(compact('submission', 'scalesNaval'));
+    }
+
+    public function scalesAircraft() {
+        $scalesAircraftIDs    = array(8, 9, 10, 11, 12, 13, 14);
+        $scalesAircraft       = $this->Submissions->Scales->find('all', array('conditions' => $scalesAircraftIDs))->select(['scale'])->where(['model_type_id' => 2]);
+        $scalesAircraft       = $scalesAircraft->extract('scale')->toArray();
+        $this->set(compact('submission', 'scalesAircraft'));
+    }
+
+    public function scalesArmor() {
+        $scalesAircraftIDs    = array(8, 9, 10, 11, 12, 13, 14);
+        $scalesArmor          = $this->Submissions->Scales->find('all', array('conditions' => $scalesAircraftIDs))->select(['scale'])->where(['model_type_id' => 4]);
+        $scalesArmor          = $scalesArmor->extract('scale')->toArray();
+        $this->set(compact('submission', 'scalesArmor'));
+    }
+
+    public function scalesAutomotive() {
+        $scalesAircraftIDs    = array(8, 9, 10, 11, 12, 13, 14);
+        $scalesAutomotive     = $this->Submissions->Scales->find('all', array('conditions' => $scalesAircraftIDs))->select(['scale'])->where(['model_type_id' => 3]);
+        $scalesAutomotive     = $scalesAutomotive->extract('scale')->toArray();
+        $this->set(compact('submission', 'scalesAutomotive'));
+    }
+
+    public function scalesDioramas() {
+        $scalesAircraftIDs    = array(8, 9, 10, 11, 12, 13, 14);
+        $scalesDioramas       = $this->Submissions->Scales->find('all', array('conditions' => $scalesAircraftIDs))->select(['scale'])->where(['model_type_id' => 7]);
+        $scalesDioramas       = $scalesDioramas->extract('scale')->toArray();
+        $this->set(compact('submission', 'scalesDioramas'));
+    }
+
+    public function scalesTrains() {
+        $scalesAircraftIDs    = array(8, 9, 10, 11, 12, 13, 14);
+        $scalesTrains         = $this->Submissions->Scales->find('all', array('conditions' => $scalesAircraftIDs))->select(['scale'])->where(['model_type_id' => 6]);
+        $scalesTrains         = $scalesTrains->extract('scale')->toArray();
+        $this->set(compact('submission', 'scalesTrains'));
     }
 
     public function edit($id = null) {

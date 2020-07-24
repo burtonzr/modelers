@@ -27,39 +27,14 @@
         </div>
         <div class="col-12 col-sm-6 mt-3">
             <div id="scales-naval"></div>
+            <div id="scales-aircraft"></div>
+            <div id="scales-automotive"></div>
+            <div id="scales-armor"></div>
+            <div id="scales-figures" class="mt-5 pt-3"></div>
+            <div id="scales-trains"></div>
+            <div id="scales-dioramas"></div>
+            <div id="scales-space" class="mt-5 pt-3"></div>
         </div>
-        <?php
-                    echo $this->Element('scales_naval');
-                ?>
-        <!--
-        <div class="col-12 col-sm-6 mt-3" id="scale-hidden">-->
-            <?php  
-                
-                
-                    
-                        /*
-                        if($output['id'] == "1") {
-                            echo $this->Form->control('scale_id', ['options' => $scalesNaval, 'empty' => true]);
-                        }
-                        if($output['id'] == "2") {
-                            echo $this->Form->control('scale_id', ['options' => $scalesAircraft, 'empty' => true]);
-                        }
-                        if($output['id'] == "3") {
-                            echo $this->Form->control('scale_id', ['options' => $scalesAutomotive, 'empty' => true]);
-                        }
-                        if($output['id'] == "4") {
-                            echo $this->Form->control('scale_id', ['options' => $scalesArmor, 'empty' => true]);
-                        }   
-                        if($output['id'] == "6") {
-                            echo $this->Form->control('scale_id', ['options' => $scalesTrains, 'empty' => true]);
-                        }
-                        if($output['id'] == "7") {
-                            echo $this->Form->control('scale_id', ['options' => $scalesDioramas, 'empty' => true]);
-                        }
-                    
-               */
-            ?>
-        <!--</div>-->
     </div>
     <div class="row">
         <div class="col-12 col-sm-6 mt-3">
