@@ -3,6 +3,14 @@ $(document).ready(function() {
         e.preventDefault();
         var modelType = $("#model-type-id").val();
         if(modelType == 1) {
+            // submission categories
+            $("#category-naval").load(
+                "submissioncategory_naval", function() {
+
+                }
+            );
+
+            // scales
             $("#scales-naval").removeClass('d-none');
             $("#scales-aircraft").addClass('d-none');
             $("#scales-armor").addClass('d-none');
@@ -16,6 +24,14 @@ $(document).ready(function() {
                 }
             );
         } else if(modelType == 2) {
+            // submission categories
+            $("#category-aircraft").load(
+                "submissioncategory_aircraft", function() {
+
+                }
+            );
+
+            // scales
             $("#scales-aircraft").removeClass('d-none');
             $("#scales-naval").addClass('d-none');
             $("#scales-armor").addClass('d-none');

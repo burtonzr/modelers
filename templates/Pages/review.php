@@ -1,1 +1,1 @@
-<h1 class="text-center">Review</h1>
+<h1 class="pagetitle text-center">Review</h1>

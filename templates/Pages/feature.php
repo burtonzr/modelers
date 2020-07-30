@@ -1,1 +1,1 @@
-<h1 class="text-center">Features</h1>
+<h1 class="pagetitle text-center">Features</h1>

@@ -20,10 +20,9 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-12 col-sm-6 mt-3" id="submission-category-hidden">
-            <?php
-                echo $this->Form->control('submission_category_id', ['options' => $submissionCategories, 'empty' => true]);
-            ?>
+        <div class="col-12 col-sm-6 mt-3">
+            <div id="category-naval"></div>
+            <div id="category-aircraft"></div>
         </div>
         <div class="col-12 col-sm-6 mt-3">
             <div id="scales-naval"></div>

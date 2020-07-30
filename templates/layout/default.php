@@ -37,7 +37,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Home</a>
+                        <a class="nav-link" href="http://www.modelersgallery.com/modelers/">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/pages/review">Reviews</a>

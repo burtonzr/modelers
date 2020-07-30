@@ -1,1 +1,1 @@
-<h1 class="text-center">Contact</h1>
+<h1 class="pagetitle text-center">Contact</h1>
