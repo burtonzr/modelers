@@ -124,7 +124,7 @@ class SubmissionsController extends AppController {
         $this->set(compact('submission', 'categoryAutomotive'));
     }
 
-    public function submmissioncategoryArmor() {
+    public function submissioncategoryArmor () {
         $scalesAircraftIDs  = array(8, 9, 10, 11, 12, 13, 14);
         $categoryArmor      = $this->Submissions->SubmissionCategories->find('all', array('conditions' => $scalesAircraftIDs))->select(['title'])->where(['model_type_id' => 4]);
         $categoryArmor      = $categoryArmor->extract('title')->toArray();
@@ -140,14 +140,23 @@ class SubmissionsController extends AppController {
 
     public function submissioncategoryTrains() {
         $scalesAircraftIDs  = array(8, 9, 10, 11, 12, 13, 14);
+        $categoryTrains     = $this->Submissions->SubmissionCategories->find('all', array('conditions' => $scalesAircraftIDs))->select(['title'])->where(['model_type_id' => 6]);
+        $categoryTrains     = $categoryTrains->extract('title')->toArray();
+        $this->set(compact('submission', 'categoryTrains'));
     }
 
     public function submissioncategoryDioramas() {
         $scalesAircraftIDs    = array(8, 9, 10, 11, 12, 13, 14);
+        $categoryDioramas     = $this->Submissions->SubmissionCategories->find('all', array('conditions' => $scalesAircraftIDs))->select(['title'])->where(['model_type_id' => 7]);
+        $categoryDioramas     = $categoryDioramas->extract('title')->toArray();
+        $this->set(compact('submission', 'categoryDioramas'));
     }
 
     public function submissioncategorySpacecraft() {
         $scalesAircraftIDs    = array(8, 9, 10, 11, 12, 13, 14);
+        $categorySpacecraft   = $this->Submissions->SubmissionCategories->find('all', array('conditions' => $scalesAircraftIDs))->select(['title'])->where(['model_type_id' => 8]);
+        $categorySpacecraft   = $categorySpacecraft->extract('title')->toArray();
+        $this->set(compact('submission', 'categorySpacecraft'));
     }
 
     public function edit($id = null) {

@@ -23,6 +23,12 @@
         <div class="col-12 col-sm-6 mt-3">
             <div id="category-naval"></div>
             <div id="category-aircraft"></div>
+            <div id="category-automotive"></div>
+            <div id="category-armor"></div>
+            <div id="category-figures"></div>
+            <div id="category-trains"></div>
+            <div id="category-dioramas"></div>
+            <div id="category-space"></div>
         </div>
         <div class="col-12 col-sm-6 mt-3">
             <div id="scales-naval"></div>
