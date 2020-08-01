@@ -37,7 +37,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="http://www.modelersgallery.com/modelers/">Home</a>
+                        <a class="nav-link" href="/pages/home">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/pages/review">Reviews</a>
@@ -52,6 +52,18 @@
                             ?>
                         </a>
                     </li>
+                    <?php if($email) { ?>
+                        <div class="dropdown-container">
+                            <li type="button" class="nav-item btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="sr-only"></span>
+                            </li>
+                            <div class="dropdown-menu">
+                                <?php
+                                    echo $this->Html->link('Add Submission', array('controller' => 'submissions', 'action' => 'add'), array('title' => 'Add Submission', 'class' => 'dropdown-item dropdown-menu-right'));
+                                ?>
+                            </div>
+                        </div>
+                    <?php } ?>
                     <li class="nav-item">
                         <a target="_blank" class="nav-link" href="http://www.shipmodels.info/mws_forum/index.php">Forum</a>
                     </li>

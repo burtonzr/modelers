@@ -48,6 +48,26 @@ hr {
     margin-bottom: 35px;
 }
 
+/* Navbar */
+.dropdown-container {
+    position: relative;
+}
+
+.dropdown-toggle {
+    margin-top: 5px;
+}
+
+.dropdown-item {
+    font-size: 12px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%; /* Bottom of button */
+    right: 0;
+    margin-left: -100px; /* More to the left */
+}
+
 .text-center {
     text-align: center;
 }
