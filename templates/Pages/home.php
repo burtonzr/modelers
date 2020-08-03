@@ -8,12 +8,6 @@
 
     $this->disableAutoLayout();
 
-    if (!Configure::read('debug')) :
-        throw new NotFoundException(
-            'Please replace templates/Pages/home.php with your own version or re-enable debug mode.'
-        );
-    endif;
-
     $cakeDescription = 'The Model Gallery';
 ?>
 <!DOCTYPE html>
