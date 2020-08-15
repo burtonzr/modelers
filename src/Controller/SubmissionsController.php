@@ -22,6 +22,10 @@ class SubmissionsController extends AppController {
             'contain' => ['Users', 'ModelTypes', 'SubmissionCategories', 'Manufacturers', 'Scales', 'Statuses', 'Images', 'SubmissionFieldValues'],
         ]);
 
+        $this->loadModel('Scales');
+        $sqlScales = $this->Scales->query('SELECT s.scale_id, scales.scale FROM `submissions` AS s LEFT JOIN `scales` ON s.scale_id = scales.id');
+        $this->set('scalesData', $sqlScales);
+
         $this->set(compact('submission'));
     }
 
