@@ -73,8 +73,7 @@ class UsersController extends AppController {
         }
 
         $statuses   = array('1' => 'Active', '2' => 'Removed', '3' => 'Suspended', '4' => 'Pending', '21' => 'Banned');
-        $usergroups = $this->Users->Usergroups->find()->select(['Name']);
-        $usergroups = $usergroups->extract('Name')->toArray();
+        $usergroups = array('1' => 'User', '2' => 'Moderator', '3' => 'Admin');
         $this->set(compact('user', 'statuses', 'usergroups'));
     }
 

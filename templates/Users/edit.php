@@ -33,7 +33,7 @@
         <?php if($UserGroupID == 3) { ?>
             <div class="col-12 col-sm-6 mt-3">
                 <?php
-                    echo $this->Form->control('User Group', ['options' => $usergroups]);
+                    echo $this->Form->control('UserGroupID', array('label' => 'Usergroup', 'options' => $usergroups));
                 ?>
             </div>
         <?php } ?>
