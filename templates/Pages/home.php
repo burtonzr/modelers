@@ -126,35 +126,37 @@
     <div class="container">
         <div class="row">
             <div class="col-6 col-sm-3 border">
-                <img src="../img/sponsor1.jpg" class="img-fluid" />
+                <img src="../img/combrig.jpg" class="img-fluid" />
             </div>
             <div class="col-6 col-sm-3 border">
-                <img src="../img/sponsor2.jpg" class="img-fluid" />
+                <img src="../img/NNT-logo.jpg" class="img-fluid" />
             </div>
             <div class="col-6 col-sm-3 border">
-                <img src="../img/sponsor3.jpg" class="img-fluid" />
+                <img src="../img/Dodo_Models.jpg" class="img-fluid" />
             </div>
             <div class="col-6 col-sm-3 border">
-                <img src="../img/sponsor4.jpg" class="img-fluid" />
+                <img src="../img/VeteranModels.jpg" class="img-fluid" />
             </div>
             <div class="col-6 col-sm-3 border">
-                <img src="../img/sponsor5.jpg" class="img-fluid" />
+                <img src="../img/flagship.jpg" class="img-fluid" />
             </div>
             <div class="col-6 col-sm-3 border">
-                <img src="../img/sponsor6.jpg" class="img-fluid" />
+                <img src="../img/akamodel.jpg" class="img-fluid" />
             </div>
             <div class="col-6 col-sm-3 border">
-                <img src="../img/sponsor7.jpg" class="img-fluid" />
+                <img src="../img/AvrModel.jpg" class="img-fluid" />
             </div>
             <div class="col-6 col-sm-3 border">
-                <img src="../img/sponsor8.jpg" class="img-fluid" />
+                <img src="../img/grandpabanner.jpg" class="img-fluid" />
             </div>
             <div class="col-6 col-sm-3 border">
-                <img src="../img/sponsor9.jpg" class="img-fluid" />
+                <img src="../img/scaledecks.jpg" class="img-fluid" />
             </div>
+            <!---
             <div class="col-6 col-sm-3 border">
                 <img src="../img/sponsor10.jpg" class="img-fluid" />
             </div>
+            --->
         </div>
     </div>
 </body>
