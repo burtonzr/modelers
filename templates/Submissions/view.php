@@ -1,25 +1,4 @@
 <h2 class="pagetitle text-center"><?= h($submission->subject) ?> by <?= h($submission->user->name) ?></h2>
-<div class="row text-center">
-    <?php if($email) { ?>
-        <div class="col-12 col-sm-4 mt-3">
-            <?= $this->Html->link(__('New Submission'), ['action' => 'add'], ['class' => 'model_types_view p-3 mt-4 btn btn-success']) ?>
-        </div>
-    <?php } ?>
-    <?php
-        if($UserGroupID == 2 || $UserGroupID == 3) { 
-    ?>
-        <div class="col-12 col-sm-4 mt-3">
-            <?= $this->Html->link(__('Edit Submission'), ['action' => 'edit', $submission->id], ['class' => 'model_types_view p-3 mt-4 btn btn-warning']) ?>
-        </div>
-    <?php } ?>
-    <?php
-        if($UserGroupID == 3) {
-    ?>
-        <div class="col-12 col-sm-4 mt-3">
-            <?= $this->Form->postLink(__('Delete Submission'), ['action' => 'delete', $submission->id], ['confirm' => __('Are you sure you want to delete # {0}?', $submission->id), 'class' => 'model_types_view p-3 mt-4 btn btn-danger']) ?>
-        </div>
-    <?php } ?>
-</div>
 <div class="text-center">
     <img src="../../img/<?= h($submission->image_path) ?>" width="70%" class="img-fluid mt-3" />
 </div>
@@ -121,7 +100,28 @@
         <?php endif; ?>
     </div>
     --->
-    <div class="col-12 col-sm-3 mt-3">
-        <?= $this->Html->link(__('Go Back'), array('controller' => 'SubmissionCategories', 'action' => 'view', $submission->submission_category->id), ['class' => 'model_types_view p-3 mt-4 btn btn-info']) ?>
+    <div class="row text-center">
+        <div class="col-12 col-sm-3 mt-3">
+            <?= $this->Html->link(__('Go Back'), array('controller' => 'SubmissionCategories', 'action' => 'view', $submission->submission_category->id), ['class' => 'model_types_view p-3 mt-4 btn btn-info']) ?>
+        </div>
+        <?php if($email) { ?>
+            <div class="col-12 col-sm-3 mt-3">
+                <?= $this->Html->link(__('New Submission'), ['action' => 'add'], ['class' => 'model_types_view p-3 mt-4 btn btn-success']) ?>
+            </div>
+        <?php } ?>
+        <?php
+            if($UserGroupID == 2 || $UserGroupID == 3) { 
+        ?>
+            <div class="col-12 col-sm-3 mt-3">
+                <?= $this->Html->link(__('Edit Submission'), ['action' => 'edit', $submission->id], ['class' => 'model_types_view p-3 mt-4 btn btn-warning']) ?>
+            </div>
+        <?php } ?>
+        <?php
+            if($UserGroupID == 3) {
+        ?>
+            <div class="col-12 col-sm-3 mt-3">
+                <?= $this->Form->postLink(__('Delete Submission'), ['action' => 'delete', $submission->id], ['confirm' => __('Are you sure you want to delete # {0}?', $submission->id), 'class' => 'model_types_view p-3 mt-4 btn btn-danger']) ?>
+            </div>
+        <?php } ?>
     </div>
 </div>

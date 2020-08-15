@@ -59,11 +59,13 @@
                 echo $this->Form->control('image_path', array('type' => 'file'));
             ?>
         </div>
-        <div class="col-12 col-sm-6 mt-3">
-            <?php
-                echo $this->Form->control('approved', ['empty' => true]);
-            ?>
-        </div>
+        <?php if($UserGroupID >= 2) { ?>
+            <div class="col-12 col-sm-6 mt-3">
+                <?php
+                    echo $this->Form->control('approved', ['empty' => true]);
+                ?>
+            </div>
+        <?php } ?>
     </div>
     <?php
         echo $this->Form->control('user_id', ['default' => $id, 'type' => 'hidden']);

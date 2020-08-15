@@ -122,10 +122,40 @@
             </h1>
         </div>
     </header>
-    <main class="main">
-        <div class="container">
-            
+   
+    <div class="container">
+        <div class="row">
+            <div class="col-6 col-sm-3 border">
+                <img src="../img/sponsor1.jpg" class="img-fluid" />
+            </div>
+            <div class="col-6 col-sm-3 border">
+                <img src="../img/sponsor2.jpg" class="img-fluid" />
+            </div>
+            <div class="col-6 col-sm-3 border">
+                <img src="../img/sponsor3.jpg" class="img-fluid" />
+            </div>
+            <div class="col-6 col-sm-3 border">
+                <img src="../img/sponsor4.jpg" class="img-fluid" />
+            </div>
+            <div class="col-6 col-sm-3 border">
+                <img src="../img/sponsor5.jpg" class="img-fluid" />
+            </div>
+            <div class="col-6 col-sm-3 border">
+                <img src="../img/sponsor6.jpg" class="img-fluid" />
+            </div>
+            <div class="col-6 col-sm-3 border">
+                <img src="../img/sponsor7.jpg" class="img-fluid" />
+            </div>
+            <div class="col-6 col-sm-3 border">
+                <img src="../img/sponsor8.jpg" class="img-fluid" />
+            </div>
+            <div class="col-6 col-sm-3 border">
+                <img src="../img/sponsor9.jpg" class="img-fluid" />
+            </div>
+            <div class="col-6 col-sm-3 border">
+                <img src="../img/sponsor10.jpg" class="img-fluid" />
+            </div>
         </div>
-    </main>
+    </div>
 </body>
 </html>

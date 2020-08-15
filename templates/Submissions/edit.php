@@ -1,18 +1,4 @@
 <h1 class="pagetitle text-center">Edit <?= h($submission->subject) ?></h1>
-<div class="row text-center">
-    <div class="col-12 col-sm-6 mt-3">
-        <?= $this->Html->link(__('List Submissions'), ['action' => 'index'], ['class' => 'model_types_view p-3 mt-4 btn btn-info']) ?>
-    </div>
-    <?php if($UserGroupID == 3) { ?>
-        <div class="col-12 col-sm-6 mt-3">
-            <?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $submission->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $submission->id), 'class' => 'model_types_view p-3 mt-4 btn btn-danger']
-            ) ?>
-        </div>
-    <?php } ?>
-</div>
 <div class="container content mt-5">
     <?= $this->Form->create($submission) ?>
     <?php if($UserGroupID == 3) { ?>
@@ -65,20 +51,27 @@
             ?>
         </div>
     </div>
-    <?php if($UserGroupID == 3) { ?>
-        <div class="row">
+    <div class="row">
+        <?php if ($UserGroupID == 3) { ?>
             <div class="col-12 col-sm-6 mt-3">
                 <?php
                     echo $this->Form->control('image_path');
                 ?>
             </div>
+        <?php } ?>
+        <?php if($UserGroupID >= 2) { ?>
             <div class="col-12 col-sm-6 mt-3">
                 <?php
                     echo $this->Form->control('approved', ['empty' => true]);
                 ?>
             </div>
-        </div>
-    <?php } ?>
+        <?php } ?>
+    </div>
     <?= $this->Form->button(__('Update Submission'), ['class' => 'loginButton btn btn-success btn-block mt-3']) ?>
     <?= $this->Form->end() ?>
+</div>
+<div class="row text-center">
+    <div class="col-12 col-sm-3 mt-3">
+        <?= $this->Html->link(__('List Submissions'), ['action' => 'index'], ['class' => 'model_types_view p-3 mt-4 btn btn-info']) ?>
+    </div>
 </div>
