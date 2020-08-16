@@ -43,19 +43,21 @@
             </div>
         <?php } ?>
     </div>
-    <?php if($UserGroupID == 3) { ?>
-        <div class="row">
-            <div class="col-12 col-sm-6 mt-3">
-                <?php
-                    echo $this->Form->control('status_id', ['options' => $statuses]);
-                ?>
-            </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 mt-3">
+            <?php
+                echo $this->Form->control('status_id', ['options' => $statuses]);
+            ?>
+        </div>
+        <?php if($UserGroupID == 3) { ?>
             <div class="col-12 col-sm-6 mt-3">
                 <?php
                     echo $this->Form->control('last_ip');
                 ?>
             </div>
-        </div>
+        <?php } ?>
+    </div>
+    <?php if($UserGroupID == 3) { ?>
         <div class="row">
             <div class="col-12 col-sm-6 mt-3">
                     <?php
