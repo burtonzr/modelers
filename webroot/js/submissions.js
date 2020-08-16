@@ -1,4 +1,14 @@
 $(document).ready(function() {
+    $("#manufacturer_id").on('change', function(e) {
+        var manufacturer = $("#manufacturer_id").val();
+
+        if(manufacturer == 28) {
+            $("#other-manufacturer").removeClass('d-none');
+        } else {
+            $("#other-manufacturer").addClass('d-none');
+        }
+    });
+
     $("#model-type-id").on('change', function(e) {
         e.preventDefault();
         var modelType = $("#model-type-id").val();

@@ -5,7 +5,44 @@ namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
 
-class Submission extends Entity {
+/**
+ * Submission Entity
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string $subject
+ * @property int $model_type_id
+ * @property int|null $submission_category_id
+ * @property int|null $manufacturer_id
+ * @property string|null $description
+ * @property int $scale_id
+ * @property int $status_id
+ * @property \Cake\I18n\FrozenTime|null $created
+ * @property \Cake\I18n\FrozenTime|null $approved
+ * @property \Cake\I18n\FrozenTime|null $modified
+ * @property string|null $image_path
+ * @property string|null $Custom_Manufacturer
+ *
+ * @property \App\Model\Entity\User $user
+ * @property \App\Model\Entity\ModelType $model_type
+ * @property \App\Model\Entity\SubmissionCategory $submission_category
+ * @property \App\Model\Entity\Manufacturer $manufacturer
+ * @property \App\Model\Entity\Scale $scale
+ * @property \App\Model\Entity\Status $status
+ * @property \App\Model\Entity\Image[] $images
+ * @property \App\Model\Entity\SubmissionFieldValue[] $submission_field_values
+ */
+class Submission extends Entity
+{
+    /**
+     * Fields that can be mass assigned using newEntity() or patchEntity().
+     *
+     * Note that when '*' is set to true, this allows all unspecified fields to
+     * be mass assigned. For security purposes, it is advised to set '*' to false
+     * (or remove it), and explicitly make individual fields accessible as needed.
+     *
+     * @var array
+     */
     protected $_accessible = [
         'user_id' => true,
         'subject' => true,
@@ -19,6 +56,7 @@ class Submission extends Entity {
         'approved' => true,
         'modified' => true,
         'image_path' => true,
+        'Custom_Manufacturer' => true,
         'user' => true,
         'model_type' => true,
         'submission_category' => true,

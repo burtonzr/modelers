@@ -69,11 +69,12 @@
                             <th><?= __('Manufacturer Id') ?></th>
                             <th><?= __('Description') ?></th>
                             <th><?= __('Scale Id') ?></th>
-                            <th><?= __('Main Image') ?></th>
                             <th><?= __('Status Id') ?></th>
                             <th><?= __('Created') ?></th>
                             <th><?= __('Approved') ?></th>
                             <th><?= __('Modified') ?></th>
+                            <th><?= __('Image Path') ?></th>
+                            <th><?= __('Custom Manufacturer') ?></th>
                             <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                         <?php foreach ($manufacturer->submissions as $submissions) : ?>
@@ -86,11 +87,12 @@
                             <td><?= h($submissions->manufacturer_id) ?></td>
                             <td><?= h($submissions->description) ?></td>
                             <td><?= h($submissions->scale_id) ?></td>
-                            <td><?= h($submissions->main_image) ?></td>
                             <td><?= h($submissions->status_id) ?></td>
                             <td><?= h($submissions->created) ?></td>
                             <td><?= h($submissions->approved) ?></td>
                             <td><?= h($submissions->modified) ?></td>
+                            <td><?= h($submissions->image_path) ?></td>
+                            <td><?= h($submissions->Custom_Manufacturer) ?></td>
                             <td class="actions">
                                 <?= $this->Html->link(__('View'), ['controller' => 'Submissions', 'action' => 'view', $submissions->id]) ?>
                                 <?= $this->Html->link(__('Edit'), ['controller' => 'Submissions', 'action' => 'edit', $submissions->id]) ?>

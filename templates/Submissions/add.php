@@ -49,8 +49,13 @@
         </div>
         <div class="col-12 col-sm-6 mt-3">
             <?php
-                echo $this->Form->control('manufacturer_id', ['options' => $manufacturers, 'empty' => true]);
+                echo $this->Form->control('manufacturer_id', array('id' => 'manufacturer_id', 'options' => $manufacturers, 'empty' => true, 'default' => 'Other Manufacturers'));
             ?>
+        </div>
+    </div>
+    <div class="row d-none" id="other-manufacturer">
+        <div class="col-12 mt-3">
+           
         </div>
     </div>
     <div class="row">
