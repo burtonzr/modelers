@@ -33,30 +33,35 @@
         <?php if($UserGroupID == 3) { ?>
             <div class="col-12 col-sm-6 mt-3">
                 <?php
+                    echo $this->Form->control('password');
+                ?>
+            </div>
+            <div class="col-12 col-sm-6 mt-3">
+                <?php
                     echo $this->Form->control('UserGroupID', array('label' => 'Usergroup', 'options' => $usergroups));
                 ?>
             </div>
         <?php } ?>
-        <div class="col-12 col-sm-6 mt-3">
-            <?php
-                echo $this->Form->control('status_id', ['options' => $statuses]);
-            ?>
-        </div>
     </div>
     <?php if($UserGroupID == 3) { ?>
         <div class="row">
             <div class="col-12 col-sm-6 mt-3">
                 <?php
-                    echo $this->Form->control('last_ip');
+                    echo $this->Form->control('status_id', ['options' => $statuses]);
                 ?>
             </div>
             <div class="col-12 col-sm-6 mt-3">
                 <?php
-                    echo $this->Form->control('forum_user');
+                    echo $this->Form->control('last_ip');
                 ?>
             </div>
         </div>
         <div class="row">
+            <div class="col-12 col-sm-6 mt-3">
+                    <?php
+                        echo $this->Form->control('forum_user');
+                    ?>
+                </div>
             <div class="col-12 col-sm-6 mt-5">
                 <?php
                     echo $this->Form->control('public_yn');

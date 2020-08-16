@@ -8,7 +8,7 @@
 
     $this->disableAutoLayout();
 
-    $cakeDescription = 'The Model Gallery';
+    $cakeDescription = 'Model Warship Gallery';
 ?>
 <!DOCTYPE html>
 <html>
@@ -118,163 +118,164 @@
         <header>
             <div class="container text-center">
                 <h1 class="pagetitle text-center">
-                    The Model Gallery
+                    Model Warship Gallery
                 </h1>
             </div>
         </header>
         <div class="container text-center">
+            <h3>Visit Our Sponsors</h3>
             <div class="row">
-                <div class="col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
+                <div class="col-6 col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
                     <a class="mt-5" href="http://combrig-models.com/" target="_blank" style="text-decoration: none;">
                         <img src="../img/combrig.jpg" class="img-fluid" />
                     </a>
                 </div>
-                <div class="col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
+                <div class="col-6 col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
                     <a class="mt-5" href="https://www.nntmodell.com/" target="_blank" style="text-decoration: none;">
                         <img src="../img/NNT-logo.jpg" class="img-fluid" />
                     </a>
                 </div>
-                <div class="col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
+                <div class="col-6 col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
                     <a class="mt-5" href="http://www.dodo-models.com/" target="_blank" style="text-decoration: none;">
                         <img src="../img/Dodo_Models.jpg" class="img-fluid" />
                     </a>
                 </div>
-                <div class="col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
+                <div class="col-6 col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
                     <a class="mt-5" href="https://www.facebook.com/Veteran-Models-%E5%A8%81%E7%89%B9%E5%80%AB%E6%A8%A1%E5%9E%8B-170063279690089/?fref=ts" target="_blank" style="text-decoration: none;">
                         <img src="../img/VeteranModels.jpg" class="img-fluid" />
                     </a>
                 </div>
-                <div class="col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
+                <div class="col-6 col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
                     <a class="mt-5" href="https://flagshipmodels.com/" target="_blank" style="text-decoration: none;">
                         <img src="../img/flagship.jpg" class="img-fluid" />
                     </a>
                 </div>
-                <div class="col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
+                <div class="col-6 col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
                     <a class="mt-5" href="https://www.akamodel.com/en/" target="_blank" style="text-decoration: none;">
                         <img src="../img/akamodel.jpg" class="img-fluid" />
                     </a>
                 </div>
-                <div class="col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
+                <div class="col-6 col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
                     <a class="mt-5" href="http://www.avrmodel.com/es/" target="_blank" style="text-decoration: none;">
                         <img src="../img/AvrModel.jpg" class="img-fluid" />
                     </a>
                 </div>
-                <div class="col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
+                <div class="col-6 col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
                     <a class="mt-5" href="https://www.grandpascabinets.com/" target="_blank" style="text-decoration: none;">
                         <img src="../img/grandpabanner.jpg" class="img-fluid" />
                     </a>
                 </div>
-                <div class="col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
+                <div class="col-6 col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
                     <a class="mt-5" href="https://scaledecks.com/" target="_blank" style="text-decoration: none;">
                         <img src="../img/scaledecks.jpg" class="img-fluid" />
                     </a>
                 </div>
-                <div class="col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
+                <div class="col-6 col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
                     <a class="mt-5" href="https://blackcatmodels.eu/en/" target="_blank" style="text-decoration: none;">
                         <img src="../img/BlackCatModels.jpg" class="img-fluid" />
                     </a>
                 </div>
-                <div class="col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
+                <div class="col-6 col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
                     <a class="mt-5" href="https://www.ssnmodellbau.de/" target="_blank" style="text-decoration: none;">
                         <img src="../img/SSN_ModelBau.jpg" class="img-fluid" />
                     </a>
                 </div>
-                <div class="col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
+                <div class="col-6 col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
                     <a class="mt-5" href="https://micromaster.co.nz/" target="_blank" style="text-decoration: none;">
                         <img src="../img/Micro-Master.jpg" class="img-fluid" />
                     </a>
                 </div>
-                <div class="col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
+                <div class="col-6 col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
                     <a class="mt-5" href="https://www.shapeways.com/shops/Frenobulax" target="_blank" style="text-decoration: none;">
                         <img src="../img/KokodaTrailModels.jpg" class="img-fluid" />
                     </a>
                 </div>
-                <div class="col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
+                <div class="col-6 col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
                     <a class="mt-5" href="https://www.model-monkey.com/" target="_blank" style="text-decoration: none;">
                         <img src="../img/ModelMonkey.jpg" class="img-fluid" />
                     </a>
                 </div>
-                <div class="col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
+                <div class="col-6 col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
                     <a class="mt-5" href="https://www.starfighter-decals.com/" target="_blank" style="text-decoration: none;">
                         <img src="../img/starfighter.jpg" class="img-fluid" />
                     </a>
                 </div>
-                <div class="col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
+                <div class="col-6 col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
                     <a class="mt-5" href="http://www.modelships.info/Amphionmodels/" target="_blank" style="text-decoration: none;">
                         <img src="../img/Amphion.jpg" class="img-fluid" />
                     </a>
                 </div>
-                <div class="col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
+                <div class="col-6 col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
                     <a class="mt-5" href="https://www.shapeways.com/shops/classicairships" target="_blank" style="text-decoration: none;">
                         <img src="../img/ClassicAirships.jpg" class="img-fluid" />
                     </a>
                 </div>
-                <div class="col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
+                <div class="col-6 col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
                     <a class="mt-5" href="http://ihphobby.tripod.com/700shipkits/7001.html" target="_blank" style="text-decoration: none;">
                         <img src="../img/IHP.jpg" class="img-fluid" />
                     </a>
                 </div>
-                <div class="col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
+                <div class="col-6 col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
                     <a class="mt-5" href="http://www.veryfirehobby.com/" target="_blank" style="text-decoration: none;">
                         <img src="../img/VeryFire.jpg" class="img-fluid" />
                     </a>
                 </div>
-                <div class="col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
+                <div class="col-6 col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
                     <a class="mt-5" href="http://www.classicwarships.com/" target="_blank" style="text-decoration: none;">
                         <img src="../img/CW-Logo.jpg" class="img-fluid" />
                     </a>
                 </div>
-                <div class="col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
+                <div class="col-6 col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
                     <a class="mt-5" href="http://www.artisthobby.net/" target="_blank" style="text-decoration: none;">
                         <img src="../img/ArtistHobby.jpg" class="img-fluid" />
                     </a>
                 </div>
-                <div class="col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
+                <div class="col-6 col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
                     <a class="mt-5" href="http://www.bigblueboy.net/" target="_blank" style="text-decoration: none;">
                         <img src="../img/BigBlueBoy.jpg" class="img-fluid" />
                     </a>
                 </div>
-                <div class="col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
+                <div class="col-6 col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
                     <a class="mt-5" href="https://www.sovereignhobbies.co.uk/password" target="_blank" style="text-decoration: none;">
                         <img src="../img/SovereignHobbies.jpg" class="img-fluid" />
                     </a>
                 </div>
-                <div class="col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
+                <div class="col-6 col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
                     <a class="mt-5" href="http://www.larsenal.com/" target="_blank" style="text-decoration: none;">
                         <img src="../img/larsenal.jpeg" class="img-fluid" />
                     </a>
                 </div>
-                <div class="col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
+                <div class="col-6 col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
                     <a class="mt-5" href="http://www.master-model.pl/" target="_blank" style="text-decoration: none;">
                         <img src="../img/master.jpg" class="img-fluid" />
                     </a>
                 </div>
-                <div class="col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
+                <div class="col-6 col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
                     <a class="mt-5" href="https://starling-models.co.uk/" target="_blank" style="text-decoration: none;">
                         <img src="../img/StarlingModels.jpg" class="img-fluid" />
                     </a>
                 </div>
-                <div class="col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
+                <div class="col-6 col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
                     <a class="mt-5" href="https://krakenhobbies.com/" target="_blank" style="text-decoration: none;">
                         <img src="../img/KrakenHobbies.jpg" class="img-fluid" />
                     </a>
                 </div>
-                <div class="col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
+                <div class="col-6 col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
                     <a class="mt-5" href="http://mtminiatures.com/" target="_blank" style="text-decoration: none;">
                         <img src="../img/mt-mini.jpg" class="img-fluid" />
                     </a>
                 </div>
-                <div class="col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
+                <div class="col-6 col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
                     <a class="mt-5" href="http://webshop.modellbaudienst.de/offline.html" target="_blank" style="text-decoration: none;">
                         <img src="../img/PetrOs-Modellbau.jpg" class="img-fluid" />
                     </a>
                 </div>
-                <div class="col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
+                <div class="col-6 col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
                     <a class="mt-5" href="http://www.warshiphobbies.com/" target="_blank" style="text-decoration: none;">
                         <img src="../img/warshiphobbies.jpg" class="img-fluid" />
                     </a>
                 </div>
-                <div class="col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
+                <div class="col-6 col-sm-4 col-md-3 border d-flex justify-content-center align-items-center">
                     <a class="mt-5" href="https://ak-interactive.com/" target="_blank" style="text-decoration: none;">
                         <img src="../img/ak-interactive.jpg" class="img-fluid" />
                     </a>
