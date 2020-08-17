@@ -53,8 +53,8 @@ class ManufacturersFixture extends TestFixture
                 'website' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
                 'status_id' => 1,
                 'approved_yn' => 1,
-                'created' => '2020-06-14 15:38:56',
-                'modified' => '2020-06-14 15:38:56',
+                'created' => '2020-08-16 21:32:21',
+                'modified' => '2020-08-16 21:32:21',
             ],
         ];
         parent::init();

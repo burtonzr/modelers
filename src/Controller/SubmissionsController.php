@@ -7,7 +7,7 @@ use Cake\Event\EventInterface;
 use Cake\DataSource\ConnectionManager;
 
 class SubmissionsController extends AppController {
-
+    
     public function index() {
         $this->paginate = [
             'contain' => ['Users', 'ModelTypes', 'SubmissionCategories', 'Manufacturers', 'Scales', 'Statuses'],
@@ -54,7 +54,7 @@ class SubmissionsController extends AppController {
                 }
                 $this->Flash->error(__('The submission could not be saved. Please, try again.'));
             }
-            
+
             $users                = $this->Submissions->Users->find('list', ['limit' => 200]);
             $modelTypes           = $this->Submissions->ModelTypes->find('list', ['limit' => 200]);
             $manufacturers        = $this->Submissions->Manufacturers->find('list', ['limit' => 200]);
