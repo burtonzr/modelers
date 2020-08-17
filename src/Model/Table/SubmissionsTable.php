@@ -111,11 +111,6 @@ class SubmissionsTable extends Table
             ->allowEmptyDateTime('approved');
 
         $validator
-            ->scalar('image_path')
-            ->maxLength('image_path', 255)
-            ->allowEmptyFile('image_path');
-
-        $validator
             ->scalar('Custom_Manufacturer')
             ->maxLength('Custom_Manufacturer', 255)
             ->allowEmptyString('Custom_Manufacturer');
