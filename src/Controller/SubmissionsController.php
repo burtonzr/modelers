@@ -38,12 +38,14 @@ class SubmissionsController extends AppController {
                 if(!$submission->getErrors()) {
                     $image      = $this->request->getData('image_path');
                     $name       = $image->getClientFilename();
-                    $targetPath = WWW_ROOT.'img'.DS.$name;
+                    $image->moveTo(WWW_ROOT . 'img' . DS . $name);
+                    //$targetPath = WWW_ROOT.'img'.DS.$name;
 
-                    if($name) {
-                        $image->moveTo($targetPath);
-                    }
+                    //if($name) {
+                        //$image->moveTo($targetPath);
+                    //}
 
+                    #$submission->image_path = $name;
                     $submission->image_path = $name;
                 }
 
