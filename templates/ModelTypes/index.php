@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <h1 class="pagetitle text-center"><?= __('Model Types') ?></h1>
+    <h1 class="pagetitle text-center"><?= __('Gallery') ?></h1>
     <?php 
         if($UserGroupID == 3) { 
     ?>
