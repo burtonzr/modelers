@@ -5,7 +5,7 @@
         <table>
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
+                    <th style="display: none;"><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('user_id') ?></th>
                     <th><?= $this->Paginator->sort('subject') ?></th>
                     <th><?= $this->Paginator->sort('model_type_id') ?></th>
@@ -23,7 +23,7 @@
             <tbody>
                 <?php foreach ($submissions as $submission): ?>
                 <tr>
-                    <td><?= $this->Number->format($submission->id) ?></td>
+                    <td style="display: none;"><?= $this->Number->format($submission->id) ?></td>
                     <td><?= $submission->has('user') ? $this->Html->link($submission->user->name, ['controller' => 'Users', 'action' => 'view', $submission->user->id]) : '' ?></td>
                     <td><?= h($submission->subject) ?></td>
                     <td><?= $submission->has('model_type') ? $this->Html->link($submission->model_type->title, ['controller' => 'ModelTypes', 'action' => 'view', $submission->model_type->id]) : '' ?></td>

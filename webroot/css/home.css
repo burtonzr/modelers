@@ -68,6 +68,12 @@ hr {
     margin-left: -100px; /* More to the left */
 }
 
+#navbarSupportedContent > ul > li:nth-child(n) > a {
+    font-size: 13px;
+}
+
+/* End Navbar */
+
 .text-center {
     text-align: center;
 }
