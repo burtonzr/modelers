@@ -1,13 +1,13 @@
 <?= $this->Html->script('submissions.js') ?>
 <h1 class="pagetitle text-center">Create Submission</h1>
-<div class="row">
-    <div class="col-12">
-        <?= $this->Html->link(__('List Submissions'), ['action' => 'index'], ['class' => 'model_types_view p-3 mt-4 btn btn-info']) ?>
-    </div>
-</div>
-<div class="container content mt-5">
-    <?= $this->Form->create($submission, array('enctype' => 'multipart/form-data')); ?>
+<div class="container mt-5">
     <div class="row">
+        <div class="col-12">
+            <?= $this->Html->link(__('List Submissions'), ['action' => 'index'], ['class' => 'model_types_view p-3 mt-4 btn btn-info']) ?>
+        </div>
+    </div>
+    <?= $this->Form->create($submission, array('enctype' => 'multipart/form-data')); ?>
+    <div class="row mt-5">
         <div class="col-12 col-sm-6 mt-3">
             <?php
                 echo $this->Form->control('subject');

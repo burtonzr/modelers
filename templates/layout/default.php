@@ -93,7 +93,7 @@
                                 <?php echo $this->Html->link('My Profile', array('controller' => 'users', 'action' => 'view/', $id), array('title' => 'My Profile', 'class' => 'nav-link'));?>
                             </a> 
                         </li>
-                        <?php if($UserGroupID == 3): ?>
+                        <?php if($UserGroupID == 2 || $UserGroupID == 3): ?>
                             <li class="nav-item">
                                 <div class="nav-link">Admin</div>
                             </li>
@@ -103,11 +103,11 @@
                                 </li>
                                 <div class="dropdown-menu">
                                     <?php
-                                        if($UserGroupID == 3 || $UserGroupID == 2) {
-                                            echo $this->Html->link('Users', array('controller' => 'users', 'action' => 'index'), array('title' => 'Users', 'class' => 'dropdown-item dropdown-menu-right'));
+                                        echo $this->Html->link('Users', array('controller' => 'users', 'action' => 'index'), array('title' => 'Users', 'class' => 'dropdown-item dropdown-menu-right'));
+                                        if($UserGroupID == 3) {
+                                            echo $this->Html->link('Submissions', array('controller' => 'submissions', 'action' => 'index'), array('title' => 'Submission', 'class' => 'dropdown-item dropdown-menu-right'));
+                                            echo $this->Html->link('Manufacturers', array('controller' => 'manufacturers', 'action' => 'index'), array('title' => 'Manufacturers', 'class' => 'dropdown-item dropdown-menu-right'));
                                         }
-                                        echo $this->Html->link('Submissions', array('controller' => 'submissions', 'action' => 'index'), array('title' => 'Submission', 'class' => 'dropdown-item dropdown-menu-right'));
-                                        echo $this->Html->link('Manufacturers', array('controller' => 'manufacturers', 'action' => 'index'), array('title' => 'Manufacturers', 'class' => 'dropdown-item dropdown-menu-right'));
                                     ?>
                                 </div>
                             </div>
