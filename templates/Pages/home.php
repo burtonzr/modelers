@@ -59,14 +59,15 @@
                     </li>
                     <?php if($email) { ?>
                         <div class="dropdown-container">
-                            <li type="button" class="nav-item btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="sr-only"></span>
+                                <li type="button" class="nav-item btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="sr-only"></span>
+                                </li>
+                                <div class="dropdown-menu">
+                                    <?php
+                                        echo $this->Html->link('Add Submission', array('controller' => 'submissions', 'action' => 'add'), array('title' => 'Add Submission', 'class' => 'dropdown-item dropdown-menu-right'));
+                                    ?>
+                                </div>
                             </li>
-                            <div class="dropdown-menu">
-                                <?php
-                                    echo $this->Html->link('Add Submission', array('controller' => 'submissions', 'action' => 'add'), array('title' => 'Add Submission', 'class' => 'dropdown-item dropdown-menu-right'));
-                                ?>
-                            </div>
                         </div>
                     <?php } ?>
                     <li class="nav-item">
@@ -92,13 +93,6 @@
                             </a>
                         </li>
                     <?php } else { ?>
-                        <?php if($UserGroupID == 2 || $UserGroupID == 3) { ?>
-                            <li class="nav-item">
-                                <a>
-                                    <?php echo $this->Html->link('Users', array('controller' => 'users', 'action' => 'index'), array('title' => 'Users', 'class' => 'nav-link'));?>
-                                </a> 
-                            </li>
-                        <?php } ?>
                         <li class="nav-item">
                             <a>
                                 <?php echo $this->Html->link('My Profile', array('controller' => 'users', 'action' => 'view/', $id), array('title' => 'My Profile', 'class' => 'nav-link'));?>
@@ -114,6 +108,9 @@
                                 </li>
                                 <div class="dropdown-menu">
                                     <?php
+                                        if($UserGroupID == 3 || $UserGroupID == 2) {
+                                            echo $this->Html->link('Users', array('controller' => 'users', 'action' => 'index'), array('title' => 'Users', 'class' => 'dropdown-item dropdown-menu-right'));
+                                        }
                                         echo $this->Html->link('Submissions', array('controller' => 'submissions', 'action' => 'index'), array('title' => 'Submission', 'class' => 'dropdown-item dropdown-menu-right'));
                                         echo $this->Html->link('Manufacturers', array('controller' => 'manufacturers', 'action' => 'index'), array('title' => 'Manufacturers', 'class' => 'dropdown-item dropdown-menu-right'));
                                     ?>

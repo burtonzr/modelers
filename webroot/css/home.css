@@ -51,14 +51,11 @@ hr {
 /* Navbar */
 .dropdown-container {
     position: relative;
+    margin-left: -10px;
 }
 
 .dropdown-toggle {
     margin-top: 5px;
-}
-
-.dropdown-item {
-    font-size: 12px;
 }
 
 .dropdown-menu {
@@ -70,6 +67,35 @@ hr {
 
 #navbarSupportedContent > ul > li:nth-child(n) > a {
     font-size: 13px;
+}
+
+/* Admin Dropdown */ 
+#navbarSupportedContent > ul > li:nth-child(10) > div {
+    font-size: 13px; 
+}
+
+/*  Medium devices (tablets, 768px and up) */
+@media only screen and (max-width: 768px) {
+    #navbarSupportedContent > ul > li:nth-child(n) > a {
+        font-size: 20px;
+    }
+    
+    /* Admin Dropdown */ 
+    #navbarSupportedContent > ul > li:nth-child(10) > div {
+        font-size: 20px; 
+    }
+
+    .dropdown-menu { 
+        margin-left: 0px !important;
+    }
+
+    #navbarSupportedContent > ul > div:nth-child(5) > li {
+        margin-top: -25px;
+    }
+
+    #navbarSupportedContent > ul > div:nth-child(11) > li {
+        margin-top: -25px;
+    }
 }
 
 /* End Navbar */
