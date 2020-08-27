@@ -41,7 +41,7 @@ class SubmissionsController extends AppController {
                     $name         = $image->getClientFilename();
                     $name2        = $image2->getClientFilename();
                     $image->moveTo(WWW_ROOT . 'img' . DS . $name);
-                    $image2->moveTo(WWW_ROOT . 'img' . DS . $name2);
+                    $image2->moveTo(WWW_ROOT . 'img2' . DS . $name2);
                     
                     $submission->image_path  = $name;
                     $submission->image_path2 = $name2;
