@@ -125,6 +125,7 @@ class SubmissionsTable extends Table {
                     'message' => 'Image file size must be less than 1MB.',
                 ]
             ])
+            /*
             ->add('image_path', 'filename', [
                 'rule' => function (UploadedFileInterface $file) {
                     // filename must not be a path
@@ -136,6 +137,7 @@ class SubmissionsTable extends Table {
                     return false;
                 }
             ])
+            */
             ->add('image_path', 'extension', [
                 'rule' => ['extension', ['png', 'jpg', 'jpeg']]
             ]);
@@ -146,7 +148,7 @@ class SubmissionsTable extends Table {
             ->allowEmptyString('Custom_Manufacturer');
 
         $validator
-            ->notEmptyFile('image_path2')
+            ->allowEmptyFile('image_path2')
             ->uploadedFile('image_path2', [
                 'types' => ['image/jpg', 'image/png', 'image/jpeg'],
                 'minSize' => 1024, // Min 1 KB
@@ -162,6 +164,7 @@ class SubmissionsTable extends Table {
                     'message' => 'Image file size must be less than 1MB.',
                 ]
             ])
+            /*
             ->add('image_path2', 'filename', [
                 'rule' => function (UploadedFileInterface $file) {
                     // filename must not be a path
@@ -173,6 +176,7 @@ class SubmissionsTable extends Table {
                     return false;
                 }
             ])
+            */
             ->add('image_path2', 'extension', [
                 'rule' => ['extension', ['png', 'jpg', 'jpeg']]
             ]);

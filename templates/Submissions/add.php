@@ -68,7 +68,7 @@
         </div>
         <div class="col-12 col-sm-6 mt-3">
             <?php
-                echo $this->Form->control('image_path2', array('type' => 'file', 'required' => False));
+                echo $this->Form->control('image_path2', array('type' => 'file'));
             ?>
         </div>
     </div>
