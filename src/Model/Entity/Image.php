@@ -9,19 +9,13 @@ use Cake\ORM\Entity;
  * Image Entity
  *
  * @property int $id
- * @property string $original_filename
- * @property string $storage_filename
- * @property string $mime_type
- * @property int $filesize
+ * @property string|null $original_pathname
  * @property string|null $title
  * @property string|null $description
  * @property int|null $submission_id
- * @property int $status_id
  * @property \Cake\I18n\FrozenTime|null $created
- * @property \Cake\I18n\FrozenTime|null $modified
  *
  * @property \App\Model\Entity\Submission $submission
- * @property \App\Model\Entity\Status $status
  */
 class Image extends Entity
 {
@@ -35,17 +29,11 @@ class Image extends Entity
      * @var array
      */
     protected $_accessible = [
-        'original_filename' => true,
-        'storage_filename' => true,
-        'mime_type' => true,
-        'filesize' => true,
+        'original_pathname' => true,
         'title' => true,
         'description' => true,
         'submission_id' => true,
-        'status_id' => true,
         'created' => true,
-        'modified' => true,
         'submission' => true,
-        'status' => true,
     ];
 }

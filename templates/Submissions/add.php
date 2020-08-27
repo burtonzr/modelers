@@ -66,6 +66,13 @@
                 echo $this->Form->control('image_path', array('type' => 'file'));
             ?>
         </div>
+        <div class="col-12 col-sm-6 mt-3">
+            <?php
+                echo $this->Form->control('image_path2', array('type' => 'file'));
+            ?>
+        </div>
+    </div>
+    <div class="row">
         <?php if($UserGroupID >= 2) { ?>
             <div class="col-12 col-sm-6 mt-3">
                 <?php
@@ -73,6 +80,22 @@
                 ?>
             </div>
         <?php } ?>
+        <!---
+        <div class="col-12 col-sm-6 mt-3">
+        <?php
+                echo $this->Form->control('images.0.original_pathname', array('type' => 'file'));
+            ?>
+        </div>
+        <div class="col-12 col-sm-6 mt-3">
+            <label>Other Images (You can upload one or more images)</label>
+            <input type="file" name="images[]" multiple />
+        </div>
+        <div class="col-12 col-sm-6 mt-3">
+            <?php
+                echo $this->Form->control('images.1.original_pathname', array('type' => 'file'));
+            ?>
+        </div>
+        --->
     </div>
     <?php
         echo $this->Form->control('user_id', ['default' => $id, 'type' => 'hidden']);

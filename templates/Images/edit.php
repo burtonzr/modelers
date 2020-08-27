@@ -22,14 +22,10 @@
             <fieldset>
                 <legend><?= __('Edit Image') ?></legend>
                 <?php
-                    echo $this->Form->control('original_filename');
-                    echo $this->Form->control('storage_filename');
-                    echo $this->Form->control('mime_type');
-                    echo $this->Form->control('filesize');
+                    echo $this->Form->control('original_pathname');
                     echo $this->Form->control('title');
                     echo $this->Form->control('description');
                     echo $this->Form->control('submission_id', ['options' => $submissions, 'empty' => true]);
-                    echo $this->Form->control('status_id', ['options' => $statuses]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

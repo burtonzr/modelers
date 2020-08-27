@@ -19,16 +19,8 @@
             <h3><?= h($image->title) ?></h3>
             <table>
                 <tr>
-                    <th><?= __('Original Filename') ?></th>
-                    <td><?= h($image->original_filename) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Storage Filename') ?></th>
-                    <td><?= h($image->storage_filename) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Mime Type') ?></th>
-                    <td><?= h($image->mime_type) ?></td>
+                    <th><?= __('Original Pathname') ?></th>
+                    <td><?= h($image->original_pathname) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Title') ?></th>
@@ -39,24 +31,12 @@
                     <td><?= $image->has('submission') ? $this->Html->link($image->submission->id, ['controller' => 'Submissions', 'action' => 'view', $image->submission->id]) : '' ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Status') ?></th>
-                    <td><?= $image->has('status') ? $this->Html->link($image->status->title, ['controller' => 'Statuses', 'action' => 'view', $image->status->id]) : '' ?></td>
-                </tr>
-                <tr>
                     <th><?= __('Id') ?></th>
                     <td><?= $this->Number->format($image->id) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Filesize') ?></th>
-                    <td><?= $this->Number->format($image->filesize) ?></td>
-                </tr>
-                <tr>
                     <th><?= __('Created') ?></th>
                     <td><?= h($image->created) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Modified') ?></th>
-                    <td><?= h($image->modified) ?></td>
                 </tr>
             </table>
             <div class="text">
