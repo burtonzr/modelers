@@ -56,10 +56,10 @@ class SubmissionsController extends AppController {
                             return $this->redirect(array('controller' => 'ModelTypes', 'action' => 'index'));
                         }
                     } else {
-                        $this->Flash->error(__('The submission could not be saved. Please, try again.'));
+                        $this->Flash->error(__('The submission could not be saved. Make sure that the file is an image with these file extensions (jpg, jpeg, png).'));
                     }
                 } else {
-                    $this->Flash->error(__('The submission could not be saved. Please, try again.'));
+                    $this->Flash->error(__('The submission could not be saved. Make sure that the file is an image with these file extensions (jpg, jpeg, png). '));
                 }
             }
 
