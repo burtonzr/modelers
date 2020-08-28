@@ -144,41 +144,6 @@ class SubmissionsTable extends Table {
             ->add('image_path', 'extension', [
                 'rule' => ['extension', ['png', 'jpg', 'jpeg']]
             ]);
-        /*
-        $validator
-            ->notEmptyFile('image_path')
-            ->uploadedFile('image_path', [
-                'types' => ['image/jpg', 'image/png', 'image/jpeg'],
-                'minSize' => 1024, // Min 1 KB
-                'maxSize' => 1024 * 1024 // Max 1 MB
-            ])
-            ->add('image_path', [
-                'mimeType' => [
-                    'rule' => [ 'mimeType', [ 'image/jpg', 'image/png', 'image/jpeg' ] ],
-                    'message' => 'Please upload only jpg, jpeg, and png.',
-                ],
-                'fileSize' => [
-                    'rule' => [ 'fileSize', '<=', '1MB' ],
-                    'message' => 'Image file size must be less than 1MB.',
-                ]
-            ])
-            /*
-            ->add('image_path', 'filename', [
-                'rule' => function (UploadedFileInterface $file) {
-                    // filename must not be a path
-                    $filename = $file->getClientFilename();
-                    if (strcmp(basename($filename), $filename) === 0) {
-                        return true;
-                    }
-        
-                    return false;
-                }
-            ])
-            
-            ->add('image_path', 'extension', [
-                'rule' => ['extension', ['png', 'jpg', 'jpeg']]
-            ]);
-            */
 
         $validator
             ->scalar('Custom_Manufacturer')
@@ -216,41 +181,6 @@ class SubmissionsTable extends Table {
             ->add('image_path2', 'extension', [
                 'rule' => ['extension', ['png', 'jpg', 'jpeg']]
             ]);
-        /*
-        $validator
-            ->allowEmptyFile('image_path2')
-            ->uploadedFile('image_path2', [
-                'types' => ['image/jpg', 'image/png', 'image/jpeg'],
-                'minSize' => 1024, // Min 1 KB
-                'maxSize' => 1024 * 1024 // Max 1 MB
-            ])
-            ->add('image_path2', [
-                'mimeType' => [
-                    'rule' => [ 'mimeType', ['image/jpg', 'image/png', 'image/jpeg']],
-                    'message' => 'Please upload only jpg, jpeg, and png.'
-                ],
-                'fileSize' => [
-                    'rule' => [ 'fileSize', '<=', '1MB' ],
-                    'message' => 'Image file size must be less than 1MB.',
-                ]
-            ])
-            
-            ->add('image_path2', 'filename', [
-                'rule' => function (UploadedFileInterface $file) {
-                    // filename must not be a path
-                    $filename = $file->getClientFilename();
-                    if (strcmp(basename($filename), $filename) === 0) {
-                        return true;
-                    }
-        
-                    return false;
-                }
-            ])
-            
-            ->add('image_path2', 'extension', [
-                'rule' => ['extension', ['png', 'jpg', 'jpeg']]
-            ]);
-            */
 
         return $validator;
     }
