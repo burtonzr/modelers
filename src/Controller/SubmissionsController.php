@@ -33,37 +33,30 @@ class SubmissionsController extends AppController {
         if($this->Auth->user('email') != null) {
             $submission = $this->Submissions->newEmptyEntity();
             if ($this->request->is('post')) {
-                //$submission = $this->Submissions->patchEntity($submission, $this->request->getData());
+                
+                $image  = $this->request->getData('image_path');
+                $name   = $image->getClientFilename();
+                $image->moveTo(WWW_ROOT . 'img' . DS . $name);
 
-               // if(!$submission->getErrors()) {
-                    $image    = $this->request->getData('image_path');
-                    $image2   = $this->request->getData('image_path2');
-                    $name     = $image->getClientFilename();
-                    $name2    = $image2->getClientFilename();
-                    $image->moveTo(WWW_ROOT . 'img' . DS . $name);
-                    $image2->moveTo(WWW_ROOT . 'img2' . DS . $name2);
+                $image2 = $this->request->getData('image_path2');
+                $name2  = $image2->getClientFilename();
+                $image2->moveTo(WWW_ROOT . 'img2' . DS . $name2);
 
-                    $submission = $this->Submissions->patchEntity($submission, $this->request->getData());
-                    
-                    $submission->image_path  = $name;
-                    $submission->image_path2 = $name2;
+                $submission = $this->Submissions->patchEntity($submission, $this->request->getData());
 
-                    $this->Submissions->save($submission);
+                $submission->image_path = $name;
+                $submission->image_path2 = $name2;
 
-                    if($this->Auth->user('UserGroupID') == 3 || $this->Auth->user('UserGroupID') == 2) {
-                        
-                        return $this->redirect(['action' => 'index']);
-                    } else {
-                        return $this->redirect(array('controller' => 'ModelTypes', 'action' => 'index'));
-                    }
-                    
-                //}
+                $this->Submissions->save($submission);
 
-                //if ($this->Submissions->save($submission)) {
-                    //$this->Flash->success(__('The submission has been saved.'));
-                    
-                //}
-                //$this->Flash->error(__('The submission could not be saved. Please, try again.'));
+                if($this->Auth->user('UserGroupID') == 3 || $this->Auth->user('UserGroupID') == 2) {
+                    $this->Flash->success(__('The submission has been saved.'));
+                    return $this->redirect(['action' => 'index']);
+                } else {
+                    $this->Flash->success(__('The submission has been saved.'));
+                    return $this->redirect(array('controller' => 'ModelTypes', 'action' => 'index'));
+                }
+                $this->Flash->error(__('The submission could not be saved. Please, try again.'));
             }
 
             $users                = $this->Submissions->Users->find('list', ['limit' => 200]);
