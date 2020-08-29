@@ -6,6 +6,8 @@ namespace App\Controller;
 use Cake\Event\EventInterface;
 use Cake\DataSource\ConnectionManager;
 use Cake\I18n\Time;
+use Cake\Filesystem\Folder;
+use Cake\Filesystem\File;
 
 class SubmissionsController extends AppController {
     
@@ -78,15 +80,23 @@ class SubmissionsController extends AppController {
                         $folder = $month.$now->year;
                     }
 
+                    if(!is_dir(WWW_ROOT.'img'.DS.$folder)) {
+                        mkdir(WWW_ROOT.'img'.DS.$folder, 0775);
+                    }
+
+                    if(!is_dir(WWW_ROOT.'img2'.DS.$folder)) {
+                        mkdir(WWW_ROOT.'img2'.DS.$folder, 0775);
+                    }
+
                     $image  = $this->request->getData('image_file');
                     $name   = $image->getClientFilename();
-                    $image->moveTo(WWW_ROOT . 'img' . DS . $name);
-                    $submission->image_path = $name;
+                    $image->moveTo(WWW_ROOT.'img'.DS.$folder.DS.$name);
+                    $submission->image_path = $folder.'/'.$name;
 
                     $image2 = $this->request->getData('image_path2');
                     $name2  = $image2->getClientFilename();
-                    $image2->moveTo(WWW_ROOT . 'img2' . DS . $name2);
-                    $submission->image_path2 = $name2;
+                    $image2->moveTo(WWW_ROOT.'img2'.DS.$folder.DS.$name2);
+                    $submission->image_path2 = $folder.'/'.$name2;
                 }
 
                 if($this->Submissions->save($submission)) {
