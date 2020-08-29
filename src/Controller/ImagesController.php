@@ -19,7 +19,7 @@ class ImagesController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Submissions', 'Statuses'],
+            'contain' => ['Submissions'],
         ];
         $images = $this->paginate($this->Images);
 
@@ -36,13 +36,19 @@ class ImagesController extends AppController
     public function view($id = null)
     {
         $image = $this->Images->get($id, [
-            'contain' => ['Submissions', 'Statuses'],
+            'contain' => ['Submissions'],
         ]);
 
         $this->set(compact('image'));
     }
 
-    public function add() {
+    /**
+     * Add method
+     *
+     * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
+     */
+    public function add()
+    {
         $image = $this->Images->newEmptyEntity();
         if ($this->request->is('post')) {
             $image = $this->Images->patchEntity($image, $this->request->getData());
@@ -54,8 +60,7 @@ class ImagesController extends AppController
             $this->Flash->error(__('The image could not be saved. Please, try again.'));
         }
         $submissions = $this->Images->Submissions->find('list', ['limit' => 200]);
-        $statuses = $this->Images->Statuses->find('list', ['limit' => 200]);
-        $this->set(compact('image', 'submissions', 'statuses'));
+        $this->set(compact('image', 'submissions'));
     }
 
     /**
@@ -80,8 +85,7 @@ class ImagesController extends AppController
             $this->Flash->error(__('The image could not be saved. Please, try again.'));
         }
         $submissions = $this->Images->Submissions->find('list', ['limit' => 200]);
-        $statuses = $this->Images->Statuses->find('list', ['limit' => 200]);
-        $this->set(compact('image', 'submissions', 'statuses'));
+        $this->set(compact('image', 'submissions'));
     }
 
     /**

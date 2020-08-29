@@ -12,7 +12,6 @@ use Cake\Validation\Validator;
  * Images Model
  *
  * @property \App\Model\Table\SubmissionsTable&\Cake\ORM\Association\BelongsTo $Submissions
- * @property \App\Model\Table\StatusesTable&\Cake\ORM\Association\BelongsTo $Statuses
  *
  * @method \App\Model\Entity\Image newEmptyEntity()
  * @method \App\Model\Entity\Image newEntity(array $data, array $options = [])
@@ -51,10 +50,6 @@ class ImagesTable extends Table
         $this->belongsTo('Submissions', [
             'foreignKey' => 'submission_id',
         ]);
-        $this->belongsTo('Statuses', [
-            'foreignKey' => 'status_id',
-            'joinType' => 'INNER',
-        ]);
     }
 
     /**
@@ -70,27 +65,9 @@ class ImagesTable extends Table
             ->allowEmptyString('id', null, 'create');
 
         $validator
-            ->scalar('original_filename')
-            ->maxLength('original_filename', 255)
-            ->requirePresence('original_filename', 'create')
-            ->notEmptyFile('original_filename');
-
-        $validator
-            ->scalar('storage_filename')
-            ->maxLength('storage_filename', 255)
-            ->requirePresence('storage_filename', 'create')
-            ->notEmptyFile('storage_filename');
-
-        $validator
-            ->scalar('mime_type')
-            ->maxLength('mime_type', 255)
-            ->requirePresence('mime_type', 'create')
-            ->notEmptyString('mime_type');
-
-        $validator
-            ->nonNegativeInteger('filesize')
-            ->requirePresence('filesize', 'create')
-            ->notEmptyFile('filesize');
+            ->scalar('original_pathname')
+            ->maxLength('original_pathname', 255)
+            ->allowEmptyString('original_pathname');
 
         $validator
             ->scalar('title')
@@ -114,7 +91,6 @@ class ImagesTable extends Table
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->existsIn(['submission_id'], 'Submissions'));
-        $rules->add($rules->existsIn(['status_id'], 'Statuses'));
 
         return $rules;
     }

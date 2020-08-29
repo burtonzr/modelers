@@ -31,6 +31,7 @@ class SubmissionsFixture extends TestFixture
         'modified' => ['type' => 'datetime', 'length' => null, 'precision' => null, 'null' => true, 'default' => null, 'comment' => ''],
         'image_path' => ['type' => 'string', 'length' => 255, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
         'Custom_Manufacturer' => ['type' => 'string', 'length' => 255, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
+        'image_path2' => ['type' => 'string', 'length' => 255, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
         '_indexes' => [
             'fk_submissions_model_type_id' => ['type' => 'index', 'columns' => ['model_type_id'], 'length' => []],
             'fk_submissions_status_id' => ['type' => 'index', 'columns' => ['status_id'], 'length' => []],
@@ -66,11 +67,12 @@ class SubmissionsFixture extends TestFixture
                 'description' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
                 'scale_id' => 1,
                 'status_id' => 1,
-                'created' => '2020-08-16 22:50:44',
-                'approved' => '2020-08-16 22:50:44',
-                'modified' => '2020-08-16 22:50:44',
+                'created' => '2020-08-27 15:12:43',
+                'approved' => '2020-08-27 15:12:43',
+                'modified' => '2020-08-27 15:12:43',
                 'image_path' => 'Lorem ipsum dolor sit amet',
                 'Custom_Manufacturer' => 'Lorem ipsum dolor sit amet',
+                'image_path2' => 'Lorem ipsum dolor sit amet',
             ],
         ];
         parent::init();

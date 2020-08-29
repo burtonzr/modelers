@@ -5,9 +5,13 @@ namespace App\Model\Table;
 
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
-use Psr\Http\Message\UploadedFileInterface;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Psr\Http\Message\UploadedFileInterface;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ResponseInterface;
+use Laminas\Diactoros\UploadedFile;
 
 /**
  * Submissions Model
@@ -89,7 +93,8 @@ class SubmissionsTable extends Table {
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator): Validator {
+    public function validationDefault(Validator $validator): Validator
+    {
         $validator
             ->nonNegativeInteger('id')
             ->allowEmptyString('id', null, 'create');
@@ -109,36 +114,16 @@ class SubmissionsTable extends Table {
             ->allowEmptyDateTime('approved');
 
         $validator
-            ->scalar('Custom_Manufacturer')
-            ->maxLength('Custom_Manufacturer', 255)
-            ->allowEmptyString('Custom_Manufacturer');
-
-        /*
-        $validator
-            ->allowEmptyFile('image_path')
-            ->add( 'image_path', [
-                'mimeType' => [
-                    'rule' => [ 'mimeType', [ 'image/jpg', 'image/png', 'image/jpeg' ] ],
-                    'message' => 'Please upload only jpg and png.',
-                ],
-                'fileSize' => [
-                    'rule' => [ 'fileSize', '<=', '1MB' ],
-                    'message' => 'Image file size must be less than 1MB.',
-                ]
-            ]);
-        */
-
-        $validator
             ->notEmptyFile('image_path')
             ->uploadedFile('image_path', [
                 'types' => ['image/jpg', 'image/png', 'image/jpeg'],
                 'minSize' => 1024, // Min 1 KB
                 'maxSize' => 1024 * 1024 // Max 1 MB
             ])
-            ->add( 'image_path', [
+            ->add('image_path', [
                 'mimeType' => [
                     'rule' => [ 'mimeType', [ 'image/jpg', 'image/png', 'image/jpeg' ] ],
-                    'message' => 'Please upload only jpg and png.',
+                    'message' => 'Please upload only jpg, jpeg, and png.',
                 ],
                 'fileSize' => [
                     'rule' => [ 'fileSize', '<=', '1MB' ],
@@ -157,6 +142,43 @@ class SubmissionsTable extends Table {
                 }
             ])
             ->add('image_path', 'extension', [
+                'rule' => ['extension', ['png', 'jpg', 'jpeg']]
+            ]);
+
+        $validator
+            ->scalar('Custom_Manufacturer')
+            ->maxLength('Custom_Manufacturer', 255)
+            ->allowEmptyString('Custom_Manufacturer');
+        
+        $validator
+            ->notEmptyFile('image_path2')
+            ->uploadedFile('image_path2', [
+                'types' => ['image/jpg', 'image/png', 'image/jpeg'],
+                'minSize' => 1024, // Min 1 KB
+                'maxSize' => 1024 * 1024 // Max 1 MB
+            ])
+            ->add('image_path2', [
+                'mimeType' => [
+                    'rule' => [ 'mimeType', [ 'image/jpg', 'image/png', 'image/jpeg' ] ],
+                    'message' => 'Please upload only jpg, jpeg, and png.',
+                ],
+                'fileSize' => [
+                    'rule' => [ 'fileSize', '<=', '1MB' ],
+                    'message' => 'Image file size must be less than 1MB.',
+                ]
+            ])
+            ->add('image_path2', 'filename', [
+                'rule' => function (UploadedFileInterface $file) {
+                    // filename must not be a path
+                    $filename = $file->getClientFilename();
+                    if (strcmp(basename($filename), $filename) === 0) {
+                        return true;
+                    }
+        
+                    return false;
+                }
+            ])
+            ->add('image_path2', 'extension', [
                 'rule' => ['extension', ['png', 'jpg', 'jpeg']]
             ]);
 

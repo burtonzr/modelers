@@ -22,6 +22,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime|null $modified
  * @property string|null $image_path
  * @property string|null $Custom_Manufacturer
+ * @property string|null $image_path2
  *
  * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\ModelType $model_type
@@ -57,6 +58,7 @@ class Submission extends Entity
         'modified' => true,
         'image_path' => true,
         'Custom_Manufacturer' => true,
+        'image_path2' => true,
         'user' => true,
         'model_type' => true,
         'submission_category' => true,

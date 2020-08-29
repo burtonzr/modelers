@@ -12,15 +12,10 @@
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('original_filename') ?></th>
-                    <th><?= $this->Paginator->sort('storage_filename') ?></th>
-                    <th><?= $this->Paginator->sort('mime_type') ?></th>
-                    <th><?= $this->Paginator->sort('filesize') ?></th>
+                    <th><?= $this->Paginator->sort('original_pathname') ?></th>
                     <th><?= $this->Paginator->sort('title') ?></th>
                     <th><?= $this->Paginator->sort('submission_id') ?></th>
-                    <th><?= $this->Paginator->sort('status_id') ?></th>
                     <th><?= $this->Paginator->sort('created') ?></th>
-                    <th><?= $this->Paginator->sort('modified') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -28,15 +23,10 @@
                 <?php foreach ($images as $image): ?>
                 <tr>
                     <td><?= $this->Number->format($image->id) ?></td>
-                    <td><?= h($image->original_filename) ?></td>
-                    <td><?= h($image->storage_filename) ?></td>
-                    <td><?= h($image->mime_type) ?></td>
-                    <td><?= $this->Number->format($image->filesize) ?></td>
+                    <td><?= h($image->original_pathname) ?></td>
                     <td><?= h($image->title) ?></td>
                     <td><?= $image->has('submission') ? $this->Html->link($image->submission->id, ['controller' => 'Submissions', 'action' => 'view', $image->submission->id]) : '' ?></td>
-                    <td><?= $image->has('status') ? $this->Html->link($image->status->title, ['controller' => 'Statuses', 'action' => 'view', $image->status->id]) : '' ?></td>
                     <td><?= h($image->created) ?></td>
-                    <td><?= h($image->modified) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $image->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $image->id]) ?>
