@@ -33,33 +33,31 @@ class SubmissionsController extends AppController {
         if($this->Auth->user('email') != null) {
             $submission = $this->Submissions->newEmptyEntity();
             if ($this->request->is('post')) {
+
+                $submission = $this->Submissions->patchEntity($submission, $this->request->getData());
+
                 if(!$submission->getErrors()) {
                     $image  = $this->request->getData('image_path');
                     $name   = $image->getClientFilename();
                     $image->moveTo(WWW_ROOT . 'img' . DS . $name);
+                    $submission->image_path = $name;
 
                     $image2 = $this->request->getData('image_path2');
                     $name2  = $image2->getClientFilename();
                     $image2->moveTo(WWW_ROOT . 'img2' . DS . $name2);
-
-                    $submission = $this->Submissions->patchEntity($submission, $this->request->getData());
-
-                    $submission->image_path = $name;
                     $submission->image_path2 = $name2;
+                }
 
-                    if($this->Submissions->save($submission)) {
-                        if($this->Auth->user('UserGroupID') == 3 || $this->Auth->user('UserGroupID') == 2) {
-                            $this->Flash->success(__('The submission has been saved.'));
-                            return $this->redirect(['action' => 'index']);
-                        } else {
-                            $this->Flash->success(__('The submission has been saved.'));
-                            return $this->redirect(array('controller' => 'ModelTypes', 'action' => 'index'));
-                        }
+                if($this->Submissions->save($submission)) {
+                    if($this->Auth->user('UserGroupID') == 3 || $this->Auth->user('UserGroupID') == 2) {
+                        $this->Flash->success(__('The submission has been saved.'));
+                        return $this->redirect(['action' => 'index']);
                     } else {
-                        $this->Flash->error(__('The submission could not be saved. Make sure that the file is an image with these file extensions (jpg, jpeg, png).'));
+                        $this->Flash->success(__('The submission has been saved.'));
+                        return $this->redirect(array('controller' => 'ModelTypes', 'action' => 'index'));
                     }
                 } else {
-                    $this->Flash->error(__('The submission could not be saved. Make sure that the file is an image with these file extensions (jpg, jpeg, png). '));
+                    $this->Flash->error(__('The submission could not be saved. Make sure that the file is an image with these file extensions (jpg, jpeg, png).'));
                 }
             }
 
