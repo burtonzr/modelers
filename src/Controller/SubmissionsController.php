@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use Cake\Event\EventInterface;
 use Cake\DataSource\ConnectionManager;
+use Cake\I18n\Time;
 
 class SubmissionsController extends AppController {
     
@@ -37,6 +38,46 @@ class SubmissionsController extends AppController {
                 $submission = $this->Submissions->patchEntity($submission, $this->request->getData());
 
                 if(!$submission->getErrors()) {
+
+                    $now = Time::now();
+                    if($now->month === 1) {
+                        $month  = "January";
+                        $folder = $month.$now->year;
+                    } else if($now->month === 2) {
+                        $month  = "February";
+                        $folder = $month.$now->year;
+                    } else if($now->month === 3) {
+                        $month  = "March";
+                        $folder = $month.$now->year;
+                    } else if($now->month === 4) {
+                        $month  = "April";
+                        $folder = $month.$now->year;
+                    } else if($now->month === 5) {
+                        $month  = "May";
+                        $folder = $month.$now->year;
+                    } else if($now->month === 6) {
+                        $month  = "June";
+                        $folder = $month.$now->year;
+                    } else if($now->month === 7) {
+                        $month  = "July";
+                        $folder = $month.$now->year;
+                    } else if($now->month === 8) {
+                        $month  = "August";
+                        $folder = $month.$now->year;
+                    } else if($now->month === 9) {
+                        $month  = "September";
+                        $folder = $month.$now->year;
+                    } else if($now->month === 10) {
+                        $month  = "October";
+                        $folder = $month.$now->year;
+                    } else if($now->month === 11) {
+                        $month  = "November";
+                        $folder = $month.$now->year;
+                    } else if($now->month === 12) {
+                        $month  = "December";
+                        $folder = $month.$now->year;
+                    }
+
                     $image  = $this->request->getData('image_file');
                     $name   = $image->getClientFilename();
                     $image->moveTo(WWW_ROOT . 'img' . DS . $name);
