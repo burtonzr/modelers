@@ -114,13 +114,13 @@ class SubmissionsTable extends Table {
             ->allowEmptyDateTime('approved');
 
         $validator
-            ->notEmptyFile('image_path')
-            ->uploadedFile('image_path', [
+            ->notEmptyFile('image_file')
+            ->uploadedFile('image_file', [
                 'types' => ['image/jpg', 'image/png', 'image/jpeg'],
                 'minSize' => 1024, // Min 1 KB
                 'maxSize' => 1024 * 1024 // Max 1 MB
             ])
-            ->add('image_path', [
+            ->add('image_file', [
                 'mimeType' => [
                     'rule' => [ 'mimeType', [ 'image/jpg', 'image/png', 'image/jpeg' ] ],
                     'message' => 'Please upload only jpg, jpeg, and png.',
@@ -130,7 +130,7 @@ class SubmissionsTable extends Table {
                     'message' => 'Image file size must be less than 1MB.',
                 ]
             ])
-            ->add('image_path', 'filename', [
+            ->add('image_file', 'filename', [
                 'rule' => function (UploadedFileInterface $file) {
                     // filename must not be a path
                     $filename = $file->getClientFilename();
@@ -141,7 +141,7 @@ class SubmissionsTable extends Table {
                     return false;
                 }
             ])
-            ->add('image_path', 'extension', [
+            ->add('image_file', 'extension', [
                 'rule' => ['extension', ['png', 'jpg', 'jpeg']]
             ]);
 
