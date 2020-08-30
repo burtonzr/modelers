@@ -36,11 +36,8 @@ class SubmissionsController extends AppController {
         if($this->Auth->user('email') != null) {
             $submission = $this->Submissions->newEmptyEntity();
             if ($this->request->is('post')) {
-
                 $submission = $this->Submissions->patchEntity($submission, $this->request->getData());
-
                 if(!$submission->getErrors()) {
-
                     $now = Time::now();
                     if($now->month === 1) {
                         $month  = "January";
@@ -90,13 +87,17 @@ class SubmissionsController extends AppController {
 
                     $image  = $this->request->getData('image_file');
                     $name   = $image->getClientFilename();
-                    $image->moveTo(WWW_ROOT.'img'.DS.$folder.DS.$name);
-                    $submission->image_path = $folder.'/'.$name;
+                    if($name) {
+                        $image->moveTo(WWW_ROOT.'img'.DS.$folder.DS.$name);
+                        $submission->image_path = $folder.'/'.$name;
+                    }
 
                     $image2 = $this->request->getData('image_path2');
                     $name2  = $image2->getClientFilename();
-                    $image2->moveTo(WWW_ROOT.'img2'.DS.$folder.DS.$name2);
-                    $submission->image_path2 = $folder.'/'.$name2;
+                    if($name2) {
+                        $image2->moveTo(WWW_ROOT.'img2'.DS.$folder.DS.$name2);
+                        $submission->image_path2 = $folder.'/'.$name2;
+                    }
                 }
 
                 if($this->Submissions->save($submission)) {

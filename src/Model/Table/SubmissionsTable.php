@@ -151,7 +151,7 @@ class SubmissionsTable extends Table {
             ->allowEmptyString('Custom_Manufacturer');
         
         $validator
-            ->notEmptyFile('image_path2')
+            ->allowEmptyFile('image_path2')
             ->uploadedFile('image_path2', [
                 'types' => ['image/jpg', 'image/png', 'image/jpeg'],
                 'minSize' => 1024, // Min 1 KB
