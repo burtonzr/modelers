@@ -101,6 +101,27 @@ class SubmissionsController extends AppController {
                 }
 
                 if($this->Submissions->save($submission)) {
+
+                    if(!is_dir(WWW_ROOT.'otherImg'.DS.$folder)) {
+                        mkdir(WWW_ROOT.'otherImg'.DS.$folder, 0775);
+                    }
+
+                    foreach($this->request->getData('data') as $image) {
+                        $name = $image->getClientFilename();
+                        //Add to data to save
+                        $imgData = array(
+                            "original_pathname" => $name,
+                            "submission_id" => $this->Submission->id
+                        );
+
+                        $this->Submission->Image->create();
+                        $this->Submission->Image->save($imgData);
+
+                        if(!$this->Submission->Image->save($imgData)) {
+                            $this->Flash->error(__('The other images could not be uploaded.'));
+                        }
+                    }
+
                     if($this->Auth->user('UserGroupID') == 3 || $this->Auth->user('UserGroupID') == 2) {
                         $this->Flash->success(__('The submission has been saved.'));
                         return $this->redirect(['action' => 'index']);

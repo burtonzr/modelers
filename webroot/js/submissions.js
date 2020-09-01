@@ -1,4 +1,26 @@
 $(document).ready(function() {
+    //Adding more images
+	$("#add_image").click(function() {
+		num_images = parseInt($("#num_images").val(), 10);
+		empty = false;
+		for(i = 1; i <= num_images; i++) {
+			if($("#ImageFile" + i).val() === "") {
+				empty = true;
+				break;
+			}
+		}
+		if(empty === true) {
+			alert("Please select a file for each image before adding another!");
+		} else {
+			$("#uploads_table > tbody").prepend('<tr><td></td><td>&nbsp;</td></tr>');
+			$("#ImageFile" + num_images).appendTo($("#uploads_table > tbody > tr:first > td:first"));
+			$(this).parent("td").parent("tr").children("td:first").append('<input type="file" name="data[Image][file][]" id="ImageFile' + (num_images + 1) + '" />');
+			$("#num_images").val(num_images + 1);
+			if((num_images + 1) >= 25) {
+				$(this).remove();
+			}
+		}
+	});
     $("#manufacturer_id").on('change', function(e) {
         var manufacturer = $("#manufacturer_id").val();
         

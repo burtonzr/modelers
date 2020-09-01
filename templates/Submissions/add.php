@@ -72,6 +72,20 @@
             ?>
         </div>
     </div>
+    <!---
+    <div class="row">
+        <div class="col-12 col-sm-6 mt-3">
+            <?php
+                echo $this->Form->control('images.0.original_pathname', array('label' => 'Other Image', 'type' => 'file'));
+            ?>
+        </div>
+        <div class="col-12 col-sm-6 mt-3">
+            <?php
+                echo $this->Form->control('images.1.original_pathname', array('label' => 'Other Image', 'type' => 'file'));
+            ?>
+        </div>
+    </div>
+    --->
     <div class="row">
         <?php if($UserGroupID >= 2) { ?>
             <div class="col-12 col-sm-6 mt-3">
@@ -80,23 +94,21 @@
                 ?>
             </div>
         <?php } ?>
-        <!---
-        <div class="col-12 col-sm-6 mt-3">
-        <?php
-                echo $this->Form->control('images.0.original_pathname', array('type' => 'file'));
-            ?>
-        </div>
-        <div class="col-12 col-sm-6 mt-3">
-            <label>Other Images (You can upload one or more images)</label>
-            <input type="file" name="images[]" multiple />
-        </div>
-        <div class="col-12 col-sm-6 mt-3">
-            <?php
-                echo $this->Form->control('images.1.original_pathname', array('type' => 'file'));
-            ?>
-        </div>
-        --->
     </div>
+    <table id='uploads_table'>
+		<thead>
+			<tr>
+				<th colspan="2">Upload Other Images (max of 25)<input type="hidden" name="data[Image][num_images]" id="num_images" value="1" /></th>
+			</tr>
+		</thead>
+		<tfoot></tfoot>
+		<tbody>
+			<tr>
+				<td><input type="file" name="data[Image][file][]" id="ImageFile1" /></td>
+				<td><input type="button" id="add_image" name="add_image" value="Add Another Image" /></td>
+			</tr>
+		</tbody>
+	</table>
     <?php
         echo $this->Form->control('user_id', ['default' => $id, 'type' => 'hidden']);
         echo $this->Form->control('status_id', ['default' => 15, 'type' => 'hidden']);
