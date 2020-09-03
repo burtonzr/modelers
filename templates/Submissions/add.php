@@ -95,7 +95,7 @@
             </div>
         <?php } ?>
     </div>
-    <table id='uploads_table'>
+    <table id="uploads_table">
 		<thead>
 			<tr>
 				<th colspan="2">Upload Other Images (max of 25)<input type="hidden" name="data[Image][num_images]" id="num_images" value="1" /></th>
