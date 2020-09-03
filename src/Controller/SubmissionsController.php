@@ -117,24 +117,27 @@ class SubmissionsController extends AppController {
                 }
 
                 foreach($this->request->getData('data') as $otherImage) {
-                    $otherName = $otherImage['file'][0]->getClientFilename(); //Get file original name
-                    
-                    //Add to data to save
-                    $imgData = array(
-                        "original_pathname" => $folder.'/'.$otherName,
-                        "submission_id" => $submission->id
-                    );
+                    for($key = 0; $key < $otherImage['num_images']; $key++) {
+                        $otherName = $otherImage['file'][$key]->getClientFilename(); //Get file original name
+                        //Add to data to save
+                        $imgData = array(
+                            "original_pathname" => $folder.'/'.$otherName,
+                            "submission_id" => $submission->id
+                        );
 
-                    if($otherName) {
-                        $otherImage['file'][0]->moveTo(WWW_ROOT.'otherImg'.DS.$folder.DS.$otherName); // move files to destination folder
-                        //$submission->Image->data = $folder.'/'.$otherNameString;
-                    }
-                    
-                    $this->Submission->Image->create();
-                    $this->Submission->Image->save($imgData);
-                    
-                    if(!$this->Submission->Image->save($imgData)) {
-                        $this->Flash->error(__('The other images could not be uploaded.'));
+                        if($otherName) {
+                            $otherImage['file'][$key]->moveTo(WWW_ROOT.'otherImg'.DS.$folder.DS.$otherName); // move files to destination folder
+                            //$submission->Image->data = $folder.'/'.$otherNameString;
+                        }
+                        
+                        /*
+                        $this->Submission->Image->create();
+                        $this->Submission->Image->save($imgData);
+                        
+                        if(!$this->Submission->Image->save($imgData)) {
+                            $this->Flash->error(__('The other images could not be uploaded.'));
+                        }
+                        */
                     }
                 }
             }
