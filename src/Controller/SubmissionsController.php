@@ -118,7 +118,9 @@ class SubmissionsController extends AppController {
 
                 foreach($this->request->getData('data') as $otherImage) {
                     for($key = 0; $key < $otherImage['num_images']; $key++) {
-                        $otherName = $otherImage['file'][$key]->getClientFilename(); //Get file original name
+                        $submitImage = $this->Submissions->Images->newEmptyEntity();
+                        $submitImage = $this->Submissions->Images->patchEntity($submitImage, $otherImage);
+                        $otherName   = $otherImage['file'][$key]->getClientFilename(); //Get file original name
                         //Add to data to save
                         $imgData = array(
                             "original_pathname" => $folder.'/'.$otherName,
@@ -127,17 +129,15 @@ class SubmissionsController extends AppController {
 
                         if($otherName) {
                             $otherImage['file'][$key]->moveTo(WWW_ROOT.'otherImg'.DS.$folder.DS.$otherName); // move files to destination folder
-                            //$submission->Image->data = $folder.'/'.$otherNameString;
+                            $submitImage->original_pathname = $folder.'/'.$otherName;
+                            $submitImage->submission_id = $submission->id;
                         }
-                        
-                        /*
-                        $this->Submission->Image->create();
-                        $this->Submission->Image->save($imgData);
-                        
-                        if(!$this->Submission->Image->save($imgData)) {
+
+                        if($this->Submissions->Images->save($submitImage)) {
+                            $this->Flash->success(__('The images have been saved.'));
+                        } else {
                             $this->Flash->error(__('The other images could not be uploaded.'));
                         }
-                        */
                     }
                 }
             }
