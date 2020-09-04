@@ -81,64 +81,55 @@ class SubmissionsController extends AppController {
                         mkdir(WWW_ROOT.'img'.DS.$folder, 0775);
                     }
 
-                    if(!is_dir(WWW_ROOT.'img2'.DS.$folder)) {
-                        mkdir(WWW_ROOT.'img2'.DS.$folder, 0775);
-                    }
-
                     $image  = $this->request->getData('image_file');
                     $name   = $image->getClientFilename();
                     if($name) {
                         $image->moveTo(WWW_ROOT.'img'.DS.$folder.DS.$name);
                         $submission->image_path = $folder.'/'.$name;
                     }
-
-                    $image2 = $this->request->getData('image_path2');
-                    $name2  = $image2->getClientFilename();
-                    if($name2) {
-                        $image2->moveTo(WWW_ROOT.'img2'.DS.$folder.DS.$name2);
-                        $submission->image_path2 = $folder.'/'.$name2;
-                    }
                 }
                 
                 if($this->Submissions->save($submission)) {
+                    if(!is_dir(WWW_ROOT.'otherImg'.DS.$folder)) {
+                        mkdir(WWW_ROOT.'otherImg'.DS.$folder, 0775);
+                    }
+
+                    foreach($this->request->getData('data') as $otherImage) {
+                        for($key = 0; $key < $otherImage['num_images']; $key++) {
+                            $submitImage = $this->Submissions->Images->newEmptyEntity();
+                            $submitImage = $this->Submissions->Images->patchEntity($submitImage, $otherImage);
+                            $otherName   = $otherImage['file'][$key]->getClientFilename(); //Get file original name
+                            //Add to data to save
+                            $imgData = array(
+                                "original_pathname" => $folder.'/'.$otherName,
+                                "submission_id" => $submission->id
+                            );
+                            
+                            if($otherName) {
+                                $otherImage['file'][$key]->moveTo(WWW_ROOT.'otherImg'.DS.$folder.DS.$otherName); // move files to destination folder
+                                $submitImage->original_pathname = $folder.'/'.$otherName;
+                                $submitImage->submission_id = $submission->id;
+
+                                if($this->Submissions->Images->save($submitImage)) {
+                                    $successMessage = 'The image '.$otherName.' has been saved.';
+                                    $this->Flash->success(__($successMessage));
+                                } else {
+                                    $errorMessage = 'The image '.$otherName.' could not be uploaded.';
+                                    $this->Flash->error(__($errorMessage));
+                                }
+                            }
+                        }
+                    }
+                    
                     if($this->Auth->user('UserGroupID') == 3 || $this->Auth->user('UserGroupID') == 2) {
                         $this->Flash->success(__('The submission has been saved.'));
-                        //return $this->redirect(['action' => 'index']);
+                        return $this->redirect(['action' => 'index']);
                     } else {
                         $this->Flash->success(__('The submission has been saved.'));
-                        //return $this->redirect(array('controller' => 'ModelTypes', 'action' => 'index'));
+                        return $this->redirect(array('controller' => 'ModelTypes', 'action' => 'index'));
                     }
                 } else {
                     $this->Flash->error(__('The submission could not be saved. Make sure that the file is an image with these file extensions (jpg, jpeg, png).'));
-                }
-
-                if(!is_dir(WWW_ROOT.'otherImg'.DS.$folder)) {
-                    mkdir(WWW_ROOT.'otherImg'.DS.$folder, 0775);
-                }
-
-                foreach($this->request->getData('data') as $otherImage) {
-                    for($key = 0; $key < $otherImage['num_images']; $key++) {
-                        $submitImage = $this->Submissions->Images->newEmptyEntity();
-                        $submitImage = $this->Submissions->Images->patchEntity($submitImage, $otherImage);
-                        $otherName   = $otherImage['file'][$key]->getClientFilename(); //Get file original name
-                        //Add to data to save
-                        $imgData = array(
-                            "original_pathname" => $folder.'/'.$otherName,
-                            "submission_id" => $submission->id
-                        );
-
-                        if($otherName) {
-                            $otherImage['file'][$key]->moveTo(WWW_ROOT.'otherImg'.DS.$folder.DS.$otherName); // move files to destination folder
-                            $submitImage->original_pathname = $folder.'/'.$otherName;
-                            $submitImage->submission_id = $submission->id;
-                        }
-
-                        if($this->Submissions->Images->save($submitImage)) {
-                            $this->Flash->success(__('The images have been saved.'));
-                        } else {
-                            $this->Flash->error(__('The other images could not be uploaded.'));
-                        }
-                    }
                 }
             }
 
