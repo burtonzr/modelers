@@ -8,6 +8,7 @@ use Cake\DataSource\ConnectionManager;
 use Cake\I18n\Time;
 use Cake\Filesystem\Folder;
 use Cake\Filesystem\File;
+use Cake\Http\Exception\InvalidCsrfTokenException;
 
 class SubmissionsController extends AppController {
     
@@ -36,100 +37,125 @@ class SubmissionsController extends AppController {
         if($this->Auth->user('email') != null) {
             $submission = $this->Submissions->newEmptyEntity();
             if ($this->request->is('post')) {
-                $submission = $this->Submissions->patchEntity($submission, $this->request->getData());
-                if(!$submission->getErrors()) {
-                    $now = Time::now();
-                    if($now->month === 1) {
-                        $month  = "January";
-                        $folder = $month.$now->year;
-                    } else if($now->month === 2) {
-                        $month  = "February";
-                        $folder = $month.$now->year;
-                    } else if($now->month === 3) {
-                        $month  = "March";
-                        $folder = $month.$now->year;
-                    } else if($now->month === 4) {
-                        $month  = "April";
-                        $folder = $month.$now->year;
-                    } else if($now->month === 5) {
-                        $month  = "May";
-                        $folder = $month.$now->year;
-                    } else if($now->month === 6) {
-                        $month  = "June";
-                        $folder = $month.$now->year;
-                    } else if($now->month === 7) {
-                        $month  = "July";
-                        $folder = $month.$now->year;
-                    } else if($now->month === 8) {
-                        $month  = "August";
-                        $folder = $month.$now->year;
-                    } else if($now->month === 9) {
-                        $month  = "September";
-                        $folder = $month.$now->year;
-                    } else if($now->month === 10) {
-                        $month  = "October";
-                        $folder = $month.$now->year;
-                    } else if($now->month === 11) {
-                        $month  = "November";
-                        $folder = $month.$now->year;
-                    } else if($now->month === 12) {
-                        $month  = "December";
-                        $folder = $month.$now->year;
-                    }
+                try {
+                    $submission = $this->Submissions->patchEntity($submission, $this->request->getData());
+                    if(!$submission->getErrors()) {
+                        $now = Time::now();
+                        if($now->month === 1) {
+                            $month  = "January";
+                            $folder = $month.$now->year;
+                        } else if($now->month === 2) {
+                            $month  = "February";
+                            $folder = $month.$now->year;
+                        } else if($now->month === 3) {
+                            $month  = "March";
+                            $folder = $month.$now->year;
+                        } else if($now->month === 4) {
+                            $month  = "April";
+                            $folder = $month.$now->year;
+                        } else if($now->month === 5) {
+                            $month  = "May";
+                            $folder = $month.$now->year;
+                        } else if($now->month === 6) {
+                            $month  = "June";
+                            $folder = $month.$now->year;
+                        } else if($now->month === 7) {
+                            $month  = "July";
+                            $folder = $month.$now->year;
+                        } else if($now->month === 8) {
+                            $month  = "August";
+                            $folder = $month.$now->year;
+                        } else if($now->month === 9) {
+                            $month  = "September";
+                            $folder = $month.$now->year;
+                        } else if($now->month === 10) {
+                            $month  = "October";
+                            $folder = $month.$now->year;
+                        } else if($now->month === 11) {
+                            $month  = "November";
+                            $folder = $month.$now->year;
+                        } else if($now->month === 12) {
+                            $month  = "December";
+                            $folder = $month.$now->year;
+                        }
 
-                    if(!is_dir(WWW_ROOT.'img'.DS.$folder)) {
-                        mkdir(WWW_ROOT.'img'.DS.$folder, 0775);
-                    }
+                        if(!is_dir(WWW_ROOT.'img'.DS.$folder)) {
+                            mkdir(WWW_ROOT.'img'.DS.$folder, 0775);
+                        }
 
-                    $image  = $this->request->getData('image_file');
-                    $name   = $image->getClientFilename();
-                    if($name) {
-                        $image->moveTo(WWW_ROOT.'img'.DS.$folder.DS.$name);
-                        $submission->image_path = $folder.'/'.$name;
+                        $image  = $this->request->getData('image_file');
+                        $name   = $image->getClientFilename();
+                        if($name) {
+                            $image->moveTo(WWW_ROOT.'img'.DS.$folder.DS.$name);
+                            $submission->image_path = $folder.'/'.$name;
+                        }
                     }
-                }
-                
-                if($this->Submissions->save($submission)) {
-                    if(!is_dir(WWW_ROOT.'otherImg'.DS.$folder)) {
-                        mkdir(WWW_ROOT.'otherImg'.DS.$folder, 0775);
-                    }
+                    
+                    if($this->Submissions->save($submission)) {
+                        if(!is_dir(WWW_ROOT.'otherImg'.DS.$folder)) {
+                            mkdir(WWW_ROOT.'otherImg'.DS.$folder, 0775);
+                        }
 
-                    foreach($this->request->getData('data') as $otherImage) {
-                        for($key = 0; $key < $otherImage['num_images']; $key++) {
-                            $submitImage = $this->Submissions->Images->newEmptyEntity();
-                            $submitImage = $this->Submissions->Images->patchEntity($submitImage, $otherImage);
-                            $otherName   = $otherImage['file'][$key]->getClientFilename(); //Get file original name
-                            //Add to data to save
-                            $imgData = array(
-                                "original_pathname" => $folder.'/'.$otherName,
-                                "submission_id" => $submission->id
-                            );
-                            
-                            if($otherName) {
-                                $otherImage['file'][$key]->moveTo(WWW_ROOT.'otherImg'.DS.$folder.DS.$otherName); // move files to destination folder
-                                $submitImage->original_pathname = $folder.'/'.$otherName;
-                                $submitImage->submission_id = $submission->id;
+                        $otherImageUpload = false;
 
-                                if($this->Submissions->Images->save($submitImage)) {
-                                    $successMessage = 'The image '.$otherName.' has been saved.';
-                                    $this->Flash->success(__($successMessage));
+                        foreach($this->request->getData('data') as $otherImage) {
+                            for($key = 0; $key < $otherImage['num_images']; $key++) {
+                                $submitImage = $this->Submissions->Images->newEmptyEntity();
+                                $submitImage = $this->Submissions->Images->patchEntity($submitImage, $otherImage);
+                                $otherName   = $otherImage['file'][$key]->getClientFilename(); //Get file original name
+                                $extension   = pathinfo($otherName, PATHINFO_EXTENSION);
+
+                                // Check file size
+
+                                // Check to see if file already exists
+
+                                // Check file extension
+                                if($extension === 'png' || $extension === 'jpg' || $extension === 'jpeg') {
+                                    //Add to data to save
+                                    $imgData = array(
+                                        "original_pathname" => $folder.'/'.$otherName,
+                                        "submission_id" => $submission->id
+                                    );
+                                    
+                                    if($otherName) {
+                                        $otherImage['file'][$key]->moveTo(WWW_ROOT.'otherImg'.DS.$folder.DS.$otherName); // move files to destination folder
+                                        $submitImage->original_pathname = $folder.'/'.$otherName;
+                                        $submitImage->submission_id = $submission->id;
+
+                                        if($this->Submissions->Images->save($submitImage)) {
+                                            $otherImageUpload = true;
+                                            $successMessage = 'The image '.$otherName.' has been saved.';
+                                            $this->Flash->success(__($successMessage));
+                                        } else {
+                                            $errorMessage = 'The image '.$otherName.' could not be uploaded.';
+                                            $this->Flash->error(__($errorMessage));
+                                        }
+                                    }
                                 } else {
-                                    $errorMessage = 'The image '.$otherName.' could not be uploaded.';
+                                    $errorMessage = 'The image '.$otherName.' could not be uploaded. The only allowed file extensions are .png, .jpg, and .jpeg.';
                                     $this->Flash->error(__($errorMessage));
                                 }
                             }
                         }
-                    }
-                    
-                    if($this->Auth->user('UserGroupID') == 3 || $this->Auth->user('UserGroupID') == 2) {
-                        $this->Flash->success(__('The submission has been saved.'));
-                        return $this->redirect(['action' => 'index']);
+                        
+                        if($otherImageUpload === true) {
+                            if($this->Auth->user('UserGroupID') == 3 || $this->Auth->user('UserGroupID') == 2) {
+                                $this->Flash->success(__('The submission has been saved.'));
+                                return $this->redirect(['action' => 'index']);
+                            } else {
+                                $this->Flash->success(__('The submission has been saved.'));
+                                return $this->redirect(array('controller' => 'ModelTypes', 'action' => 'index'));
+                            }
+                        } else {
+                            $this->Flash->success(__('The submission has been saved.'));
+                        }
                     } else {
-                        $this->Flash->success(__('The submission has been saved.'));
-                        return $this->redirect(array('controller' => 'ModelTypes', 'action' => 'index'));
+                        $this->Flash->error(__('The submission could not be saved. Make sure that the file is an image with these file extensions (jpg, jpeg, png).'));
                     }
-                } else {
-                    $this->Flash->error(__('The submission could not be saved. Make sure that the file is an image with these file extensions (jpg, jpeg, png).'));
+                } catch (InvalidCsrfTokenException $e) {
+                    $this->Flash->error(__('There was an error with this submission.')); 
+                    echo 'Error:'.$e->getMessage();
+                    return;
                 }
             }
 
