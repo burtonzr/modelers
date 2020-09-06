@@ -149,6 +149,27 @@ class SubmissionsTable extends Table {
             ->scalar('Custom_Manufacturer')
             ->maxLength('Custom_Manufacturer', 255)
             ->allowEmptyString('Custom_Manufacturer');
+        /*
+        $validator
+            ->notEmptyFile('data')
+            ->uploadedFile('data', [
+                'types' => ['image/jpg', 'image/png', 'image/jpeg'],
+                'minSize' => 1024, // Min 1 KB
+                'maxSize' => 1024 * 1024 // Max 1 MB
+            ])
+            ->add('data', [
+                'mimeType' => [
+                    'rule' => [ 'mimeType', [ 'image/jpg', 'image/png', 'image/jpeg' ] ],
+                    'message' => 'Please upload only jpg, jpeg, and png.',
+                ],
+                'fileSize' => [
+                    'rule' => [ 'fileSize', '<=', '1MB' ],
+                    'message' => 'Image file size must be less than 1MB.',
+                ]
+            ])
+            ->add('data', 'extension', [
+                'rule' => ['extension', ['png', 'jpg', 'jpeg']]
+            ]);*/
 
         return $validator;
     }
