@@ -92,7 +92,7 @@ class SubmissionsController extends AppController {
                                 $errorMessage = 'The image '.$name.' already exists in the '.$folder.' folder.';
                                 $this->Flash->error(__($errorMessage));
                             } else {
-                                $noSubmission   = true;
+                                $noSubmission = true;
                                 $image->moveTo(WWW_ROOT.'img'.DS.$folder.DS.$name);
                                 $submission->image_path = $folder.'/'.$name;
                             }
@@ -104,59 +104,58 @@ class SubmissionsController extends AppController {
                             if(!is_dir(WWW_ROOT.'otherImg'.DS.$folder)) {
                                 mkdir(WWW_ROOT.'otherImg'.DS.$folder, 0775);
                             }
-    
                             $otherImageUpload = false;
-    
                             foreach($this->request->getData('data') as $otherImage) {
                                 for($key = 0; $key < $otherImage['num_images']; $key++) {
                                     $submitImage = $this->Submissions->Images->newEmptyEntity();
                                     $submitImage = $this->Submissions->Images->patchEntity($submitImage, $otherImage);
                                     if(!$submitImage->getErrors()) {
-                                        $otherName   = $otherImage['file'][$key]->getClientFilename(); //Get file original name
-                                        $extension   = pathinfo($otherName, PATHINFO_EXTENSION);
-                                        $size        = $otherImage['file'][$key]->getSize();
-                                        
-                                        // Check file size
-                                        if($size === 0) {
-                                            $errorMessage = 'The image '.$otherName.' is greater than 1MB and can not be uploaded.';
-                                            $this->Flash->error(__($errorMessage));
-                                        }
-                                        else if($size <= 1048576) {
-                                            // Check to see if file already exists
-                                            if(file_exists(WWW_ROOT.'otherImg'.DS.$folder.'/'.$otherName)) {
-                                                $errorMessage   = 'The image '.$otherName.' already exists in the '.$folder.' folder.';
+                                        $otherName = $otherImage['file'][$key]->getClientFilename(); //Get file original name
+                                        if($otherName !== '') {
+                                            $extension   = pathinfo($otherName, PATHINFO_EXTENSION);
+                                            $size        = $otherImage['file'][$key]->getSize();
+                                            
+                                            // Check file size
+                                            if($size === 0) {
+                                                $errorMessage = 'The image '.$otherName.' is greater than 1MB and can not be uploaded.';
                                                 $this->Flash->error(__($errorMessage));
-                                            } else {
-                                                // Check file extension
-                                                if($extension === 'png' || $extension === 'jpg' || $extension === 'jpeg') {
-                                                    //Add to data to save
-                                                    $imgData = array(
-                                                        "original_pathname" => $folder.'/'.$otherName,
-                                                        "submission_id" => $submission->id
-                                                    );
-                                                    
-                                                    if($otherName) {
-                                                        $otherImage['file'][$key]->moveTo(WWW_ROOT.'otherImg'.DS.$folder.DS.$otherName); // move files to destination folder
-                                                        $submitImage->original_pathname = $folder.'/'.$otherName;
-                                                        $submitImage->submission_id = $submission->id;
-            
-                                                        if($this->Submissions->Images->save($submitImage)) {
-                                                            $otherImageUpload = true;
-                                                            $successMessage = 'The image '.$otherName.' has been saved.';
-                                                            $this->Flash->success(__($successMessage));
-                                                        } else {
-                                                            $errorMessage = 'The image '.$otherName.' could not be uploaded.';
-                                                            $this->Flash->error(__($errorMessage));
-                                                        }
-                                                    }
-                                                } else {
-                                                    $errorMessage = 'The image '.$otherName.' could not be uploaded. The only allowed file extensions are .png, .jpg, and .jpeg.';
+                                            } else if($size <= 1048576) {
+                                                // Check to see if file already exists
+                                                if(file_exists(WWW_ROOT.'otherImg'.DS.$folder.'/'.$otherName)) {
+                                                    $errorMessage   = 'The image '.$otherName.' already exists in the '.$folder.' folder.';
                                                     $this->Flash->error(__($errorMessage));
+                                                } else {
+                                                    // Check file extension
+                                                    if($extension === 'png' || $extension === 'jpg' || $extension === 'jpeg') {
+                                                        //Add to data to save
+                                                        $imgData = array(
+                                                            "original_pathname" => $folder.'/'.$otherName,
+                                                            "submission_id" => $submission->id
+                                                        );
+                                                        
+                                                        if($otherName) {
+                                                            $otherImage['file'][$key]->moveTo(WWW_ROOT.'otherImg'.DS.$folder.DS.$otherName); // move files to destination folder
+                                                            $submitImage->original_pathname = $folder.'/'.$otherName;
+                                                            $submitImage->submission_id = $submission->id;
+                
+                                                            if($this->Submissions->Images->save($submitImage)) {
+                                                                $otherImageUpload = true;
+                                                                $successMessage = 'The image '.$otherName.' has been saved.';
+                                                                $this->Flash->success(__($successMessage));
+                                                            } else {
+                                                                $errorMessage = 'The image '.$otherName.' could not be uploaded.';
+                                                                $this->Flash->error(__($errorMessage));
+                                                            }
+                                                        }
+                                                    } else {
+                                                        $errorMessage = 'The image '.$otherName.' could not be uploaded. The only allowed file extensions are .png, .jpg, and .jpeg.';
+                                                        $this->Flash->error(__($errorMessage));
+                                                    }
                                                 }
+                                            } else {
+                                                $errorMessage = 'The image '.$otherName.' is greater than 1MB and can not be uploaded.';
+                                                $this->Flash->error(__($errorMessage));
                                             }
-                                        } else {
-                                            $errorMessage = 'The image '.$otherName.' is greater than 1MB and can not be uploaded.';
-                                            $this->Flash->error(__($errorMessage));
                                         }
                                     }
                                 }
@@ -171,7 +170,13 @@ class SubmissionsController extends AppController {
                                     return $this->redirect(array('controller' => 'ModelTypes', 'action' => 'index'));
                                 }
                             } else {
-                                $this->Flash->success(__('The submission has been saved.'));
+                                if($this->Auth->user('UserGroupID') == 3 || $this->Auth->user('UserGroupID') == 2) {
+                                    $this->Flash->success(__('The submission has been saved.'));
+                                    return $this->redirect(['action' => 'index']);
+                                } else {
+                                    $this->Flash->success(__('The submission has been saved.'));
+                                    return $this->redirect(array('controller' => 'ModelTypes', 'action' => 'index'));
+                                }
                             }
                         } else {
                             $this->Flash->error(__('The submission could not be saved.'));
