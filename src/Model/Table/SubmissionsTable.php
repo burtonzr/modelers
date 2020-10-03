@@ -93,8 +93,7 @@ class SubmissionsTable extends Table {
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator): Validator
-    {
+    public function validationDefault(Validator $validator): Validator {
         $validator
             ->nonNegativeInteger('id')
             ->allowEmptyString('id', null, 'create');
@@ -109,6 +108,10 @@ class SubmissionsTable extends Table {
             ->scalar('description')
             ->allowEmptyString('description');
 
+        $validator
+            ->scalar('submission_category_id')
+            ->notEmptyArray('submission_category_id');
+        
         $validator
             ->dateTime('approved')
             ->allowEmptyDateTime('approved');

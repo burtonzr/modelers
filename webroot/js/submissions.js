@@ -1,4 +1,20 @@
 $(document).ready(function() {
+    // Save image file name 
+    var removed = "";
+    $("#mainImage").removeAttr('required');
+    $("#changeImageButton").on('click', function() {
+        $("#changeImageButton").addClass('d-none');
+        $("#changeImage").removeClass('d-none');
+        var imageName = $("#mainImage").val();
+        removed       = $("#mainImageHidden").remove();
+        $("#newImagePath").html(imageName);
+    });
+    $("#cancelMainImage").on('click', function() {
+        $("#changeImageButton").removeClass('d-none');
+        $("#changeImage").addClass('d-none');
+        $("#newImagePath").html();
+        removed.insertAfter("#mainImage");
+    });
     //Adding more images
 	$("#add_image").click(function() {
 		num_images = parseInt($("#num_images").val(), 10);
@@ -77,7 +93,7 @@ $(document).ready(function() {
             $("#category-aircraft").removeClass('d-none');
             $("#category-aircraft").load(
                 "submissioncategory_aircraft", function() {
-
+                    
                 }
             );
 
