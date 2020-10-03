@@ -1,6 +1,6 @@
 <h2 class="pagetitle text-center"><?= h($submission->subject) ?> by <?= h($submission->user->name) ?></h2>
 <div class="text-center">
-    <img src="../../img/<?= h($submission->image_path) ?>" width="70%" class="img-fluid mt-3" />
+    <img src="../../img/<?= h($submission->image_path) ?>" width="50%" class="img-fluid mt-3" />
 </div>
 <div class="container mt-3">
     <h3 class="text-center">
@@ -21,7 +21,20 @@
     <p class="mt-5">
         <?= $this->Text->autoParagraph(h($submission->description)); ?>
     </p>
-    <h4 class="text-center mt-5">Gallery Updated On <?= h(date('d/m/Y', strtotime($submission->modified))) ?></h4>
+    <div class="row mt-3">
+        <?php
+            foreach($optionalImages as $image) {
+                if($submission->id == $image['submission_id']) {
+        ?>
+        <div class="col-12 col-sm-4 text-center">
+            <img src="../../otherImg/<?= $image['original_pathname']; ?>" width="50%" class="img-fluid mt-3" />
+        </div>
+        <?php 
+                }
+            }
+        ?>
+    </div>
+    <h4 class="text-center mt-5">Gallery Updated On <?= h(date('m/d/Y', strtotime($submission->modified))) ?></h4>
     <!---
     <div class="related">
         <h4><?= __('Related Images') ?></h4>

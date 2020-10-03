@@ -1,6 +1,10 @@
-<h1 class="pagetitle text-center">Edit <?= h($submission->subject) ?></h1>
+<?= $this->Html->script('submissions.js') ?>
+<div class="text-center">
+    <h1 class="pagetitle">Edit <?= h($submission->subject) ?></h1>
+    <img src="../../img/<?= h($submission->image_path) ?>" width="35%" class="img-fluid mt-2" />
+</div>
 <div class="container content mt-5">
-    <?= $this->Form->create($submission) ?>
+    <?= $this->Form->create($submission, array('enctype' => 'multipart/form-data')) ?>
     <?php if($UserGroupID == 3) { ?>
         <div class="row">
             <div class="col-12 col-sm-6 mt-3">
@@ -53,10 +57,16 @@
     </div>
     <div class="row">
         <?php if ($UserGroupID == 3) { ?>
-            <div class="col-12 col-sm-6 mt-3">
-                <?php
-                    echo $this->Form->control('image_path');
-                ?>
+            <div class="col-12 col-sm-6 mt-4">
+                <button type="button" id="changeImageButton" style="text-transform: capitalize; font-size: 15px;" class="btn btn-info btn-block">Update Current Image</button>
+                <div class="d-none" id="changeImage">
+                    <?php
+                        echo $this->Form->control('image_file', array('id' => 'mainImage', 'label' => 'Main Image', 'type' => 'file', 'formnovalidate' => true));
+                    ?>
+                    <p id="newImagePath"></p>
+                    <button type="button" id="cancelMainImage" class="btn btn-danger btn-block" style="text-transform: capitalize; font-size: 15px;">Cancel</button>
+                    <input type="hidden" id="mainImageHidden" value="<?= h($submission->image_path) ?>" />
+                </div>
             </div>
         <?php } ?>
         <?php if($UserGroupID >= 2) { ?>
@@ -67,7 +77,7 @@
             </div>
         <?php } ?>
     </div>
-    <?= $this->Form->button(__('Update Submission'), ['class' => 'loginButton btn btn-success btn-block mt-3']) ?>
+    <?= $this->Form->button(__('Update Submission'), ['type' => 'submit', 'class' => 'loginButton btn btn-success btn-block mt-3']) ?>
     <?= $this->Form->end() ?>
 </div>
 <div class="row text-center">

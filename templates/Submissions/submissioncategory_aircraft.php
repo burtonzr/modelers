@@ -1,3 +1,3 @@
 <?php
-    echo $this->Form->control('submission_category_id', ['options' => $categoryAircraft, 'empty' => true])
+    echo $this->Form->control('submission_category_id', ['id' => 'categoryAircraft', 'options' => $categoryAircraft, 'empty' => true]);
 ?> 
