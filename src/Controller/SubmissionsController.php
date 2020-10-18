@@ -41,51 +41,37 @@ class SubmissionsController extends AppController {
             if ($this->request->is('post')) {
                 $submission = $this->Submissions->patchEntity($submission, $this->request->getData());
                 if(!$submission->getErrors()) {
-                    $now = Time::now();
-                    if($now->month === 1) {
-                        $month  = "January";
-                        $folder = $month.$now->year;
-                    } else if($now->month === 2) {
-                        $month  = "February";
-                        $folder = $month.$now->year;
-                    } else if($now->month === 3) {
-                        $month  = "March";
-                        $folder = $month.$now->year;
-                    } else if($now->month === 4) {
-                        $month  = "April";
-                        $folder = $month.$now->year;
-                    } else if($now->month === 5) {
-                        $month  = "May";
-                        $folder = $month.$now->year;
-                    } else if($now->month === 6) {
-                        $month  = "June";
-                        $folder = $month.$now->year;
-                    } else if($now->month === 7) {
-                        $month  = "July";
-                        $folder = $month.$now->year;
-                    } else if($now->month === 8) {
-                        $month  = "August";
-                        $folder = $month.$now->year;
-                    } else if($now->month === 9) {
-                        $month  = "September";
-                        $folder = $month.$now->year;
-                    } else if($now->month === 10) {
-                        $month  = "October";
-                        $folder = $month.$now->year;
-                    } else if($now->month === 11) {
-                        $month  = "November";
-                        $folder = $month.$now->year;
-                    } else if($now->month === 12) {
-                        $month  = "December";
-                        $folder = $month.$now->year;
-                    }
+                    $now             = Time::now();
+                    $folder          = $now->year . "-" . $now->month;
+                    $modelTypeFolder = "";
 
-                    if(!is_dir(WWW_ROOT.'img'.DS.$folder)) {
-                        mkdir(WWW_ROOT.'img'.DS.$folder, 0775);
-                    }
-
+                    $modelTypeId          = $this->request->getData('model_type_id');
                     $submissionCategoryId = $this->request->getData('submission_category_id');
                     $scaleId              = $this->request->getData('scale_id');
+
+                    if($modelTypeId === "1") {
+                        $modelTypeFolder = "Naval";
+                    } else if ($modelTypeId === "2") {
+                        $modelTypeFolder = "Aircraft";
+                    } else if ($modelTypeId === "3") {
+                        $modelTypeFolder = "Auto";
+                    } else if ($modelTypeId === "4") {
+                        $modelTypeFolder = "Armor";
+                    } else if ($modelTypeId === "5") {
+                        $modelTypeFolder = "Figures";
+                    } else if ($modelTypeId === "6") {
+                        $modelTypeFolder = "Trains";
+                    } else if ($modelTypeId === "7") {
+                        $modelTypeFolder = "Dioramas";
+                    } else if ($modelTypeId === "8") {
+                        $modelTypeFolder = "Space";
+                    }
+                
+                    $ModelTypeDateFolderName = $modelTypeFolder . '-' . $folder;
+                   
+                    if(!is_dir(WWW_ROOT.'img'.DS.$ModelTypeDateFolderName)) {
+                        mkdir(WWW_ROOT.'img'.DS.$ModelTypeDateFolderName, 0775);
+                    }
 
                     if($submissionCategoryId === '0') {
                         $this->Flash->error(__('A submission category could not be determined. Please select a submission category.'));
@@ -98,21 +84,21 @@ class SubmissionsController extends AppController {
                     $name   = $image->getClientFilename();
                     if($name) {
                         // Check to see if file already exists
-                        if(file_exists(WWW_ROOT.'img'.DS.$folder.'/'.$name)) {
+                        if(file_exists(WWW_ROOT.'img'.DS.$ModelTypeDateFolderName.'/'.$name)) {
                             $noSubmission = false;
-                            $errorMessage = 'The image '.$name.' already exists in the '.$folder.' folder.';
+                            $errorMessage = 'The image '.$name.' already exists in the '.$ModelTypeDateFolderName.' folder.';
                             $this->Flash->error(__($errorMessage));
                         } else {
                             $noSubmission = true;
-                            $image->moveTo(WWW_ROOT.'img'.DS.$folder.DS.$name);
-                            $submission->image_path = $folder.'/'.$name;
+                            $image->moveTo(WWW_ROOT.'img'.DS.$ModelTypeDateFolderName.DS.$name);
+                            $submission->image_path = $ModelTypeDateFolderName.'/'.$name;
                         }
                     }
 
                     if($noSubmission) {
                         if($this->Submissions->save($submission)) {
-                            if(!is_dir(WWW_ROOT.'otherImg'.DS.$folder)) {
-                                mkdir(WWW_ROOT.'otherImg'.DS.$folder, 0775);
+                            if(!is_dir(WWW_ROOT.'otherImg'.DS.$ModelTypeDateFolderName)) {
+                                mkdir(WWW_ROOT.'otherImg'.DS.$ModelTypeDateFolderName, 0775);
                             }
                             $otherImageUpload = false;
                             foreach($this->request->getData('data') as $otherImage) {
@@ -131,21 +117,21 @@ class SubmissionsController extends AppController {
                                                 $this->Flash->error(__($errorMessage));
                                             } else if($size <= 1048576) {
                                                 // Check to see if file already exists
-                                                if(file_exists(WWW_ROOT.'otherImg'.DS.$folder.'/'.$otherName)) {
-                                                    $errorMessage   = 'The image '.$otherName.' already exists in the '.$folder.' folder.';
+                                                if(file_exists(WWW_ROOT.'otherImg'.DS.$ModelTypeDateFolderName.'/'.$otherName)) {
+                                                    $errorMessage   = 'The image '.$otherName.' already exists in the '.$ModelTypeDateFolderName.' folder.';
                                                     $this->Flash->error(__($errorMessage));
                                                 } else {
                                                     // Check file extension
                                                     if($extension === 'png' || $extension === 'jpg' || $extension === 'jpeg') {
                                                         //Add to data to save
                                                         $imgData = array(
-                                                            "original_pathname" => $folder.'/'.$otherName,
+                                                            "original_pathname" => $ModelTypeDateFolderName.'/'.$otherName,
                                                             "submission_id" => $submission->id
                                                         );
                                                         
                                                         if($otherName) {
-                                                            $otherImage['file'][$key]->moveTo(WWW_ROOT.'otherImg'.DS.$folder.DS.$otherName); // move files to destination folder
-                                                            $submitImage->original_pathname = $folder.'/'.$otherName;
+                                                            $otherImage['file'][$key]->moveTo(WWW_ROOT.'otherImg'.DS.$ModelTypeDateFolderName.DS.$otherName); // move files to destination folder
+                                                            $submitImage->original_pathname = $ModelTypeDateFolderName.'/'.$otherName;
                                                             $submitImage->submission_id = $submission->id;
                 
                                                             if($this->Submissions->Images->save($submitImage)) {
@@ -213,51 +199,37 @@ class SubmissionsController extends AppController {
             if ($this->request->is(['patch', 'post', 'put'])) {
                 $submission = $this->Submissions->patchEntity($submission, $this->request->getData());
                 if(!$submission->getErrors()) {
-                    $now = Time::now();
-                    if($now->month === 1) {
-                        $month  = "January";
-                        $folder = $month.$now->year;
-                    } else if($now->month === 2) {
-                        $month  = "February";
-                        $folder = $month.$now->year;
-                    } else if($now->month === 3) {
-                        $month  = "March";
-                        $folder = $month.$now->year;
-                    } else if($now->month === 4) {
-                        $month  = "April";
-                        $folder = $month.$now->year;
-                    } else if($now->month === 5) {
-                        $month  = "May";
-                        $folder = $month.$now->year;
-                    } else if($now->month === 6) {
-                        $month  = "June";
-                        $folder = $month.$now->year;
-                    } else if($now->month === 7) {
-                        $month  = "July";
-                        $folder = $month.$now->year;
-                    } else if($now->month === 8) {
-                        $month  = "August";
-                        $folder = $month.$now->year;
-                    } else if($now->month === 9) {
-                        $month  = "September";
-                        $folder = $month.$now->year;
-                    } else if($now->month === 10) {
-                        $month  = "October";
-                        $folder = $month.$now->year;
-                    } else if($now->month === 11) {
-                        $month  = "November";
-                        $folder = $month.$now->year;
-                    } else if($now->month === 12) {
-                        $month  = "December";
-                        $folder = $month.$now->year;
-                    }
+                    $now             = Time::now();
+                    $folder          = $now->year . "-" . $now->month;
+                    $modelTypeFolder = "";
 
-                    if(!is_dir(WWW_ROOT.'img'.DS.$folder)) {
-                        mkdir(WWW_ROOT.'img'.DS.$folder, 0775);
-                    }
-
+                    $modelTypeId          = $this->request->getData('model_type_id');
                     $submissionCategoryId = $this->request->getData('submission_category_id');
                     $scaleId              = $this->request->getData('scale_id');
+
+                    if($modelTypeId === "1") {
+                        $modelTypeFolder = "Naval";
+                    } else if ($modelTypeId === "2") {
+                        $modelTypeFolder = "Aircraft";
+                    } else if ($modelTypeId === "3") {
+                        $modelTypeFolder = "Auto";
+                    } else if ($modelTypeId === "4") {
+                        $modelTypeFolder = "Armor";
+                    } else if ($modelTypeId === "5") {
+                        $modelTypeFolder = "Figures";
+                    } else if ($modelTypeId === "6") {
+                        $modelTypeFolder = "Trains";
+                    } else if ($modelTypeId === "7") {
+                        $modelTypeFolder = "Dioramas";
+                    } else if ($modelTypeId === "8") {
+                        $modelTypeFolder = "Space";
+                    }
+
+                    $ModelTypeDateFolderName = $modelTypeFolder . '-' . $folder;
+                   
+                    if(!is_dir(WWW_ROOT.'img'.DS.$ModelTypeDateFolderName)) {
+                        mkdir(WWW_ROOT.'img'.DS.$ModelTypeDateFolderName, 0775);
+                    }
 
                     if($submissionCategoryId === '0') {
                         $this->Flash->error(__('A submission category could not be determined. Please select a submission category.'));
@@ -270,12 +242,12 @@ class SubmissionsController extends AppController {
                     $name   = $image->getClientFilename();
                     if($name) {
                         // Check to see if file already exists
-                        if(file_exists(WWW_ROOT.'img'.DS.$folder.'/'.$name)) {
-                            $errorMessage = 'The image '.$name.' already exists in the '.$folder.' folder.';
+                        if(file_exists(WWW_ROOT.'img'.DS.$ModelTypeDateFolderName.'/'.$name)) {
+                            $errorMessage = 'The image '.$name.' already exists in the '.$ModelTypeDateFolderName.' folder.';
                             $this->Flash->error(__($errorMessage));
                         } else {
-                            $image->moveTo(WWW_ROOT.'img'.DS.$folder.DS.$name);
-                            $submission->image_path = $folder.'/'.$name;
+                            $image->moveTo(WWW_ROOT.'img'.DS.$ModelTypeDateFolderName.DS.$name);
+                            $submission->image_path = $ModelTypeDateFolderName.'/'.$name;
                         }
                     }
                 }

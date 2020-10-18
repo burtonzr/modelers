@@ -26,8 +26,10 @@
             foreach($optionalImages as $image) {
                 if($submission->id == $image['submission_id']) {
         ?>
-        <div class="col-12 col-sm-4 text-center">
-            <img src="../../otherImg/<?= $image['original_pathname']; ?>" width="50%" class="img-fluid mt-3" />
+        <div class="col-12 col-sm-6 text-center">
+            <a href="../../otherImg/<?= $image['original_pathname']; ?>" target="_blank">
+                <img src="../../otherImg/<?= $image['original_pathname']; ?>" width="50%" class="img-thumbnail img-fluid mt-3" />
+            </a>
         </div>
         <?php 
                 }
