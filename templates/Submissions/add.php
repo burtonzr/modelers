@@ -83,18 +83,14 @@
             </table>
         </div>
     </div>
-    <div class="row">
-        <?php if($UserGroupID >= 2) { ?>
-            <div class="col-12 col-sm-6 mt-3">
-                <?php
-                    echo $this->Form->control('approved', ['empty' => true]);
-                ?>
-            </div>
-        <?php } ?>
-    </div>
     <?php
         echo $this->Form->control('user_id', ['default' => $id, 'type' => 'hidden']);
-        echo $this->Form->control('status_id', ['default' => 15, 'type' => 'hidden']);
+        echo $this->Form->control('approved', ['default' => $approved, 'type' => 'hidden']);
+        if($UserGroupID >= 2) {
+            echo $this->Form->control('status_id', ['default' => 16, 'type' => 'hidden']);
+        } else {
+            echo $this->Form->control('status_id', ['default' => 15, 'type' => 'hidden']);
+        }
     ?>
     <?= $this->Form->button(__('Add Submission'), ['class' => 'loginButton btn btn-success btn-block mt-3']) ?>
     <?= $this->Form->end() ?>

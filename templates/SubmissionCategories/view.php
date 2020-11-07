@@ -17,7 +17,7 @@
         <?php if (!empty($submissionCategory->submissions)) : ?>
             <div class="row mt-5">
                 <?php foreach ($submissionCategory->submissions as $submissions) : ?>
-                    <?php if ($submissions->status_id == 16): ?>
+                    <?php if ($submissions->status_id == 16 && $submissions->approved <= $now): ?>
                         <div class="col-sm-12 col-md-6 content mt-5 grid modeltypes">
                             <div class="inner">
                                 <h4 class="text-center" style="text-transform: capitalize;">

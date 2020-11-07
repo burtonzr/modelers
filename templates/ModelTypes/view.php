@@ -22,6 +22,19 @@
                     <div class="inner">
                         <h3 class="text-center" style="text-transform: capitalize; margin-top: 40px;"><?= $this->Html->link(h($submissionCategories->title), ['controller' => 'SubmissionCategories', 'action' => 'view', $submissionCategories->id]) ?></h3>
                     </div>
+                    <?php $counter = 1; ?>
+                    <?php foreach($top3Submissions as $topSubmission): ?>
+                        <p style="font-size: 16px;" class="lead">
+                            <?php
+                                if($submissionCategories['id'] === $topSubmission['submission_category_id']) {
+                                    if($counter <= 3) {
+                                        echo $topSubmission['subject'];
+                                        $counter++;
+                                    }
+                                } 
+                            ?>
+                        </p>
+                    <?php endforeach; ?>
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>

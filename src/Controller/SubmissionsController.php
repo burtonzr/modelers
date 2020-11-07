@@ -12,12 +12,48 @@ use Cake\Filesystem\File;
 class SubmissionsController extends AppController {
     
     public function index() {
-        $this->paginate = [
-            'contain' => ['Users', 'ModelTypes', 'SubmissionCategories', 'Manufacturers', 'Scales', 'Statuses'],
-        ];
-        $submissions = $this->paginate($this->Submissions);
+        if($this->Auth->user('UserGroupID') == 3 || $this->Auth->user('UserGroupID') == 2) {
+            $this->paginate = [
+                'contain' => ['Users', 'ModelTypes', 'SubmissionCategories', 'Manufacturers', 'Scales', 'Statuses'],
+            ];
+            $submissions = $this->paginate($this->Submissions);
+            $Statuses = $this->Submissions->Statuses->find('list', [
+                'keyField' => 'id',
+                'valueField' => 'title'
+            ])->where(['type' => 'submissions']);
 
-        $this->set(compact('submissions'));
+            if ($this->request->is(['patch', 'post', 'put'])) {
+                $id = $this->request->getData('submission_id');
+                $submission = $this->Submissions->get($id, [
+                    'contain' => [],
+                ]);
+                if(!$submission->getErrors()) {
+                    $statusName = "";
+                    $status_id  = $this->request->getData('status_id');
+                    $subject    = $this->request->getData('submissionsubject');
+                    $submission = $this->Submissions->patchEntity($submission, $this->request->getData());
+
+                    if($status_id === '15') {
+                        $statusName = 'pending';
+                    } else if($status_id === '16') {
+                        $statusName = 'active';
+                    } else if($status_id === '17') {
+                        $statusName = 'removed';
+                    }
+                }
+                if ($this->Submissions->save($submission)) {
+                    $message = 'The status of ' . $subject . ' was updated to ' . $statusName . '.';
+                    $this->Flash->success(__($message));
+    
+                    return $this->redirect(['action' => 'index']);
+                }
+                $this->Flash->error(__('The submission status could not be updated. Please, try again.'));
+            }
+    
+            $this->set(compact('submissions', 'Statuses'));
+        } else {
+            return $this->redirect(array('controller' => 'ModelTypes', 'action' => 'index'));
+        }
     }
 
     public function view($id = null) {
@@ -38,10 +74,12 @@ class SubmissionsController extends AppController {
     public function add() {
         if($this->Auth->user('email') != null) {
             $submission = $this->Submissions->newEmptyEntity();
+            $now        = Time::now();
+            $approved   = $now->year . "-" . $now->month . "-" . $now->day . " 23:59:59";
+            $this->set('approved', $approved);
             if ($this->request->is('post')) {
                 $submission = $this->Submissions->patchEntity($submission, $this->request->getData());
                 if(!$submission->getErrors()) {
-                    $now             = Time::now();
                     $folder          = $now->year . "-" . $now->month;
                     $modelTypeFolder = "";
 
@@ -97,6 +135,18 @@ class SubmissionsController extends AppController {
 
                     if($noSubmission) {
                         if($this->Submissions->save($submission)) {
+                            //Create thumbnail
+                            require_once(ROOT . DS . 'vendor' . DS . "phpThumb" . DS . "phpthumb.class.php");
+                            $phpThumb      = new \phpThumb();
+                            $phpThumb->src = WWW_ROOT.'img'.DS.$ModelTypeDateFolderName.DS.$name;
+                            $phpThumb->h   = 125;
+                            if($phpThumb->GenerateThumbnail()) {
+                                $phpThumb->RenderToFile(WWW_ROOT.'img'.DS.$ModelTypeDateFolderName.'/'."thumb_".$name);
+                            } else { 
+                                die('Failed: '.$phpThumb->error); 
+                                $this->Flash->error(__("Thumbnail could not be created."));
+                            }
+                            unset($phpThumb);
                             if(!is_dir(WWW_ROOT.'otherImg'.DS.$ModelTypeDateFolderName)) {
                                 mkdir(WWW_ROOT.'otherImg'.DS.$ModelTypeDateFolderName, 0775);
                             }
@@ -185,7 +235,7 @@ class SubmissionsController extends AppController {
             $modelTypes           = $this->Submissions->ModelTypes->find('list', ['limit' => 200]);
             $manufacturers        = $this->Submissions->Manufacturers->find('list', ['limit' => 200]);
             $statuses             = $this->Submissions->Statuses->find('list', ['limit' => 200]);
-            $this->set(compact('submission', 'users', 'modelTypes', 'manufacturers', 'statuses', 'categoryAircraft'));
+            $this->set(compact('submission', 'users', 'modelTypes', 'manufacturers', 'statuses'));
         } else {
             return $this->redirect(array('controller' => 'Users', 'action' => 'login'));
         }
@@ -265,7 +315,7 @@ class SubmissionsController extends AppController {
             $manufacturers        = $this->Submissions->Manufacturers->find('list', ['limit' => 200]);
             $scales               = $this->Submissions->Scales->find()->select(['scale']);
             $scales               = $scales->extract('scale')->toArray();
-            $statuses = $this->Submissions->Statuses->find('list', ['limit' => 200]);
+            $statuses              = $this->Submissions->Statuses->find('list', ['limit' => 200]);
             $this->set(compact('submission', 'users', 'modelTypes', 'submissionCategories', 'manufacturers', 'scales', 'statuses'));
         } else {
             return $this->redirect(array('controller' => 'Users', 'action' => 'login'));

@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Cake\Event\EventInterface;
+use Cake\ORM\TableRegistry;
 
 class ModelTypesController extends AppController {
     
@@ -20,8 +21,14 @@ class ModelTypesController extends AppController {
         $modelType = $this->ModelTypes->get($id, [
             'contain' => ['Statuses', 'SubmissionCategories', 'SubmissionFields', 'Submissions'],
         ]);
-
-        $this->set(compact('modelType'));
+        
+        $this->loadModel('Submissions');
+        $this->loadModel('SubmissionCategories');
+        $count = $this->SubmissionCategories->find('all')->count();
+        $top3Submissions = $this->Submissions->find('all', array(
+            'order' => array('id' => 'DESC')
+        ))->toList();
+        $this->set(compact('modelType', 'top3Submissions'));
     }
 
     public function add() {

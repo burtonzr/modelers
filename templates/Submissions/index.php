@@ -12,11 +12,11 @@
                     <th><?= $this->Paginator->sort('submission_category_id') ?></th>
                     <th><?= $this->Paginator->sort('manufacturer_id') ?></th>
                     <th><?= $this->Paginator->sort('scale_id') ?></th>
-                    <th><?= $this->Paginator->sort('image_path') ?></th>
+                    <!--<th><?= $this->Paginator->sort('image_path') ?></th>-->
                     <th><?= $this->Paginator->sort('status_id') ?></th>
-                    <th><?= $this->Paginator->sort('created') ?></th>
+                    <!--<th><?= $this->Paginator->sort('created') ?></th>
                     <th><?= $this->Paginator->sort('approved') ?></th>
-                    <th><?= $this->Paginator->sort('modified') ?></th>
+                    <th><?= $this->Paginator->sort('modified') ?></th>-->
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -30,11 +30,18 @@
                     <td><?= $submission->has('submission_category') ? $this->Html->link($submission->submission_category->title, ['controller' => 'SubmissionCategories', 'action' => 'view', $submission->submission_category->id]) : '' ?></td>
                     <td><?= $submission->has('manufacturer') ? $this->Html->link($submission->manufacturer->name, ['controller' => 'Manufacturers', 'action' => 'view', $submission->manufacturer->id]) : '' ?></td>
                     <td><?= $submission->has('scale') ? $this->Html->link($submission->scale->id, ['controller' => 'Scales', 'action' => 'view', $submission->scale->id]) : '' ?></td>
-                    <td><?= h($submission->image_path) ?></td>
-                    <td><?= $submission->has('status') ? $this->Html->link($submission->status->title, ['controller' => 'Statuses', 'action' => 'view', $submission->status->id]) : '' ?></td>
+                    <!--<td><?= h($submission->image_path) ?></td>-->
+                    <td>
+                        <?= $this->Form->create($submission) ?>
+                            <?= $this->Form->control('submissionsubject', ['default' => $submission->subject, 'type' => 'hidden']); ?>
+                            <?= $this->Form->control('submission_id', ['default' => $submission->id, 'type' => 'hidden']); ?>
+                            <?= $this->Form->control('status_id', ['label' => false, 'options' => $Statuses, 'empty' => true, 'onChange' => 'this.form.submit()']); ?>
+                        <?= $this->Form->end() ?>
+                    </td>
+                    <!--
                     <td><?= h($submission->created) ?></td>
                     <td><?= h($submission->approved) ?></td>
-                    <td><?= h($submission->modified) ?></td>
+                    <td><?= h($submission->modified) ?></td>-->
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $submission->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $submission->id]) ?>

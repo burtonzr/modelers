@@ -29,7 +29,13 @@
     "autoload": {
         "psr-4": {
             "App\\": "src/"
-        }
+        },
+        "classmap": [
+            "vendor/phpThumb"
+        ],
+        "files": [
+            "vendor/phpThumb/phpthumb.class.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

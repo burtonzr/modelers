@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 use Cake\Event\EventInterface;
+use Cake\Core\App;
 
 class AppController extends Controller {
 

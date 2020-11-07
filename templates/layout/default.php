@@ -104,8 +104,8 @@
                                 <div class="dropdown-menu">
                                     <?php
                                         echo $this->Html->link('Users', array('controller' => 'users', 'action' => 'index'), array('title' => 'Users', 'class' => 'dropdown-item dropdown-menu-right'));
+                                        echo $this->Html->link('Submissions', array('controller' => 'submissions', 'action' => 'index'), array('title' => 'Submission', 'class' => 'dropdown-item dropdown-menu-right'));
                                         if($UserGroupID == 3) {
-                                            echo $this->Html->link('Submissions', array('controller' => 'submissions', 'action' => 'index'), array('title' => 'Submission', 'class' => 'dropdown-item dropdown-menu-right'));
                                             echo $this->Html->link('Manufacturers', array('controller' => 'manufacturers', 'action' => 'index'), array('title' => 'Manufacturers', 'class' => 'dropdown-item dropdown-menu-right'));
                                         }
                                     ?>
