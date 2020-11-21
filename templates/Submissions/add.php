@@ -86,7 +86,7 @@
     <?php
         echo $this->Form->control('user_id', ['default' => $id, 'type' => 'hidden']);
         echo $this->Form->control('approved', ['default' => $approved, 'type' => 'hidden']);
-        echo $this->Form->control('created_date', ['id' => 'created_date', 'type' => 'hidden']);
+        echo $this->Form->control('created', ['type' => 'hidden']);
         if($UserGroupID >= 2) {
             echo $this->Form->control('status_id', ['default' => 16, 'type' => 'hidden']);
         } else {

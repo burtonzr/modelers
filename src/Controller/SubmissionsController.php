@@ -86,6 +86,7 @@ class SubmissionsController extends AppController {
                     $modelTypeId          = $this->request->getData('model_type_id');
                     $submissionCategoryId = $this->request->getData('submission_category_id');
                     $scaleId              = $this->request->getData('scale_id');
+                    $created              = $this->request->getData('created');
 
                     if($modelTypeId === "1") {
                         $modelTypeFolder = "Naval";

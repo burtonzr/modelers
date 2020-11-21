@@ -17,11 +17,12 @@ use Cake\ORM\Entity;
  * @property string|null $description
  * @property int $scale_id
  * @property int $status_id
- * @property \Cake\I18n\FrozenTime|null $created
+ * @property string|null $created
  * @property \Cake\I18n\FrozenTime|null $approved
  * @property \Cake\I18n\FrozenTime|null $modified
  * @property string|null $image_path
  * @property string|null $Custom_Manufacturer
+ * @property string|null $created_date
  *
  * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\ModelType $model_type
@@ -53,7 +54,6 @@ class Submission extends Entity
         'scale_id' => true,
         'status_id' => true,
         'created' => true,
-        'created_date' => true,
         'approved' => true,
         'modified' => true,
         'image_path' => true,

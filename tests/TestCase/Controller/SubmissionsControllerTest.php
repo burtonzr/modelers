@@ -64,6 +64,16 @@ class SubmissionsControllerTest extends TestCase
     }
 
     /**
+     * Test edit method
+     *
+     * @return void
+     */
+    public function testEdit(): void
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
      * Test scalesNaval method
      *
      * @return void
@@ -199,16 +209,6 @@ class SubmissionsControllerTest extends TestCase
      * @return void
      */
     public function testSubmissioncategorySpacecraft(): void
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    /**
-     * Test edit method
-     *
-     * @return void
-     */
-    public function testEdit(): void
     {
         $this->markTestIncomplete('Not implemented yet.');
     }
