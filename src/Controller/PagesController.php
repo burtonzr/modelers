@@ -9,10 +9,19 @@ use Cake\Http\Exception\NotFoundException;
 use Cake\Http\Response;
 use Cake\View\Exception\MissingTemplateException;
 use Cake\Event\EventInterface;
+use Cake\DataSource\ConnectionManager;
+use Cake\ORM\Entity;
+use Cake\ORM\TableRegistry;
+use Cake\ORM\Query;
 
 class PagesController extends AppController {
 
     public function display(...$path): ?Response {
+        $this->loadModel('submissions');
+        $submissions = TableRegistry::get('Submissions');
+        $query       = $submissions->find();
+        $query       = $query->select(['id', 'subject', 'created', 'image_path'])->order(['id' => 'DESC'])->limit(2);
+        $this->set('query', $query);
         if (!$path) {
             return $this->redirect('/');
         }
@@ -28,7 +37,6 @@ class PagesController extends AppController {
             $subpage = $path[1];
         }
         $this->set(compact('page', 'subpage'));
-
         try {
             return $this->render(implode('/', $path));
         } catch (MissingTemplateException $exception) {

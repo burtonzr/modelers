@@ -75,7 +75,7 @@ class SubmissionsController extends AppController {
         if($this->Auth->user('email') != null) {
             $submission = $this->Submissions->newEmptyEntity();
             $now        = Time::now();
-            $approved   = $now->year . "-" . $now->month . "-" . $now->day . " 23:59:59";
+            $approved   = $now->year."-".$now->month."-".$now->day." 23:59:59";
             $this->set('approved', $approved);
             if ($this->request->is('post')) {
                 $submission = $this->Submissions->patchEntity($submission, $this->request->getData());

@@ -1,4 +1,10 @@
 $(document).ready(function() {
+    var d       = new Date();
+    year        = d.getFullYear();
+    month       = '' + (d.getMonth() + 1);
+    day         = '' + d.getDate();
+    var created = year + "-" + month + "-" + day;
+    $("#created_date").val(created);
     // Save image file name 
     var removed = "";
     $("#mainImage").removeAttr('required');

@@ -5,6 +5,8 @@
     use Cake\Datasource\ConnectionManager;
     use Cake\Error\Debugger;
     use Cake\Http\Exception\NotFoundException;
+    use Cake\I18n\FrozenTime;
+    use Cake\I18n\Time;
 
     $this->disableAutoLayout();
 
@@ -35,6 +37,7 @@
         <?= $this->fetch('script') ?>
     </head>
     <body>
+        <?= $this->Html->script('home.js') ?>
         <nav class="navbar navbar-expand-md bg-danger navbar-dark">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -136,6 +139,29 @@
                 <img src="../img/mwlogo-05a.gif" class="img-fluid" />
             </div>
         </header>
+        <div>
+            <script>
+                $(document).ready(function() {
+                    var d        = new Date();
+                    year         = d.getFullYear();
+                    month        = '' + (d.getMonth() + 1);
+                    day          = '' + d.getDate();
+                    var created  = year + "-" + month + "-" + day;
+                    $("#created").text(created);
+                });
+            </script>
+            <h2 class="text-center">What's New</h2>
+            <div class="row">
+                <?php foreach($query as $row): ?>
+                    <div class="col-6 text-center">
+                        <h3>
+                            <?= $this->Html->link(__(h($row->subject)), ['controller' => 'Submissions', 'action' => 'view', $row->id]) ?> 
+                        </h3>
+                        <img src="../img/<?= $row['image_path']; ?>" width="70%" class="img-fluid" />
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
         <div class="container text-center mt-3">
             <div class="row">
                 <div class="col-6 col-sm-4 col-md-3 border border-dark d-flex justify-content-center align-items-center">

@@ -53,6 +53,7 @@ class Submission extends Entity
         'scale_id' => true,
         'status_id' => true,
         'created' => true,
+        'created_date' => true,
         'approved' => true,
         'modified' => true,
         'image_path' => true,
