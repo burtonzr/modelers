@@ -37,7 +37,6 @@
         <?= $this->fetch('script') ?>
     </head>
     <body>
-        <?= $this->Html->script('home.js') ?>
         <nav class="navbar navbar-expand-md bg-danger navbar-dark">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -142,23 +141,30 @@
         <div>
             <script>
                 $(document).ready(function() {
-                    var d        = new Date();
-                    year         = d.getFullYear();
-                    month        = '' + (d.getMonth() + 1);
-                    day          = '' + d.getDate();
-                    var created  = year + "-" + month + "-" + day;
-                    $("#created").text(created);
+                    var d           = new Date();
+                    var year        = d.getFullYear();
+                    var month       = d.getMonth() + 1;
+                    var day         = d.getDate();
+                    var created     = year + "-" + month + "-" + day;
+                    var expiresDate = new Date(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + (d.getDate()) + " 23:59:59");
+                    var expires     = "; expires=" + expiresDate;
+                    document.cookie = "createdDate=" + escape(created) + expires + "; path=/";
                 });
             </script>
+            <?php
+                $_COOKIE['createdDate'];
+            ?>
             <h2 class="text-center">What's New</h2>
             <div class="row">
                 <?php foreach($query as $row): ?>
-                    <div class="col-6 text-center">
-                        <h3>
-                            <?= $this->Html->link(__(h($row->subject)), ['controller' => 'Submissions', 'action' => 'view', $row->id]) ?> 
-                        </h3>
-                        <img src="../img/<?= $row['image_path']; ?>" width="70%" class="img-fluid" />
-                    </div>
+                    <?php if($row['created'] === $_COOKIE['createdDate']): ?>
+                        <div class="col-6 text-center">
+                            <h3>
+                                <?= $this->Html->link(__(h($row->subject)), ['controller' => 'Submissions', 'action' => 'view', $row->id]) ?> 
+                            </h3>
+                            <img src="../img/<?= $row['image_path']; ?>" width="70%" class="img-fluid" />
+                        </div>
+                    <?php endif; ?>
                 <?php endforeach; ?>
             </div>
         </div>
