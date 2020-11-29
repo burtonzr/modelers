@@ -153,20 +153,33 @@
             </script>
             <?php
                 $_COOKIE['createdDate'];
+                $activeRecords = false;
             ?>
-            <h2 class="text-center">What's New</h2>
-            <div class="row">
-                <?php foreach($query as $row): ?>
-                    <?php if($row['created'] === $_COOKIE['createdDate']): ?>
-                        <div class="col-6 text-center">
-                            <h3>
-                                <?= $this->Html->link(__(h($row->subject)), ['controller' => 'Submissions', 'action' => 'view', $row->id]) ?> 
-                            </h3>
-                            <img src="../img/<?= $row['image_path']; ?>" width="70%" class="img-fluid" />
+            <?php if(isset($_COOKIE['createdDate'])): ?>
+                <h2 class="text-center">What's New For <?php echo $_COOKIE['createdDate']; ?></h2>
+                <div class="row">
+                    <?php foreach($query as $row): ?>
+                        <?php if($row['created'] === $_COOKIE['createdDate']): ?>
+                            <?php $activeRecords = true; ?>
+                            <div class="col-6 text-center">
+                                <h3>
+                                    <?= $this->Html->link(__(h($row->subject)), ['controller' => 'Submissions', 'action' => 'view', $row->id]) ?> 
+                                </h3>
+                                <img src="../img/<?= $row['image_path']; ?>" width="70%" class="img-fluid" />
+                            </div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+            <?php if($activeRecords === false): ?>
+                <div class="container py-4">
+                    <div class="card text-center">
+                        <div class="card-header">
+                            There are no new posts today.
                         </div>
-                    <?php endif; ?>
-                <?php endforeach; ?>
-            </div>
+                    </div>
+                </div>
+            <?php endif; ?>
         </div>
         <div class="container text-center mt-3">
             <div class="row">
