@@ -12,8 +12,13 @@ class ModelTypesController extends AppController {
         $this->paginate = [
             'contain' => ['Statuses'],
         ];
-        $modelTypes = $this->paginate($this->ModelTypes);
 
+        $this->loadModel('Submissions');
+        $submissions = $this->Submissions->query('SELECT * FROM `submissions` ORDER BY ID DESC');
+        $modelTypes  = $this->ModelTypes->query('SELECT * FROM `model_types` ORDER BY ID ASC');
+        $submissions = $this->paginate($this->Submissions);
+
+        $this->set('submissionsData', $submissions);
         $this->set(compact('modelTypes'));
     }
 
