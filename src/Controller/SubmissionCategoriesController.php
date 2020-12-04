@@ -15,10 +15,19 @@ class SubmissionCategoriesController extends AppController {
         ];
 
         $this->loadModel('Submissions');
+        $this->loadModel('Scales');
+        $this->loadModel('Users');
+        $this->loadModel('Manufacturers');
         $submissions          = $this->Submissions->find('all')->order(['Submissions.id' => 'DESC']);
+        $scales               = $this->Scales->find('all')->order(['Scales.id' => 'ASC']);
+        $users                = $this->Users->find('all')->order(['Users.id' => 'ASC']);
+        $manufacturers        = $this->Manufacturers->find('all')->order(['Manufacturers.id' => 'ASC']);
         $submissionCategories = $this->SubmissionCategories->find('all')->order(['SubmissionCategories.title' => 'ASC']);
-
-        $this->set('submissions', $this->paginate($submissions, ['limit' => '75']));
+        
+        $this->set('submissions', $this->paginate($submissions, ['limit' => '25']));
+        $this->set('scales', $scales);
+        $this->set('users', $users);
+        $this->set('manufacturers', $manufacturers);
         $this->set(compact('submissionCategories'));
     }
 
