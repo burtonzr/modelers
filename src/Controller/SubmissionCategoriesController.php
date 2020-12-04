@@ -11,10 +11,14 @@ class SubmissionCategoriesController extends AppController {
     
     public function index() {
         $this->paginate = [
-            'contain' => ['ParentSubmissionCategories', 'ModelTypes', 'Statuses'],
+            'contain' => ['ModelTypes', 'Statuses'],
         ];
-        $submissionCategories = $this->paginate($this->SubmissionCategories);
 
+        $this->loadModel('Submissions');
+        $submissions          = $this->Submissions->find('all')->order(['Submissions.id' => 'DESC']);
+        $submissionCategories = $this->SubmissionCategories->find('all')->order(['SubmissionCategories.title' => 'ASC']);
+
+        $this->set('submissions', $this->paginate($submissions, ['limit' => '75']));
         $this->set(compact('submissionCategories'));
     }
 

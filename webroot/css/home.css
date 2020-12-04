@@ -187,6 +187,10 @@ body > nav {
     height: 200px;
 }
 
+.submission-category-grid {
+    height: 65px;
+}
+
 .pagetitle {
     font-weight: 400;
 }
