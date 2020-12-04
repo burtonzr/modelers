@@ -23,7 +23,9 @@
             <?php endforeach; ?>
         </div>
         <div class="col-sm-2 mt-5">
-            Hello
+            <?php foreach($submissions as $submission): ?>
+                <img src="../../img/<?= $submission['image_path']; ?>" class="img-thumbnail img-fluid mt-3" />
+            <?php endforeach; ?>
         </div>
         <div class="col-sm-5 mt-5">
             <ul class="list-group">
