@@ -11,12 +11,12 @@
             <div class="col-sm-4">
                 <div class="form-check">
                     <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input check_scales" id="check_scales" name="Scales" value="Scales">Scales
+                        <input type="checkbox" class="form-check-input check_scales" id="check_scales" name="Scales" value="Scales"><span class="ml-2">Scales</span>
                     </label>
                 </div>
                 <div class="form-check">
                     <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input check_manufacturers" id="check_manufacturers" name="Manufacturers" value="Manufacturers">Manufacturers
+                        <input type="checkbox" class="form-check-input check_manufacturers" id="check_manufacturers" name="Manufacturers" value="Manufacturers"><span class="ml-2">Manufacturers</span>
                     </label>
                 </div>
             </div>
