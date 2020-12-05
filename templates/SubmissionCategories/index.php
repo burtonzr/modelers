@@ -1,14 +1,35 @@
+<?= $this->Html->script('gallery.js'); ?>
 <div class="container-fluid">
     <h1 class="pagetitle text-center"><?= __('ModelShipGallery.com') ?></h1>
         <div class="row mt-5">
-            <div class="col-12 col-sm-6">
+            <div class="col-sm-4">
+
+            </div>
+            <div class="col-sm-4">
+                <h4 class="text-center float-right">Filter by</h4>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input check_scales" id="check_scales" name="Scales" value="Scales">Scales
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input check_manufacturers" id="check_manufacturers" name="Manufacturers" value="Manufacturers">Manufacturers
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div id="scales_filter" class="d-none col-12 col-sm-6">
                 <?php
-                    echo $this->Form->control('scale_id', ['label' => 'Filter by Scale', 'id' => 'scale_id', 'empty' => true]);
+                    echo $this->Form->control('scale_id', ['options' => $filterScales, 'label' => 'Filter by Scale', 'id' => 'scale_id', 'empty' => true]);
                 ?>
             </div>
-            <div class="col-12 col-sm-6">
+            <div id="manufacturer_filter" class="d-none col-12 col-sm-6">
                 <?php
-                    echo $this->Form->control('manufacturer_id', ['label' => 'Filter by Manufacturer', 'id' => 'manufacturer_id', 'empty' => true]);
+                    echo $this->Form->control('manufacturer_id', ['options' => $filterManufacturer, 'label' => 'Filter by Manufacturer', 'id' => 'manufacturer_id', 'empty' => true]);
                 ?>
             </div>
         </div>

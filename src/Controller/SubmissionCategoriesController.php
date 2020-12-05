@@ -23,11 +23,21 @@ class SubmissionCategoriesController extends AppController {
         $users                = $this->Users->find('all')->order(['Users.id' => 'ASC']);
         $manufacturers        = $this->Manufacturers->find('all')->order(['Manufacturers.id' => 'ASC']);
         $submissionCategories = $this->SubmissionCategories->find('all')->order(['SubmissionCategories.title' => 'ASC']);
-        
+        $filterScales         = $this->Scales->find('list', [
+            'keyField' => 'id',
+            'valueField' => 'scale'
+        ])->toArray();
+        $filterManufacturer = $this->Manufacturers->find('list', [
+            'keyField' => 'id',
+            'valueField' => 'name'
+        ])->toArray();
+
         $this->set('submissions', $this->paginate($submissions, ['limit' => '25']));
         $this->set('scales', $scales);
         $this->set('users', $users);
         $this->set('manufacturers', $manufacturers);
+        $this->set('filterManufacturer', $filterManufacturer);
+        $this->set('filterScales', $filterScales);
         $this->set(compact('submissionCategories'));
     }
 
