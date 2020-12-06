@@ -1,38 +1,37 @@
-<?= $this->Html->script('gallery.js'); ?>
 <div class="container-fluid">
     <h1 class="pagetitle text-center"><?= __('ModelShipGallery.com') ?></h1>
-        <div class="row mt-5">
-            <div class="col-sm-4">
+    <div class="row mt-5">
+        <div class="col-sm-4">
 
+        </div>
+        <div class="col-sm-4">
+            <h4 class="text-center float-right">Filter by</h4>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input check_scales" id="check_scales" name="Scales" value="Scales"><span class="ml-2">Scales</span>
+                </label>
             </div>
-            <div class="col-sm-4">
-                <h4 class="text-center float-right">Filter by</h4>
-            </div>
-            <div class="col-sm-4">
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input check_scales" id="check_scales" name="Scales" value="Scales"><span class="ml-2">Scales</span>
-                    </label>
-                </div>
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input check_manufacturers" id="check_manufacturers" name="Manufacturers" value="Manufacturers"><span class="ml-2">Manufacturers</span>
-                    </label>
-                </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input check_manufacturers" id="check_manufacturers" name="Manufacturers" value="Manufacturers"><span class="ml-2">Manufacturers</span>
+                </label>
             </div>
         </div>
-        <div class="row mt-5">
-            <div id="scales_filter" class="d-none col-12 col-sm-6">
-                <?php
-                    echo $this->Form->control('scale_id', ['options' => $filterScales, 'label' => 'Filter by Scale', 'id' => 'scale_id', 'empty' => true]);
-                ?>
-            </div>
-            <div id="manufacturer_filter" class="d-none col-12 col-sm-6">
-                <?php
-                    echo $this->Form->control('manufacturer_id', ['options' => $filterManufacturer, 'label' => 'Filter by Manufacturer', 'id' => 'manufacturer_id', 'empty' => true]);
-                ?>
-            </div>
+    </div>
+    <div class="row mt-5">
+        <div id="scales_filter" class="d-none col-12 col-sm-6">
+            <?php
+                echo $this->Form->control('scale_id', ['options' => $filterScales, 'label' => 'Filter by Scale', 'id' => 'scale_id', 'empty' => true]);
+            ?>
         </div>
+        <div id="manufacturer_filter" class="d-none col-12 col-sm-6">
+            <?php
+                echo $this->Form->control('manufacturer_id', ['options' => $filterManufacturer, 'label' => 'Filter by Manufacturer', 'id' => 'manufacturer_id', 'empty' => true]);
+            ?>
+        </div>
+    </div>
     <div class="row">
         <div class="col-sm-4 mt-5">
             <ul class="list-group">
@@ -54,31 +53,33 @@
             <?php endforeach; ?>
         </div>
         <div class="col-sm-4 mt-5">
-            <?php foreach($submissions as $submission): ?>
-                <div class="col-sm-12 content mt-2 gridSubmissions d-flex justify-content-center">
-                    <div class="inner">
-                        <h4>
-                            <?php foreach($scales as $scale): ?>
-                                <?php if($scale->id === $submission->scale_id): ?>
-                                    <?= h($scale->scale) ?>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
-                            <?= $this->Html->link(__(h($submission->subject)), ['controller' => 'Submissions', 'action' => 'view', $submission->id]) ?>
-                            <?php foreach($manufacturers as $manufacturer): ?>
-                                <?php if($manufacturer->id === $submission->manufacturer_id): ?>
-                                    (<?= h($manufacturer->name); ?>)
-                                <?php endif; ?>
-                            <?php endforeach; ?>
-                            <span>by</span>
-                            <?php foreach($users as $user): ?>
-                                <?php if($user->id === $submission->user_id): ?>
-                                    <?= h($user->name) ?>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
-                        </h4>
+            <div class="submission-container">
+                <?php foreach($submissions as $submission): ?>
+                    <div class="col-sm-12 content mt-2 gridSubmissions d-flex justify-content-center">
+                        <div class="inner">
+                            <h4>
+                                <?php foreach($scales as $scale): ?>
+                                    <?php if($scale->id === $submission->scale_id): ?>
+                                        <?= h($scale->scale) ?>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                                <?= $this->Html->link(__(h($submission->subject)), ['controller' => 'Submissions', 'action' => 'view', $submission->id]) ?>
+                                <?php foreach($manufacturers as $manufacturer): ?>
+                                    <?php if($manufacturer->id === $submission->manufacturer_id): ?>
+                                        (<?= h($manufacturer->name); ?>)
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                                <span>by</span>
+                                <?php foreach($users as $user): ?>
+                                    <?php if($user->id === $submission->user_id): ?>
+                                        <?= h($user->name) ?>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </h4>
+                        </div>
                     </div>
-                </div>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
+            </div>
         </div>
     </div>
     <div class="paginator mt-3">
@@ -146,3 +147,43 @@
     </div>
     -->
 </div>
+<script>
+    $(document).ready(function() {
+        $("#check_scales").on('change', function() {
+            if($("input.check_scales").is(':checked')) {
+                $("#scales_filter").removeClass('d-none');
+            } else {
+                $("#scales_filter").addClass('d-none');
+            }
+        });
+        $("#check_manufacturers").on('change', function() {
+            if($("input.check_manufacturers").is(':checked')) {
+                $("#manufacturer_filter").removeClass('d-none');
+            } else {
+                $("#manufacturer_filter").addClass('d-none');
+            }
+        });
+        $("#scale_id").on('change', function() {
+            var scale_id = $(this).val();
+            search(scale_id);
+        });
+        $("#manufacturer_id").on('change', function() {
+            var manufacturer_id = $(this).val();
+            search(manufacturer_id);
+        });
+        function search(filter) {
+            var data = filter;
+            $.ajax({
+                method: 'get',
+                url : "<?php echo $this->Url->build([ 'controller' => 'SubmissionCategories', 'action' => 'Search' ]); ?>",
+                data: {
+                    filter: data
+                },
+                success: function(response) {
+                    console.log(response);
+                    $('.submission-container').html(response);
+                }
+            });
+        }
+    });
+</script>

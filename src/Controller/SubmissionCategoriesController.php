@@ -41,6 +41,26 @@ class SubmissionCategoriesController extends AppController {
         $this->set(compact('submissionCategories'));
     }
 
+    public function search() {
+        $this->request->allowMethod('ajax');
+        $this->loadModel('Submissions');
+
+        $filter = $this->request->query('filter');
+        debug($filter);
+        exit;
+
+        $query = $this->Submissions->find('all', [
+            'conditions' => ['scale_id = ' . $filter],
+            'order' => ['Submissions.id' => 'DESC'],
+            'limit' => '25'
+        ]);
+        debug($query);
+        exit;
+
+        $this->set('submissions', $this->paginate($query));
+        $this->set('_serialize', ['submissions']);
+    }
+
     public function view($id = null) {
         $submissionCategory = $this->SubmissionCategories->get($id, [
             'contain' => ['ParentSubmissionCategories', 'ModelTypes', 'Statuses', 'ChildSubmissionCategories', 'Submissions'],
