@@ -44,8 +44,14 @@ class SubmissionCategoriesController extends AppController {
     public function search() {
         $this->request->allowMethod('ajax');
         $this->loadModel('Submissions');
+        $this->loadModel('Scales');
+        $this->loadModel('Users');
+        $this->loadModel('Manufacturers');
 
-        $filter = $this->request->getQuery('filter');
+        $filter        = $this->request->getQuery('filter');
+        $scales        = $this->Scales->find('all')->order(['Scales.id' => 'ASC']);
+        $users         = $this->Users->find('all')->order(['Users.id' => 'ASC']);
+        $manufacturers = $this->Manufacturers->find('all')->order(['Manufacturers.id' => 'ASC']);
 
         $query = $this->Submissions->find('all', [
             'conditions' => ['scale_id = ' . $filter],
@@ -54,6 +60,9 @@ class SubmissionCategoriesController extends AppController {
         ]);
 
         $this->set('submissions', $this->paginate($query));
+        $this->set('scales', $scales);
+        $this->set('users', $users);
+        $this->set('manufacturers', $manufacturers);
         $this->set('_serialize', ['submissions']);
     }
 
