@@ -48,26 +48,29 @@ class SubmissionCategoriesController extends AppController {
         $this->loadModel('Users');
         $this->loadModel('Manufacturers');
 
-        $filter        = $this->request->getQuery('filter');
-        $filterType    = $this->request->getQuery('type');
-        $scales        = $this->Scales->find('all')->order(['Scales.id' => 'ASC']);
-        $users         = $this->Users->find('all')->order(['Users.id' => 'ASC']);
-        $manufacturers = $this->Manufacturers->find('all')->order(['Manufacturers.id' => 'ASC']);
-
-        if($filterType === 'scale') {
+        $scaleFilter        = $this->request->getQuery('scale');
+        $manufacturerFilter = $this->request->getQuery('manufacturer');
+        $scales             = $this->Scales->find('all')->order(['Scales.id' => 'ASC']);
+        $users              = $this->Users->find('all')->order(['Users.id' => 'ASC']);
+        $manufacturers      = $this->Manufacturers->find('all')->order(['Manufacturers.id' => 'ASC']);
+        
+        if($scaleFilter !== null) {
             $query = $this->Submissions->find('all', [
-                'conditions' => ['scale_id = ' . $filter],
-                'order' => ['Submissions.id' => 'DESC'],
-                'limit' => '25'
-            ]);
-        } else if($filterType === 'manufacturer') {
-            $query = $this->Submissions->find('all', [
-                'conditions' => ['manufacturer_id = ' . $filter],
+                'conditions' => ['scale_id = ' . $scaleFilter],
                 'order' => ['Submissions.id' => 'DESC'],
                 'limit' => '25'
             ]);
         }
 
+        if($manufacturerFilter !== null) {
+            $query = $this->Submissions->find('all', [
+                'conditions' => ['manufacturer_id = ' . $manufacturerFilter],
+                'order' => ['Submissions.id' => 'DESC'],
+                'limit' => '25'
+            ]);
+        }
+        
+        
         $this->set('submissions', $this->paginate($query));
         $this->set('scales', $scales);
         $this->set('users', $users);

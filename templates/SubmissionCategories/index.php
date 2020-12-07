@@ -166,24 +166,37 @@
         $("#scale_id").on('change', function() {
             var scale_id = $(this).val();
             if(scale_id !== "") {
-                search(scale_id, 'scale');
+                searchScale(scale_id);
             }
         });
         $("#manufacturer_id").on('change', function() {
             var manufacturer_id = $(this).val();
             if(manufacturer_id !== "") {
-                search(manufacturer_id, 'manufacturer');
+                searchManufacturer(manufacturer_id);
             }
         });
-        function search(filter, type) {
-            var data       = filter;
-            var filterType = type;
+
+        function searchManufacturer(filter) {
+            var data = filter;
+            $.ajax({
+                method: 'get',
+                url: "<?php echo $this->Url->build(['controller' => 'SubmissionCategories', 'action' => 'Search']); ?>",
+                data: {
+                    manufacturer: data
+                },
+                success: function(response) {
+                    $('.submission-container').html(response);
+                }
+            });
+        }
+
+        function searchScale(filter) {
+            var data = filter;
             $.ajax({
                 method: 'get',
                 url : "<?php echo $this->Url->build(['controller' => 'SubmissionCategories', 'action' => 'Search']); ?>",
                 data: {
-                    filter: data,
-                    type: filterType
+                    scale: data
                 },
                 success: function(response) {
                     $('.submission-container').html(response);
