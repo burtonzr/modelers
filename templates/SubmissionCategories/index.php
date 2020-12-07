@@ -165,22 +165,27 @@
         });
         $("#scale_id").on('change', function() {
             var scale_id = $(this).val();
-            search(scale_id);
+            if(scale_id !== "") {
+                search(scale_id, 'scale');
+            }
         });
         $("#manufacturer_id").on('change', function() {
             var manufacturer_id = $(this).val();
-            search(manufacturer_id);
+            if(manufacturer_id !== "") {
+                search(manufacturer_id, 'manufacturer');
+            }
         });
-        function search(filter) {
-            var data = filter;
+        function search(filter, type) {
+            var data       = filter;
+            var filterType = type;
             $.ajax({
                 method: 'get',
-                url : "<?php echo $this->Url->build([ 'controller' => 'SubmissionCategories', 'action' => 'Search' ]); ?>",
+                url : "<?php echo $this->Url->build(['controller' => 'SubmissionCategories', 'action' => 'Search']); ?>",
                 data: {
-                    filter: data
+                    filter: data,
+                    type: filterType
                 },
                 success: function(response) {
-                    console.log(response);
                     $('.submission-container').html(response);
                 }
             });

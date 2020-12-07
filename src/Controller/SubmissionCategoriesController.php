@@ -49,15 +49,24 @@ class SubmissionCategoriesController extends AppController {
         $this->loadModel('Manufacturers');
 
         $filter        = $this->request->getQuery('filter');
+        $filterType    = $this->request->getQuery('type');
         $scales        = $this->Scales->find('all')->order(['Scales.id' => 'ASC']);
         $users         = $this->Users->find('all')->order(['Users.id' => 'ASC']);
         $manufacturers = $this->Manufacturers->find('all')->order(['Manufacturers.id' => 'ASC']);
 
-        $query = $this->Submissions->find('all', [
-            'conditions' => ['scale_id = ' . $filter],
-            'order' => ['Submissions.id' => 'DESC'],
-            'limit' => '25'
-        ]);
+        if($filterType === 'scale') {
+            $query = $this->Submissions->find('all', [
+                'conditions' => ['scale_id = ' . $filter],
+                'order' => ['Submissions.id' => 'DESC'],
+                'limit' => '25'
+            ]);
+        } else if($filterType === 'manufacturer') {
+            $query = $this->Submissions->find('all', [
+                'conditions' => ['manufacturer_id = ' . $filter],
+                'order' => ['Submissions.id' => 'DESC'],
+                'limit' => '25'
+            ]);
+        }
 
         $this->set('submissions', $this->paginate($query));
         $this->set('scales', $scales);
