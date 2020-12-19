@@ -53,23 +53,33 @@ class SubmissionCategoriesController extends AppController {
         $scales             = $this->Scales->find('all')->order(['Scales.id' => 'ASC']);
         $users              = $this->Users->find('all')->order(['Users.id' => 'ASC']);
         $manufacturers      = $this->Manufacturers->find('all')->order(['Manufacturers.id' => 'ASC']);
-        
-        if($scaleFilter !== null) {
-            $query = $this->Submissions->find('all', [
-                'conditions' => ['scale_id = ' . $scaleFilter],
-                'order' => ['Submissions.id' => 'DESC'],
-                'limit' => '25'
-            ]);
-        }
 
-        if($manufacturerFilter !== null) {
-            $query = $this->Submissions->find('all', [
+        if($scaleFilter == 0 && $manufacturerFilter !== 0) {
+            $query = $this->Submissions->find('all', array(
                 'conditions' => ['manufacturer_id = ' . $manufacturerFilter],
                 'order' => ['Submissions.id' => 'DESC'],
                 'limit' => '25'
-            ]);
+            ));
         }
-        
+
+        if($scaleFilter !== 0 && $manufacturerFilter == 0) {
+            $query = $this->Submissions->find('all', array(
+                'conditions' => ['scale_id = ' . $scaleFilter],
+                'order' => ['Submissions.id' => 'DESC'],
+                'limit' => '25'
+            ));
+        }
+
+        if($scaleFilter !== 0 && $manufacturerFilter !== 0) {
+            $query = $this->Submissions->find('all', array(
+                'conditions' => array(
+                    'scale_id = ' . $scaleFilter,
+                    'manufacturer_id = ' . $manufacturerFilter
+                ),
+                'order' => ['Submissions.id' => 'DESC'],
+                'limit' => '25'
+            ));
+        }
         
         $this->set('submissions', $this->paginate($query));
         $this->set('scales', $scales);
