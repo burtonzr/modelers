@@ -169,6 +169,6 @@ class SubmissionCategoriesController extends AppController {
     public function beforeFilter(EventInterface $event) {
         parent::beforeFilter($event);
 
-        $this->Auth->allow(['index', 'view']);
+        $this->Auth->allow(['index', 'view', 'search']);
     }
 }
