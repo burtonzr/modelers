@@ -42,50 +42,67 @@ class SubmissionCategoriesController extends AppController {
     }
 
     public function search() {
-        $this->request->allowMethod('ajax');
-        $this->loadModel('Submissions');
-        $this->loadModel('Scales');
-        $this->loadModel('Users');
-        $this->loadModel('Manufacturers');
+        //if($this->Auth->user('email') == null) {
+            $this->request->allowMethod('ajax');
+            $this->loadModel('Submissions');
+            $this->loadModel('Scales');
+            $this->loadModel('Users');
+            $this->loadModel('Manufacturers');
 
-        $scaleFilter        = $this->request->getQuery('scale');
-        $manufacturerFilter = $this->request->getQuery('manufacturer');
-        $scales             = $this->Scales->find('all')->order(['Scales.id' => 'ASC']);
-        $users              = $this->Users->find('all')->order(['Users.id' => 'ASC']);
-        $manufacturers      = $this->Manufacturers->find('all')->order(['Manufacturers.id' => 'ASC']);
+            $scaleFilter        = $this->request->getQuery('scale');
+            $manufacturerFilter = $this->request->getQuery('manufacturer');
+            $categoryFilter     = $this->request->getQuery('category');
+            $scales             = $this->Scales->find('all')->order(['Scales.id' => 'ASC']);
+            $users              = $this->Users->find('all')->order(['Users.id' => 'ASC']);
+            $manufacturers      = $this->Manufacturers->find('all')->order(['Manufacturers.id' => 'ASC']);
 
-        if($scaleFilter == 0 && $manufacturerFilter !== 0) {
-            $query = $this->Submissions->find('all', array(
-                'conditions' => ['manufacturer_id = ' . $manufacturerFilter],
-                'order' => ['Submissions.id' => 'DESC'],
-                'limit' => '25'
-            ));
-        }
+            if($categoryFilter !== 0) {
+                $query = $this->Submissions->find('all', array(
+                    'conditions' => ['submission_category_id = ' . $categoryFilter],
+                    'order' => ['Submissions.id' => 'DESC'],
+                    'limit' => '25'
+                ));
+            }
 
-        if($scaleFilter !== 0 && $manufacturerFilter == 0) {
-            $query = $this->Submissions->find('all', array(
-                'conditions' => ['scale_id = ' . $scaleFilter],
-                'order' => ['Submissions.id' => 'DESC'],
-                'limit' => '25'
-            ));
-        }
+            /*
 
-        if($scaleFilter !== 0 && $manufacturerFilter !== 0) {
-            $query = $this->Submissions->find('all', array(
-                'conditions' => array(
-                    'scale_id = ' . $scaleFilter,
-                    'manufacturer_id = ' . $manufacturerFilter
-                ),
-                'order' => ['Submissions.id' => 'DESC'],
-                'limit' => '25'
-            ));
-        }
-        
-        $this->set('submissions', $this->paginate($query));
-        $this->set('scales', $scales);
-        $this->set('users', $users);
-        $this->set('manufacturers', $manufacturers);
-        $this->set('_serialize', ['submissions']);
+            if($scaleFilter == 0 && $manufacturerFilter !== 0) {
+                $query = $this->Submissions->find('all', array(
+                    'conditions' => ['manufacturer_id = ' . $manufacturerFilter],
+                    'order' => ['Submissions.id' => 'DESC'],
+                    'limit' => '25'
+                ));
+            }
+
+            if($scaleFilter !== 0 && $manufacturerFilter == 0) {
+                $query = $this->Submissions->find('all', array(
+                    'conditions' => ['scale_id = ' . $scaleFilter],
+                    'order' => ['Submissions.id' => 'DESC'],
+                    'limit' => '25'
+                ));
+            }
+
+            if($scaleFilter !== 0 && $manufacturerFilter !== 0) {
+                $query = $this->Submissions->find('all', array(
+                    'conditions' => array(
+                        'scale_id = ' . $scaleFilter,
+                        'manufacturer_id = ' . $manufacturerFilter
+                    ),
+                    'order' => ['Submissions.id' => 'DESC'],
+                    'limit' => '25'
+                ));
+            }
+
+            */
+            
+            $this->set('submissions', $this->paginate($query));
+            $this->set('scales', $scales);
+            $this->set('users', $users);
+            $this->set('manufacturers', $manufacturers);
+            $this->set('_serialize', ['submissions']);
+        //} else {
+         //   return $this->redirect($this->Auth->logout());
+       // }
     }
 
     public function view($id = null) {
