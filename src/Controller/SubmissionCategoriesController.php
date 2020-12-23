@@ -8,7 +8,6 @@ use \Cake\Database\Expression\QueryExpression;
 use Cake\ORM\Query;
 use Cake\ORM\TableRegistry;
 use Cake\I18n\Time;
-use Cake\Routing\Router;
 
 class SubmissionCategoriesController extends AppController {
     
@@ -60,11 +59,19 @@ class SubmissionCategoriesController extends AppController {
             $scaleFilter        = $this->request->getQuery('scale');
             $manufacturerFilter = $this->request->getQuery('manufacturer');
             $categoryFilter     = $this->request->getQuery('category');
-            $and_filter = $query->newExpr()->add(['scale_id = ' . $scaleFilter])->add(['manufacturer_id = ' . $manufacturerFilter])->add(['submission_category_id = ' . $categoryFilter]);
+            $and_filter1 = $query->newExpr()->add(['scale_id = ' . $scaleFilter])->add(['manufacturer_id = ' . $manufacturerFilter])->add(['submission_category_id = ' . $categoryFilter]);
+            $and_filter2 = $query->newExpr()->add(['scale_id = ' . $scaleFilter])->add(['manufacturer_id = ' . $manufacturerFilter]);
+            $and_filter3 = $query->newExpr()->add(['scale_id = ' . $scaleFilter])->add(['submission_category_id = ' . $categoryFilter]);
+            $and_filter4 = $query->newExpr()->add(['manufacturer_id = ' . $manufacturerFilter])->add(['submission_category_id = ' . $categoryFilter]);
 
             return $exp->or([
-                'submission_category_id = ' . '1',
-                $query->newExpr()->and([$and_filter])
+                $query->newExpr()->and([$and_filter1]),
+                $query->newExpr()->and([$and_filter2]),
+                $query->newExpr()->and([$and_filter3]),
+                $query->newExpr()->and([$and_filter4]),
+                'submission_category_id = ' . $categoryFilter,
+                'scale_id = ' . $scaleFilter,
+                'manufacturer_id = ' . $manufacturerFilter,
             ]);
         });
 
