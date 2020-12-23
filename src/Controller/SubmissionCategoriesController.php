@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Cake\Event\EventInterface;
+use \Cake\Database\Expression\QueryExpression;
+use Cake\ORM\Query;
 use Cake\ORM\TableRegistry;
 use Cake\I18n\Time;
 use Cake\Routing\Router;
@@ -43,67 +45,36 @@ class SubmissionCategoriesController extends AppController {
     }
 
     public function search() {
-        //if($this->Auth->user('email') == null) {
-            $this->request->allowMethod('ajax');
-            $this->loadModel('Submissions');
-            $this->loadModel('Scales');
-            $this->loadModel('Users');
-            $this->loadModel('Manufacturers');
+        $this->request->allowMethod('ajax');
+        $this->loadModel('Submissions');
+        $this->loadModel('Scales');
+        $this->loadModel('Users');
+        $this->loadModel('Manufacturers');
 
+        $scales        = $this->Scales->find('all')->order(['Scales.id' => 'ASC']);
+        $users         = $this->Users->find('all')->order(['Users.id' => 'ASC']);
+        $submissions   = $this->Submissions->find('all')->order(['Submissions.id' => 'ASC']);
+        $manufacturers = $this->Manufacturers->find('all')->order(['Manufacturers.id' => 'ASC']);
+        
+        $query = $submissions->find('all')->where(function(QueryExpression $exp, Query $query) {
             $scaleFilter        = $this->request->getQuery('scale');
             $manufacturerFilter = $this->request->getQuery('manufacturer');
             $categoryFilter     = $this->request->getQuery('category');
-            $scales             = $this->Scales->find('all')->order(['Scales.id' => 'ASC']);
-            $users              = $this->Users->find('all')->order(['Users.id' => 'ASC']);
-            $manufacturers      = $this->Manufacturers->find('all')->order(['Manufacturers.id' => 'ASC']);
+            $and_filter = $query->newExpr()->add(['scale_id = ' . $scaleFilter])->add(['manufacturer_id = ' . $manufacturerFilter])->add(['submission_category_id = ' . $categoryFilter]);
 
-            if($categoryFilter !== 0) {
-                $query = $this->Submissions->find('all', array(
-                    'conditions' => ['submission_category_id = ' . $categoryFilter],
-                    'order' => ['Submissions.id' => 'DESC'],
-                    'limit' => '25'
-                ));
-            }
+            return $exp->or([
+                'submission_category_id = ' . '1',
+                $query->newExpr()->and([$and_filter])
+            ]);
+        });
 
-            /*
-
-            if($scaleFilter == 0 && $manufacturerFilter !== 0) {
-                $query = $this->Submissions->find('all', array(
-                    'conditions' => ['manufacturer_id = ' . $manufacturerFilter],
-                    'order' => ['Submissions.id' => 'DESC'],
-                    'limit' => '25'
-                ));
-            }
-
-            if($scaleFilter !== 0 && $manufacturerFilter == 0) {
-                $query = $this->Submissions->find('all', array(
-                    'conditions' => ['scale_id = ' . $scaleFilter],
-                    'order' => ['Submissions.id' => 'DESC'],
-                    'limit' => '25'
-                ));
-            }
-
-            if($scaleFilter !== 0 && $manufacturerFilter !== 0) {
-                $query = $this->Submissions->find('all', array(
-                    'conditions' => array(
-                        'scale_id = ' . $scaleFilter,
-                        'manufacturer_id = ' . $manufacturerFilter
-                    ),
-                    'order' => ['Submissions.id' => 'DESC'],
-                    'limit' => '25'
-                ));
-            }
-
-            */
-            
-            $this->set('submissions', $this->paginate($query));
-            $this->set('scales', $scales);
-            $this->set('users', $users);
-            $this->set('manufacturers', $manufacturers);
-            $this->set('_serialize', ['submissions']);
-        //} else {
-         //   return $this->redirect($this->Auth->logout());
-       // }
+        sql($query);
+        
+        $this->set('submissions', $this->paginate($query));
+        $this->set('scales', $scales);
+        $this->set('users', $users);
+        $this->set('manufacturers', $manufacturers);
+        $this->set('_serialize', ['submissions']);
     }
 
     public function view($id = null) {
