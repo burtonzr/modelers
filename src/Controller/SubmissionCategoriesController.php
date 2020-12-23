@@ -6,6 +6,7 @@ namespace App\Controller;
 use Cake\Event\EventInterface;
 use Cake\ORM\TableRegistry;
 use Cake\I18n\Time;
+use Cake\Routing\Router;
 
 class SubmissionCategoriesController extends AppController {
     

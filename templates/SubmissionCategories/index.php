@@ -21,18 +21,15 @@
         </div>
     </div>
     <div class="row mt-5">
-        <div id="scales_filter" class="d-none col-12 col-sm-5">
+        <div id="scales_filter" class="d-none col-12 col-sm-6">
             <?php
                 echo $this->Form->control('scale_id', ['options' => $filterScales, 'label' => 'Filter by Scale', 'id' => 'scale_id', 'empty' => true]);
             ?>
         </div>
-        <div id="manufacturer_filter" class="d-none col-12 col-sm-5">
+        <div id="manufacturer_filter" class="d-none col-12 col-sm-6">
             <?php
                 echo $this->Form->control('manufacturer_id', ['options' => $filterManufacturer, 'label' => 'Filter by Manufacturer', 'id' => 'manufacturer_id', 'empty' => true]);
             ?>
-        </div>
-        <div id="filter_submit" class="d-none col-12 col-sm-2">
-            <button id="filter_click_button" type="button" class="btn btn-success">Filter Submissions</button>
         </div>
     </div>
     <div class="row">
@@ -109,7 +106,6 @@
         $("#check_scales").on('change', function() {
             if($("input.check_scales").is(':checked')) {
                 $("#scales_filter").removeClass('d-none');
-                $("#filter_submit").removeClass('d-none');
             } else {
                 $("#scales_filter").addClass('d-none');
             }
@@ -117,45 +113,33 @@
         $("#check_manufacturers").on('change', function() {
             if($("input.check_manufacturers").is(':checked')) {
                 $("#manufacturer_filter").removeClass('d-none');
-                $("#filter_submit").removeClass('d-none');
             } else {
                 $("#manufacturer_filter").addClass('d-none');
             }
         });
         $("#scale_id").on('change', function() {
             scale_id = $(this).val();
+            search();
         });
         $("#manufacturer_id").on('change', function() {
             manufacturer_id = $(this).val();
+            search();
         });
         $(".filterSubmissionCategory").on('click', function() {
             $(this).map(function() {
                 submissionCategoryid = $(this).attr('data-id'); 
-                console.log(submissionCategoryid);
-                search(scale_id, manufacturer_id, submissionCategoryid);
+                search();
             });
         });
-        $("#filter_click_button").on('click', function() {
-            if(scale_id == "") {
-                scale_id = 0;
-            }
-            if(manufacturer_id == "") {
-                manufacturer_id = 0;
-            }
-            search(scale_id, manufacturer_id, submissionCategoryid);
-        });
 
-        function search(filter_scale, filter_manufacturer, filter_category) {
-            var dataScale        = filter_scale;
-            var dataManufacturer = filter_manufacturer;
-            var dataCategory     = filter_category;
+        function search() {
             $.ajax({
                 method: 'get',
                 url: "<?php echo $this->Url->build(['controller' => 'SubmissionCategories', 'action' => 'Search']); ?>",
                 data: {
-                    scale:        dataScale,
-                    manufacturer: dataManufacturer,
-                    category:     dataCategory
+                    scale:        scale_id,
+                    manufacturer: manufacturer_id,
+                    category:     submissionCategoryid
                 },
                 success: function(response) {
                     $('.submission-container').html(response);
