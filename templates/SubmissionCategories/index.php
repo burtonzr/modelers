@@ -35,12 +35,12 @@
     <div class="row">
         <div class="col-sm-4 mt-5">
             <ul class="list-group">
+                <li class="list-group-item">
+                    <span class="filterSubmissionCategory" data-id="0" style="color: #0071BC;cursor: pointer;">All Categories</span>
+                </li>
                 <?php foreach ($submissionCategories as $submissionCategory): ?>
                     <li class="list-group-item">
-                        <a style="color: #0071BC;cursor: pointer;" class="filterSubmissionCategory" data-id="<?= $submissionCategory->id ?>" style="text-decoration: none;"><?= h($submissionCategory->title) ?></a>
-                        <!--
-                        <?= $this->Html->link(h($submissionCategory->title), ['controller' => 'SubmissionCategories', 'action' => 'view', $submissionCategory->id]) ?>
-                        -->
+                        <a style="text-decoration: none;color: #0071BC;cursor: pointer;" class="filterSubmissionCategory" data-id="<?= $submissionCategory->id ?>"><?= h($submissionCategory->title) ?></a>
                     </li>
                 <?php endforeach; ?>
             </ul>
@@ -119,15 +119,22 @@
         });
         $("#scale_id").on('change', function() {
             scale_id = $(this).val();
+            if(scale_id === "") {
+                scale_id = 0;
+            }
             search();
         });
         $("#manufacturer_id").on('change', function() {
             manufacturer_id = $(this).val();
+            if(manufacturer_id === "") {
+                manufacturer_id = 0;
+            }
             search();
         });
         $(".filterSubmissionCategory").on('click', function() {
             $(this).map(function() {
                 submissionCategoryid = $(this).attr('data-id'); 
+                console.log(submissionCategoryid);
                 search();
             });
         });

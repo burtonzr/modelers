@@ -59,24 +59,38 @@ class SubmissionCategoriesController extends AppController {
             $scaleFilter        = $this->request->getQuery('scale');
             $manufacturerFilter = $this->request->getQuery('manufacturer');
             $categoryFilter     = $this->request->getQuery('category');
+            $count              = 0;
+            if($scaleFilter !== '0') {
+                $count++;
+            }
+            if($manufacturerFilter !== '0') {
+                $count++;
+            }
+            if($categoryFilter !== '0') {
+                $count++;
+            }
             $and_filter1 = $query->newExpr()->add(['scale_id = ' . $scaleFilter])->add(['manufacturer_id = ' . $manufacturerFilter])->add(['submission_category_id = ' . $categoryFilter]);
             $and_filter2 = $query->newExpr()->add(['scale_id = ' . $scaleFilter])->add(['manufacturer_id = ' . $manufacturerFilter]);
             $and_filter3 = $query->newExpr()->add(['scale_id = ' . $scaleFilter])->add(['submission_category_id = ' . $categoryFilter]);
             $and_filter4 = $query->newExpr()->add(['manufacturer_id = ' . $manufacturerFilter])->add(['submission_category_id = ' . $categoryFilter]);
-
-            return $exp->or([
-                $query->newExpr()->and([$and_filter1]),
-                $query->newExpr()->and([$and_filter2]),
-                $query->newExpr()->and([$and_filter3]),
-                $query->newExpr()->and([$and_filter4]),
-                'submission_category_id = ' . $categoryFilter,
-                'scale_id = ' . $scaleFilter,
-                'manufacturer_id = ' . $manufacturerFilter,
-            ]);
+            if($count === 1) {
+                return $exp->or([
+                    'submission_category_id = ' . $categoryFilter,
+                    'scale_id = ' . $scaleFilter,
+                    'manufacturer_id = ' . $manufacturerFilter,
+                ]); 
+            } else if($count === 2) {
+                return $exp->or([
+                    $query->newExpr()->and([$and_filter2]),
+                ]);
+            } else if($count === 3) {
+                return $exp->or([
+                    $query->newExpr()->and([$and_filter1]),
+                ]);
+            } else if($count === 0) {
+                return $exp;
+            }
         });
-
-        sql($query);
-        
         $this->set('submissions', $this->paginate($query));
         $this->set('scales', $scales);
         $this->set('users', $users);
