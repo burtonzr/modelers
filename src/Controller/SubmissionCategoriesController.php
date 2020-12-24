@@ -80,9 +80,21 @@ class SubmissionCategoriesController extends AppController {
                     'manufacturer_id = ' . $manufacturerFilter,
                 ]); 
             } else if($count === 2) {
-                return $exp->or([
-                    $query->newExpr()->and([$and_filter2]),
-                ]);
+                if($scaleFilter !== '0' && $manufacturerFilter !== '0') {
+                    return $exp->or([
+                        $query->newExpr()->and([$and_filter2]),
+                    ]);
+                }
+                if($scaleFilter !== '0' && $categoryFilter !== '0') {
+                    return $exp->or([
+                        $query->newExpr()->and([$and_filter3]),
+                    ]);
+                }
+                if($manufacturerFilter !== 0 && $categoryFilter !== '0') {
+                    return $exp->or([
+                        $query->newExpr()->and([$and_filter4])
+                    ]);
+                }
             } else if($count === 3) {
                 return $exp->or([
                     $query->newExpr()->and([$and_filter1]),
