@@ -53,7 +53,9 @@
                             <div class="col-sm-12 mt-2 gridSubmissions d-flex justify-content-center">
                                 <img src="../../img/<?= $submission['image_path']; ?>" class="img-thumbnail img-fluid" />
                                 <div class="overlay">
-                                    <div class="text"><?= h($submission->subject); ?></div>
+                                    <div class="text-submission-imagetitles">
+                                        <?= $this->Html->link(__(h($submission->subject)), ['controller' => 'Submissions', 'action' => 'view', $submission->id], array('style' => 'color: white;')) ?>
+                                    </div>
                                 </div>
                             </div>
                         <?php endforeach; ?>

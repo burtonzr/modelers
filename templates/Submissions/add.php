@@ -10,7 +10,7 @@
     <div class="row mt-5">
         <div class="col-12 col-sm-6 mt-3">
             <?php
-                echo $this->Form->control('subject');
+                echo $this->Form->control('subject', ['label' => 'Subject']);
             ?>
         </div>
         <div class="col-12 col-sm-6 mt-3">

@@ -187,8 +187,7 @@ body > nav {
     height: 150px;
 }
 
-.text {
-    color: white;
+.text-submission-imagetitles {
     font-size: 20px;
     position: absolute;
     top: 50%;
@@ -197,7 +196,7 @@ body > nav {
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     text-align: center;
-  }
+}
 
 .overlay {
     position: absolute;

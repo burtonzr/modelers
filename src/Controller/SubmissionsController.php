@@ -130,7 +130,7 @@ class SubmissionsController extends AppController {
                         } else {
                             $noSubmission = true;
                             $image->moveTo(WWW_ROOT.'img'.DS.$ModelTypeDateFolderName.DS.$name);
-                            $submission->image_path = $ModelTypeDateFolderName.'/'.$name;
+                            $submission->image_path = $ModelTypeDateFolderName.'/'."thumb_".$name;
                         }
                     }
 
@@ -140,7 +140,8 @@ class SubmissionsController extends AppController {
                             require_once(ROOT . DS . 'vendor' . DS . "phpThumb" . DS . "phpthumb.class.php");
                             $phpThumb      = new \phpThumb();
                             $phpThumb->src = WWW_ROOT.'img'.DS.$ModelTypeDateFolderName.DS.$name;
-                            $phpThumb->h   = 125;
+                            $phpThumb->h   = 450;
+                            $phpThumb->w   = 550;
                             if($phpThumb->GenerateThumbnail()) {
                                 $phpThumb->RenderToFile(WWW_ROOT.'img'.DS.$ModelTypeDateFolderName.'/'."thumb_".$name);
                             } else { 
@@ -148,6 +149,7 @@ class SubmissionsController extends AppController {
                                 $this->Flash->error(__("Thumbnail could not be created."));
                             }
                             unset($phpThumb);
+                            unlink(WWW_ROOT.'img'.DS.$ModelTypeDateFolderName.DS.$name);
                             if(!is_dir(WWW_ROOT.'otherImg'.DS.$ModelTypeDateFolderName)) {
                                 mkdir(WWW_ROOT.'otherImg'.DS.$ModelTypeDateFolderName, 0775);
                             }
