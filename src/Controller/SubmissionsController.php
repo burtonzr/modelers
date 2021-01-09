@@ -140,7 +140,7 @@ class SubmissionsController extends AppController {
                             require_once(ROOT . DS . 'vendor' . DS . "phpThumb" . DS . "phpthumb.class.php");
                             $phpThumb      = new \phpThumb();
                             $phpThumb->src = WWW_ROOT.'img'.DS.$ModelTypeDateFolderName.DS.$name;
-                            $phpThumb->h   = 450;
+                            $phpThumb->h   = 500;
                             $phpThumb->w   = 550;
                             if($phpThumb->GenerateThumbnail()) {
                                 $phpThumb->RenderToFile(WWW_ROOT.'img'.DS.$ModelTypeDateFolderName.'/'."thumb_".$name);
