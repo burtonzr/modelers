@@ -50,59 +50,63 @@ class SubmissionCategoriesController extends AppController {
         $this->loadModel('Users');
         $this->loadModel('Manufacturers');
 
-        $scales        = $this->Scales->find('all')->order(['Scales.id' => 'ASC']);
-        $users         = $this->Users->find('all')->order(['Users.id' => 'ASC']);
-        $submissions   = $this->Submissions->find('all')->order(['Submissions.id' => 'ASC']);
-        $manufacturers = $this->Manufacturers->find('all')->order(['Manufacturers.id' => 'ASC']);
-        
-        $query = $submissions->find('all')->where(function(QueryExpression $exp, Query $query) {
-            $scaleFilter        = $this->request->getQuery('scale');
-            $manufacturerFilter = $this->request->getQuery('manufacturer');
-            $categoryFilter     = $this->request->getQuery('category');
-            $count              = 0;
-            if($scaleFilter !== '0') {
-                $count++;
-            }
-            if($manufacturerFilter !== '0') {
-                $count++;
-            }
-            if($categoryFilter !== '0') {
-                $count++;
-            }
-            $and_filter1 = $query->newExpr()->add(['scale_id = ' . $scaleFilter])->add(['manufacturer_id = ' . $manufacturerFilter])->add(['submission_category_id = ' . $categoryFilter]);
-            $and_filter2 = $query->newExpr()->add(['scale_id = ' . $scaleFilter])->add(['manufacturer_id = ' . $manufacturerFilter]);
-            $and_filter3 = $query->newExpr()->add(['scale_id = ' . $scaleFilter])->add(['submission_category_id = ' . $categoryFilter]);
-            $and_filter4 = $query->newExpr()->add(['manufacturer_id = ' . $manufacturerFilter])->add(['submission_category_id = ' . $categoryFilter]);
-            if($count === 1) {
-                return $exp->or([
-                    'submission_category_id = ' . $categoryFilter,
-                    'scale_id = ' . $scaleFilter,
-                    'manufacturer_id = ' . $manufacturerFilter,
-                ]); 
-            } else if($count === 2) {
-                if($scaleFilter !== '0' && $manufacturerFilter !== '0') {
-                    return $exp->or([
-                        $query->newExpr()->and([$and_filter2]),
-                    ]);
+        $scales         = $this->Scales->find('all')->order(['Scales.id' => 'ASC']);
+        $users          = $this->Users->find('all')->order(['Users.id' => 'ASC']);
+        $submissions    = $this->Submissions->find('all')->order(['Submissions.id' => 'ASC']);
+        $manufacturers  = $this->Manufacturers->find('all')->order(['Manufacturers.id' => 'ASC']);
+        $categoryFilter = $this->request->getQuery('category');
+        if($categoryFilter === '0') {
+            $query = $submissions->find('all')->order(['id' => 'ASC']);
+        } else {
+            $query = $submissions->find('all')->where(function(QueryExpression $exp, Query $query) {
+                $scaleFilter        = $this->request->getQuery('scale');
+                $manufacturerFilter = $this->request->getQuery('manufacturer');
+                $categoryFilter     = $this->request->getQuery('category');
+                $count              = 0;
+                if($scaleFilter !== '0') {
+                    $count++;
                 }
-                if($scaleFilter !== '0' && $categoryFilter !== '0') {
-                    return $exp->or([
-                        $query->newExpr()->and([$and_filter3]),
-                    ]);
+                if($manufacturerFilter !== '0') {
+                    $count++;
                 }
-                if($manufacturerFilter !== 0 && $categoryFilter !== '0') {
-                    return $exp->or([
-                        $query->newExpr()->and([$and_filter4])
-                    ]);
+                if($categoryFilter !== '0') {
+                    $count++;
                 }
-            } else if($count === 3) {
-                return $exp->or([
-                    $query->newExpr()->and([$and_filter1]),
-                ]);
-            } else if($count === 0) {
-                return $exp;
-            }
-        });
+                $and_filter1 = $query->newExpr()->add(['scale_id = ' . $scaleFilter])->add(['manufacturer_id = ' . $manufacturerFilter])->add(['submission_category_id = ' . $categoryFilter]);
+                $and_filter2 = $query->newExpr()->add(['scale_id = ' . $scaleFilter])->add(['manufacturer_id = ' . $manufacturerFilter]);
+                $and_filter3 = $query->newExpr()->add(['scale_id = ' . $scaleFilter])->add(['submission_category_id = ' . $categoryFilter]);
+                $and_filter4 = $query->newExpr()->add(['manufacturer_id = ' . $manufacturerFilter])->add(['submission_category_id = ' . $categoryFilter]);
+                if($count === 1) {
+                    return $exp->or([
+                        'submission_category_id = ' . $categoryFilter,
+                        'scale_id = ' . $scaleFilter,
+                        'manufacturer_id = ' . $manufacturerFilter,
+                    ]); 
+                } else if($count === 2) {
+                    if($scaleFilter !== '0' && $manufacturerFilter !== '0') {
+                        return $exp->or([
+                            $query->newExpr()->and([$and_filter2]),
+                        ]);
+                    }
+                    if($scaleFilter !== '0' && $categoryFilter !== '0') {
+                        return $exp->or([
+                            $query->newExpr()->and([$and_filter3]),
+                        ]);
+                    }
+                    if($manufacturerFilter !== 0 && $categoryFilter !== '0') {
+                        return $exp->or([
+                            $query->newExpr()->and([$and_filter4])
+                        ]);
+                    }
+                } else if($count === 3) {
+                    return $exp->or([
+                        $query->newExpr()->and([$and_filter1]),
+                    ]);
+                } else if($count === 0) {
+                    return $exp;
+                }
+            });
+        }
         $this->set('submissions', $this->paginate($query));
         $this->set('scales', $scales);
         $this->set('users', $users);
