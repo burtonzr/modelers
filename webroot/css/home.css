@@ -33,6 +33,38 @@ ul {
     padding-left: 25px;
 }
 
+.modelTypeTH {
+    font-size: 18px;
+    color: black;
+}
+
+table, th, td {
+    margin: auto;
+    text-align: left;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    padding-left: 10px !important;
+    border: 2px solid #ccc;
+    border-collapse: collapse;
+}
+
+@media(max-width: 630px) {
+    table, th, td {
+        border: 0;
+    }
+}
+
+.custom-column {
+    float: left;
+    width: 50%;
+}
+
+.custom-row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
 a {
     color: #0071BC;
     text-decoration: none;

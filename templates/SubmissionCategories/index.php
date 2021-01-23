@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <h1 class="pagetitle text-center"><?= __('ModelShipGallery.com') ?></h1>
-    <div class="row mt-5">
+    <div class="row mt-4">
         <div class="col-sm-4">
 
         </div>
@@ -10,17 +10,17 @@
         <div class="col-sm-4">
             <div class="form-check">
                 <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input check_scales" id="check_scales" name="Scales" value="Scales"><span class="ml-2">Scales</span>
+                    <input type="checkbox" class="form-check-input check_scales" id="check_scales" name="Scales" value="Scales"><span style="font-size: 17px;" class="ml-2">Scales</span>
                 </label>
             </div>
             <div class="form-check">
                 <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input check_manufacturers" id="check_manufacturers" name="Manufacturers" value="Manufacturers"><span class="ml-2">Manufacturers</span>
+                    <input type="checkbox" class="form-check-input check_manufacturers" id="check_manufacturers" name="Manufacturers" value="Manufacturers"><span style="font-size: 17px;" class="ml-2">Manufacturers</span>
                 </label>
             </div>
         </div>
     </div>
-    <div class="row mt-5">
+    <div class="row mt-4">
         <div id="scales_filter" class="d-none col-12 col-sm-6">
             <?php
                 echo $this->Form->control('scale_id', ['options' => $filterScales, 'label' => 'Filter by Scale', 'id' => 'scale_id', 'empty' => true]);
@@ -33,65 +33,75 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-4 mt-5">
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <span class="filterSubmissionCategory" data-id="0" style="color: #0071BC;cursor: pointer;">All Categories</span>
-                </li>
-                <?php foreach ($submissionCategories as $submissionCategory): ?>
-                    <li class="list-group-item">
-                        <a style="text-decoration: none;color: #0071BC;cursor: pointer;" class="filterSubmissionCategory" data-id="<?= $submissionCategory->id ?>"><?= h($submissionCategory->title) ?></a>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
+        <div class="col-sm-12 col-md-3 mt-5">
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="modelTypeTH">Naval</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($submissionCategories as $submissionCategory): ?>
+                            <tr>
+                                <td>
+                                    <a style="text-decoration: none;color: #0071BC;cursor: pointer;" class="filterSubmissionCategory" data-id="<?= $submissionCategory->id ?>"><?= h($submissionCategory->title) ?></a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class="col-sm-8 mt-5">
+        <div class="col-sm-12 col-md-9 mt-5">
             <div class="submission-container">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <?php foreach($submissions as $submission): ?>
-                            <div class="col-sm-12 mt-2 gridSubmissions d-flex justify-content-center">
-                                <img src="../../img/<?= $submission['image_path']; ?>" class="img-thumbnail img-fluid" />
-                                <div class="overlay">
-                                    <div class="text-submission-imagetitles">
-                                        <?= $this->Html->link(__(h($submission->subject)), ['controller' => 'Submissions', 'action' => 'view', $submission->id], array('style' => 'color: white;')) ?>
+                <div class="table-responsive">
+                    <div class="custom-row">
+                        <div class="custom-column">
+                            <?php foreach($submissions as $submission): ?>
+                                <div class="col-12 mt-2 gridSubmissions d-flex justify-content-center">
+                                    <img src="../../img/<?= $submission['image_path']; ?>" class="img-thumbnail img-fluid" />
+                                    <div class="overlay">
+                                        <div class="text-submission-imagetitles">
+                                            <?= $this->Html->link(__(h($submission->subject)), ['controller' => 'Submissions', 'action' => 'view', $submission->id], array('style' => 'color: white;')) ?>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-                    <div class="col-sm-6">
-                        <?php foreach($submissions as $submission): ?>
-                            <div class="col-sm-12 content mt-2 gridSubmissions d-flex justify-content-center">
-                                <div class="inner">
-                                    <h4>
-                                        <?php foreach($scales as $scale): ?>
-                                            <?php if($scale->id === $submission->scale_id): ?>
-                                                <?= h($scale->scale) ?>
-                                            <?php endif; ?>
-                                        <?php endforeach; ?>
-                                        <?= $this->Html->link(__(h($submission->subject)), ['controller' => 'Submissions', 'action' => 'view', $submission->id]) ?>
-                                        <?php foreach($manufacturers as $manufacturer): ?>
-                                            <?php if($manufacturer->id === $submission->manufacturer_id): ?>
-                                                (<?= h($manufacturer->name); ?>)
-                                            <?php endif; ?>
-                                        <?php endforeach; ?>
-                                        <span>by</span>
-                                        <?php foreach($users as $user): ?>
-                                            <?php if($user->id === $submission->user_id): ?>
-                                                <?= h($user->name) ?>
-                                            <?php endif; ?>
-                                        <?php endforeach; ?>
-                                    </h4>
+                            <?php endforeach; ?>
+                        </div>
+                        <div class="custom-column">
+                            <?php foreach($submissions as $submission): ?>
+                                <div class="col-12 content mt-2 gridSubmissions d-flex justify-content-center">
+                                    <div class="inner">
+                                        <h4>
+                                            <?php foreach($scales as $scale): ?>
+                                                <?php if($scale->id === $submission->scale_id): ?>
+                                                    <?= h($scale->scale) ?>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                            <?= $this->Html->link(__(h($submission->subject)), ['controller' => 'Submissions', 'action' => 'view', $submission->id]) ?>
+                                            <?php foreach($manufacturers as $manufacturer): ?>
+                                                <?php if($manufacturer->id === $submission->manufacturer_id): ?>
+                                                    (<?= h($manufacturer->name); ?>)
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                            <span>by</span>
+                                            <?php foreach($users as $user): ?>
+                                                <?php if($user->id === $submission->user_id): ?>
+                                                    <?= h($user->name) ?>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                        </h4>
+                                    </div>
                                 </div>
-                            </div>
-                        <?php endforeach; ?>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="paginator mt-3">
+    <div class="paginator mt-5">
         <ul class="pagination">
             <?= $this->Paginator->first('<< ' . __('first')) ?>
             <?= $this->Paginator->prev('< ' . __('previous')) ?>
@@ -102,6 +112,12 @@
         <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
     </div>
 </div>
+<div class="row">
+    <div class="col-md-9">
+        
+    </div>
+</div>
+
 <script>
     $(document).ready(function() {
         var scale_id             = 0;
