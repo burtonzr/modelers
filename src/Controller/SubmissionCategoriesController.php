@@ -68,16 +68,23 @@ class SubmissionCategoriesController extends AppController {
             if($categoryFilter !== '0') {
                 $count++;
             }
-            $and_filter1 = $query->newExpr()->add(['scale_id = ' . $scaleFilter])->add(['manufacturer_id = ' . $manufacturerFilter])->add(['submission_category_id = ' . $categoryFilter])->add(['model_type_id = ' . '1']);
-            $and_filter2 = $query->newExpr()->add(['scale_id = ' . $scaleFilter])->add(['manufacturer_id = ' . $manufacturerFilter])->add(['model_type_id = ' . '1']);
-            $and_filter3 = $query->newExpr()->add(['scale_id = ' . $scaleFilter])->add(['submission_category_id = ' . $categoryFilter])->add(['model_type_id = ' . '1']);
-            $and_filter4 = $query->newExpr()->add(['manufacturer_id = ' . $manufacturerFilter])->add(['submission_category_id = ' . $categoryFilter])->add(['model_type_id = ' . '1']);
+            $and_manufacturer = $query->newExpr()->add(['manufacturer_id = ' . $manufacturerFilter])->add(['model_type_id = ' . '1']);
+            $and_filter1      = $query->newExpr()->add(['scale_id = ' . $scaleFilter])->add(['manufacturer_id = ' . $manufacturerFilter])->add(['submission_category_id = ' . $categoryFilter])->add(['model_type_id = ' . '1']);
+            $and_filter2      = $query->newExpr()->add(['scale_id = ' . $scaleFilter])->add(['manufacturer_id = ' . $manufacturerFilter])->add(['model_type_id = ' . '1']);
+            $and_filter3      = $query->newExpr()->add(['scale_id = ' . $scaleFilter])->add(['submission_category_id = ' . $categoryFilter])->add(['model_type_id = ' . '1']);
+            $and_filter4      = $query->newExpr()->add(['manufacturer_id = ' . $manufacturerFilter])->add(['submission_category_id = ' . $categoryFilter])->add(['model_type_id = ' . '1']);
             if($count === 1) {
-                return $exp->or([
-                    'submission_category_id = ' . $categoryFilter,
-                    'scale_id = ' . $scaleFilter,
-                    'manufacturer_id = ' . $manufacturerFilter,
-                ]); 
+                if($manufacturerFilter !== '0') {
+                    return $exp->or([
+                        $query->newExpr()->and([$and_manufacturer]),
+                    ]);
+                }
+                if($manufacturerFilter === '0') {
+                    return $exp->or([
+                        'submission_category_id = ' . $categoryFilter,
+                        'scale_id = ' . $scaleFilter
+                    ]); 
+                }
             } else if($count === 2) {
                 if($scaleFilter !== '0' && $manufacturerFilter !== '0') {
                     return $exp->or([
@@ -102,8 +109,6 @@ class SubmissionCategoriesController extends AppController {
                 return $exp;
             }
         });
-        sql($query);
-        exit;
         $this->set('submissions', $this->paginate($query));
         $this->set('scales', $scales);
         $this->set('users', $users);
