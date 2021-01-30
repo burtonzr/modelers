@@ -1,7 +1,7 @@
-<div class="row">
-    <div class="col-sm-6">
+<div class="custom-row">
+    <div class="custom-column">
         <?php foreach($submissions as $submission): ?>
-            <div class="col-sm-12 mt-2 gridSubmissions d-flex justify-content-center">
+            <div class="col-12 mt-2 gridSubmissions d-flex justify-content-center">
                 <img src="../../img/<?= $submission['image_path']; ?>" class="img-thumbnail img-fluid" />
                 <div class="overlay">
                     <div class="text-submission-imagetitles">
@@ -11,9 +11,9 @@
             </div>
         <?php endforeach; ?>
     </div>
-    <div class="col-sm-6">
+    <div class="custom-column">
         <?php foreach($submissions as $submission): ?>
-            <div class="col-sm-12 content mt-2 gridSubmissions d-flex justify-content-center">
+            <div class="col-12 content mt-2 gridSubmissions d-flex justify-content-center">
                 <div class="inner">
                     <h4>
                         <?php foreach($scales as $scale): ?>
