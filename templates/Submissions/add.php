@@ -10,12 +10,12 @@
     <div class="row mt-5">
         <div class="col-12 col-sm-6 mt-3">
             <?php
-                echo $this->Form->control('subject', ['label' => 'Subject']);
+                echo $this->Form->control('subject', ['label' => 'Subject', 'required' => true]);
             ?>
         </div>
         <div class="col-12 col-sm-6 mt-3">
             <?php
-                echo $this->Form->control('model_type_id', ['id' => 'model-type-id', 'options' => $modelTypes, 'empty' => true]);
+                echo $this->Form->control('model_type_id', ['id' => 'model-type-id', 'options' => $modelTypes, 'empty' => true, 'required' => true]);
             ?>
         </div>
     </div>
@@ -49,7 +49,7 @@
         </div>
         <div class="col-12 col-sm-6 mt-3">
             <?php
-                echo $this->Form->control('manufacturer_id', ['id' => 'manufacturer_id', 'options' => $manufacturers, 'empty' => true]);
+                echo $this->Form->control('manufacturer_id', ['id' => 'manufacturer_id', 'options' => $manufacturers, 'empty' => true, 'required' => true]);
             ?>
         </div>
     </div>

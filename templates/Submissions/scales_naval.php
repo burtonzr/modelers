@@ -1,3 +1,3 @@
 <?php
-    echo $this->Form->control('scale_id', ['options' => $scalesNaval, 'empty' => true]);
+    echo $this->Form->control('scale_id', ['options' => $scalesNaval, 'empty' => true, 'required' => true]);
 ?>

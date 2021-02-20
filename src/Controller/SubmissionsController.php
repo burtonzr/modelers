@@ -87,7 +87,7 @@ class SubmissionsController extends AppController {
                     $submissionCategoryId = $this->request->getData('submission_category_id');
                     $scaleId              = $this->request->getData('scale_id');
                     $created              = $this->request->getData('created');
-
+                    
                     if($modelTypeId === "1") {
                         $modelTypeFolder = "Naval";
                     } else if ($modelTypeId === "2") {
@@ -112,10 +112,15 @@ class SubmissionsController extends AppController {
                         mkdir(WWW_ROOT.'img'.DS.$ModelTypeDateFolderName, 0775);
                     }
 
-                    if($submissionCategoryId === '0') {
+                    if($modelTypeId === '') {
+                        $this->Flash->error(__('A model type could not be determined. Please select a model type.'));   
+                    }
+
+                    if($submissionCategoryId === '0' || $submissionCategoryId === '') {
                         $this->Flash->error(__('A submission category could not be determined. Please select a submission category.'));
                     }
-                    if($scaleId === '0') {
+
+                    if($scaleId === '0' || $scaleId === '') {
                         $this->Flash->error(__('A scale could not be determined. Please select a scale.'));
                     }
 
@@ -134,7 +139,7 @@ class SubmissionsController extends AppController {
                         }
                     }
 
-                    if($noSubmission) {
+                    if($noSubmission && $modelTypeId !== '') {
                         if($this->Submissions->save($submission)) {
                             //Create thumbnail
                             require_once(ROOT . DS . 'vendor' . DS . "phpThumb" . DS . "phpthumb.class.php");

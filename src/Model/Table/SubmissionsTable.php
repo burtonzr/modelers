@@ -110,7 +110,7 @@ class SubmissionsTable extends Table {
 
         $validator
             ->scalar('submission_category_id')
-            ->notEmptyArray('submission_category_id');
+            ->notEmptyString('submission_category_id');
         
         $validator
             ->dateTime('approved')
