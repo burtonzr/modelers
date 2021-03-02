@@ -1,13 +1,11 @@
 <h2 class="pagetitle text-center"><?= h($submission->subject) ?> by <?= h($submission->user->name) ?></h2>
 <div class="text-center">
-    <img src="../../img/<?= h($submission->image_path) ?>" width="50%" class="img-fluid mt-3" />
+    <a href="../../img/<?= h($submission->image_path) ?>" data-lightbox="submissiongallery">
+        <img src="../../img/<?= h($submission->image_path) ?>" width="60%" class="img-fluid mt-3" />
+    </a>
 </div>
 <div class="container mt-3">
     <h3 class="text-center">
-        <?= h($submission->model_type->title) ?>
-        <span class="mx-3"><i class="fa fa-angle-left"></i></span>
-        <?= h($submission->submission_category->title) ?>
-        <span class="mx-3"><i class="fa fa-angle-left"></i></span>
         <?php 
             foreach($scalesData as $scale) {
                 if($submission->scale->id == $scale['id']) {
@@ -15,8 +13,8 @@
                 }
             }
         ?>
-        <span class="mx-3"><i class="fa fa-angle-left"></i></span>
-        <?= h($submission->manufacturer->name) ?>
+        <?= h($submission->subject) ?>
+        (<?= h($submission->manufacturer->name) ?>)
     </h3>
     <p class="mt-5">
         <?= $this->Text->autoParagraph(h($submission->description)); ?>
@@ -26,9 +24,9 @@
             foreach($optionalImages as $image) {
                 if($submission->id == $image['submission_id']) {
         ?>
-        <div class="col-12 col-sm-6 text-center">
-            <a href="../../otherImg/<?= $image['original_pathname']; ?>" target="_blank">
-                <img src="../../otherImg/<?= $image['original_pathname']; ?>" width="50%" class="img-thumbnail img-fluid mt-3" />
+        <div class="col-sm-6 col-md-4 text-center">
+            <a href="../../otherImg/<?= $image['original_pathname']; ?>" data-lightbox="submissiongallery">
+                <img src="../../otherImg/<?= $image['original_pathname']; ?>" class="img-thumbnail img-fluid mt-3" />
             </a>
         </div>
         <?php 
@@ -36,6 +34,8 @@
             }
         ?>
     </div>
+    <a href="" ><h4 style="color: mediumblue;" class="text-center mt-5"><?= h($submission->user->name) ?></h4></a>
+    <hr />
     <h4 class="text-center mt-5">Gallery Updated On <?= h(date('m/d/Y', strtotime($submission->modified))) ?></h4>
     <!---
     <div class="related">
@@ -114,7 +114,6 @@
             </div>
         <?php endif; ?>
     </div>
-    --->
     <div class="row text-center">
         <div class="col-12 col-sm-3 mt-3">
             <?= $this->Html->link(__('Go Back'), array('controller' => 'SubmissionCategories', 'action' => 'view', $submission->submission_category->id), ['class' => 'model_types_view p-3 mt-4 btn btn-info']) ?>
@@ -139,4 +138,5 @@
             </div>
         <?php } ?>
     </div>
+    --->
 </div>

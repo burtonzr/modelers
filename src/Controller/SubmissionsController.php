@@ -16,8 +16,9 @@ class SubmissionsController extends AppController {
             $this->paginate = [
                 'contain' => ['Users', 'ModelTypes', 'SubmissionCategories', 'Manufacturers', 'Scales', 'Statuses'],
             ];
-            $submissions = $this->paginate($this->Submissions);
-            $Statuses = $this->Submissions->Statuses->find('list', [
+            $this->loadModel('Submissions');
+            $submissions = $this->Submissions->find('all')->order(['Submissions.id' => 'DESC']);
+            $Statuses    = $this->Submissions->Statuses->find('list', [
                 'keyField' => 'id',
                 'valueField' => 'title'
             ])->where(['type' => 'submissions']);
@@ -49,10 +50,10 @@ class SubmissionsController extends AppController {
                 }
                 $this->Flash->error(__('The submission status could not be updated. Please, try again.'));
             }
-    
-            $this->set(compact('submissions', 'Statuses'));
+            $this->set('submissions', $this->paginate($submissions, ['limit' => '25']));
+            $this->set(compact('Statuses'));
         } else {
-            return $this->redirect(array('controller' => 'ModelTypes', 'action' => 'index'));
+            return $this->redirect(array('controller' => 'SubmissionCategories', 'action' => 'index'));
         }
     }
 
@@ -67,7 +68,6 @@ class SubmissionsController extends AppController {
         $sqlImages = $this->Images->query("SELECT original_pathname, submission_id FROM `images` WHERE `submission_id` = 277");
         $this->set('scalesData', $sqlScales);
         $this->set('optionalImages', $sqlImages);
-        
         $this->set(compact('submission'));
     }
 
@@ -236,13 +236,23 @@ class SubmissionsController extends AppController {
                             $this->Flash->error(__('The submission could not be saved.'));
                         }
                     }
+                } else {
+                    $modelTypes  = $this->Submissions->ModelTypes->find('list', ['limit' => 200]);
+                    $modelTypeId = ['0' => ''];
+                    $data        = $modelTypeId + $modelTypes->toArray();
+                    debug($data);
+                    exit;
+                    $this->set(compact('modelTypes', $data));
+                    
+                    //debug($this->request->getData('model_type_id'));
+                    //exit;
                 }
             }
 
-            $users                = $this->Submissions->Users->find('list', ['limit' => 200]);
-            $modelTypes           = $this->Submissions->ModelTypes->find('list', ['limit' => 200]);
-            $manufacturers        = $this->Submissions->Manufacturers->find('list', ['limit' => 200]);
-            $statuses             = $this->Submissions->Statuses->find('list', ['limit' => 200]);
+            $users          = $this->Submissions->Users->find('list', ['limit' => 200]);
+            $modelTypes     = $this->Submissions->ModelTypes->find('list', ['limit' => 200]);
+            $manufacturers  = $this->Submissions->Manufacturers->find('list', ['limit' => 200]);
+            $statuses       = $this->Submissions->Statuses->find('list', ['limit' => 200]);
             $this->set(compact('submission', 'users', 'modelTypes', 'manufacturers', 'statuses'));
         } else {
             return $this->redirect(array('controller' => 'Users', 'action' => 'login'));
