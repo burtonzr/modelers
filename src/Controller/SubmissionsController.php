@@ -236,23 +236,13 @@ class SubmissionsController extends AppController {
                             $this->Flash->error(__('The submission could not be saved.'));
                         }
                     }
-                } else {
-                    $modelTypes  = $this->Submissions->ModelTypes->find('list', ['limit' => 200]);
-                    $modelTypeId = ['0' => ''];
-                    $data        = $modelTypeId + $modelTypes->toArray();
-                    debug($data);
-                    exit;
-                    $this->set(compact('modelTypes', $data));
-                    
-                    //debug($this->request->getData('model_type_id'));
-                    //exit;
                 }
             }
 
-            $users          = $this->Submissions->Users->find('list', ['limit' => 200]);
-            $modelTypes     = $this->Submissions->ModelTypes->find('list', ['limit' => 200]);
-            $manufacturers  = $this->Submissions->Manufacturers->find('list', ['limit' => 200]);
-            $statuses       = $this->Submissions->Statuses->find('list', ['limit' => 200]);
+            $users         = $this->Submissions->Users->find('list', ['limit' => 200]);
+            $modelTypes    = $this->Submissions->ModelTypes->find('list', ['limit' => 200]);
+            $manufacturers = $this->Submissions->Manufacturers->find('list', ['limit' => 200]);
+            $statuses      = $this->Submissions->Statuses->find('list', ['limit' => 200]);
             $this->set(compact('submission', 'users', 'modelTypes', 'manufacturers', 'statuses'));
         } else {
             return $this->redirect(array('controller' => 'Users', 'action' => 'login'));

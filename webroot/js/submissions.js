@@ -44,6 +44,7 @@ $(document).ready(function() {
 		}
 	});
     $("#manufacturer_id").on('change', function(e) {
+        e.preventDefault();
         var manufacturer = $("#manufacturer_id").val();
         
         if(manufacturer == 28) {
@@ -53,6 +54,138 @@ $(document).ready(function() {
         }
     });
 
+    var manufacturerId = $("#manufacturer_id").val();
+    var modelTypeId    = $("#model-type-id").val();
+    if(manufacturerId === '28') {
+        $("#other-manufacturer").removeClass('d-none');
+    }
+    if(modelTypeId === '1') {
+        // submission categories
+        $("#category-naval").removeClass('d-none');
+        $("#category-naval").load(
+            "submissioncategory_naval", function() {
+                
+            }
+        );
+        // scales
+        $("#scales-naval").removeClass('d-none');
+        $("#scales-naval").load(
+            "scales_naval", function() {
+
+            }
+        );
+    }
+    if(modelTypeId === '2') {
+        // submission categories
+        $("#category-aircraft").removeClass('d-none');
+        $("#category-aircraft").load(
+            "submissioncategory_aircraft", function() {
+                
+            }
+        );
+
+        // scales
+        $("#scales-aircraft").removeClass('d-none');
+        $("#scales-aircraft").load(
+            "scales_aircraft", function() {
+
+            }
+        );
+    }
+    if(modelTypeId === '3') {
+        // submission categories
+        $("#category-automotive").removeClass('d-none');
+        $("#category-automotive").load(
+            "submissioncategory_automotive", function() {
+
+            }
+        );
+
+        // scales
+        $("#scales-automotive").removeClass('d-none');
+        $("#scales-automotive").load(
+            "scales_automotive", function() {
+
+            }
+        );
+    }
+    if(modelTypeId === '4') {
+        // submission categories
+        $("#category-armor").removeClass('d-none');
+        $("#category-armor").load(
+            "submissioncategory_armor", function() {
+
+            }
+        );
+
+        // scales
+        $("#scales-armor").removeClass('d-none');
+        $("#scales-armor").load(
+            "scales_armor", function() {
+
+            }
+        );
+    }
+    if(modelTypeId === '5') {
+        // submission categories
+        $("#category-figures").removeClass('d-none');
+        $("#category-figures").load(
+            "submissioncategory_figures", function() {
+
+            }
+        );
+
+        // scales
+        $("#scales-figures").removeClass('d-none');
+        $("#scales-figures").text("There are no scales for Figures.");
+    }
+    if(modelTypeId === '6') {
+        // submission categories
+        $("#category-trains").removeClass('d-none');
+        $("#category-trains").load(
+            "submissioncategory_trains", function() {
+
+            }
+        );
+
+        // scales
+        $("#scales-trains").removeClass('d-none');
+        $("#scales-trains").load(
+            "scales_trains", function() {
+
+            }
+        );
+    }
+    if(modelTypeId === '7') {
+        // submission categories
+        $("#category-dioramas").removeClass('d-none');
+        $("#category-dioramas").load(
+            "submissioncategory_dioramas", function() {
+
+            }
+        );
+
+        // scales
+        $("#scales-dioramas").removeClass('d-none');
+        $("#scales-dioramas").load(
+            "scales_dioramas", function() {
+
+            }
+        );
+    }
+    if(modelTypeId === '8') {
+        // submission categories
+        $("#category-space").removeClass('d-none');
+        $("#category-space").load(
+            "submissioncategory_spacecraft", function() {
+
+            }
+        );
+
+        // scales
+        $("#scales-space").removeClass('d-none');
+        $("#scales-space").text("There are no scales for Spacecraft/Sci-Fi.");
+    }
     $("#model-type-id").on('change', function(e) {
         e.preventDefault();
         var modelType = $("#model-type-id").val();
@@ -85,8 +218,6 @@ $(document).ready(function() {
 
                 }
             );
-            
-            
             // scales
             $("#scales-naval").removeClass('d-none');
             $("#scales-naval").load(
