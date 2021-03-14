@@ -39,7 +39,7 @@
             }
         ?>
     </div>
-    <a href="" ><h4 style="color: mediumblue;" class="text-center mt-5"><?= h($submission->user->name) ?></h4></a>
+    <h4 style="color: mediumblue;" class="text-center mt-5"><?php echo $this->Html->link($submission->user->name, array('controller' => 'users', 'action' => 'view/', $submission->user->id), array('class' => 'nav-link'));?></h4>
     <hr />
     <h4 class="text-center mt-5">Gallery Updated On <?= h(date('m/d/Y', strtotime($submission->modified))) ?></h4>
     <!---
