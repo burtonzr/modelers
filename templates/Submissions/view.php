@@ -14,7 +14,12 @@
             }
         ?>
         <?= h($submission->subject) ?>
-        (<?= h($submission->manufacturer->name) ?>)
+        <?php if($submission->manufacturer->name === "Other Manufacturer") { ?>
+            (<?= h($submission->Custom_Manufacturer) ?>)
+        <?php } ?>
+        <?php if($submission->manufacturer->name !== "Other Manufacturer") { ?>
+            (<?= h($submission->manufacturer->name) ?>)
+        <?php } ?>
     </h3>
     <p class="mt-5">
         <?= $this->Text->autoParagraph(h($submission->description)); ?>
