@@ -115,7 +115,7 @@ class UsersController extends AppController {
                         $this->Flash->error('You have been banned from logging into the application.');
                         return $this->redirect($this->Auth->logout());
                     } else {
-                        return $this->redirect(array('controller' => 'ModelTypes', 'action' => 'index'));
+                        return $this->redirect(array('controller' => 'SubmissionCategories', 'action' => 'index'));
                     }
                 } else {
                     $this->Flash->error('Your email or password is incorrect. ');
