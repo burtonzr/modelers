@@ -1,10 +1,10 @@
 <h2 class="pagetitle text-center"><?= h($submission->subject) ?> by <?= h($submission->user->name) ?></h2>
-<div class="text-center">
+<div class="portrait">
     <a href="../../img/<?= h($submission->image_path) ?>" data-lightbox="submissiongallery">
-        <img src="../../img/<?= h($submission->image_path) ?>" width="60%" class="img-fluid mt-3" />
+        <img src="../../img/<?= h($submission->image_path) ?>" class="portrait-img img-fluid mt-3" />
     </a>
 </div>
-<div class="container mt-3">
+<div class="container mt-5">
     <h3 class="text-center">
         <?php 
             foreach($scalesData as $scale) {
