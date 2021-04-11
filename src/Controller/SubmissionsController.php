@@ -221,7 +221,7 @@ class SubmissionsController extends AppController {
                                     return $this->redirect(['action' => 'index']);
                                 } else {
                                     $this->Flash->success(__('The submission has been saved.'));
-                                    return $this->redirect(array('controller' => 'ModelTypes', 'action' => 'index'));
+                                    return $this->redirect(array('controller' => 'SubmissionCategories', 'action' => 'index'));
                                 }
                             } else {
                                 if($this->Auth->user('UserGroupID') == 3 || $this->Auth->user('UserGroupID') == 2) {
@@ -229,7 +229,7 @@ class SubmissionsController extends AppController {
                                     return $this->redirect(['action' => 'index']);
                                 } else {
                                     $this->Flash->success(__('The submission has been saved.'));
-                                    return $this->redirect(array('controller' => 'ModelTypes', 'action' => 'index'));
+                                    return $this->redirect(array('controller' => 'SubmissionCategories', 'action' => 'index'));
                                 }
                             }
                         } else {

@@ -42,50 +42,16 @@
     <h4 style="color: mediumblue;" class="text-center mt-5"><?php echo $this->Html->link($submission->user->name, array('controller' => 'users', 'action' => 'view/', $submission->user->id), array('class' => 'nav-link'));?></h4>
     <hr />
     <h4 class="text-center mt-5">Gallery Updated On <?= h(date('m/d/Y', strtotime($submission->modified))) ?></h4>
-    <!---
-    <div class="related">
-        <h4><?= __('Related Images') ?></h4>
-        <?php if (!empty($submission->images)) : ?>
-        <div class="table-responsive">
-            <table>
-                <tr>
-                    <th><?= __('Id') ?></th>
-                    <th><?= __('Original Filename') ?></th>
-                    <th><?= __('Storage Filename') ?></th>
-                    <th><?= __('Mime Type') ?></th>
-                    <th><?= __('Filesize') ?></th>
-                    <th><?= __('Title') ?></th>
-                    <th><?= __('Description') ?></th>
-                    <th><?= __('Submission Id') ?></th>
-                    <th><?= __('Status Id') ?></th>
-                    <th><?= __('Created') ?></th>
-                    <th><?= __('Modified') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
-                </tr>
-                <?php foreach ($submission->images as $images) : ?>
-                <tr>
-                    <td><?= h($images->id) ?></td>
-                    <td><?= h($images->original_filename) ?></td>
-                    <td><?= h($images->storage_filename) ?></td>
-                    <td><?= h($images->mime_type) ?></td>
-                    <td><?= h($images->filesize) ?></td>
-                    <td><?= h($images->title) ?></td>
-                    <td><?= h($images->description) ?></td>
-                    <td><?= h($images->submission_id) ?></td>
-                    <td><?= h($images->status_id) ?></td>
-                    <td><?= h($images->created) ?></td>
-                    <td><?= h($images->modified) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('View'), ['controller' => 'Images', 'action' => 'view', $images->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['controller' => 'Images', 'action' => 'edit', $images->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['controller' => 'Images', 'action' => 'delete', $images->id], ['confirm' => __('Are you sure you want to delete # {0}?', $images->id)]) ?>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </table>
-        </div>
-        <?php endif; ?>
+    <div class="row">
+        <?php
+            if($UserGroupID == 2 || $UserGroupID == 3 || $submission->user_id === $id) { 
+        ?>
+            <div class="col-12 col-sm-3 mt-3">
+                <?= $this->Html->link(__('Edit Submission'), ['action' => 'edit', $submission->id], ['class' => 'model_types_view p-3 mt-4 btn btn-warning']) ?>
+            </div>
+        <?php } ?>
     </div>
+    <!---
     <div class="related">
         <h4><?= __('Related Submission Field Values') ?></h4>
         <?php if (!empty($submission->submission_field_values)) : ?>
