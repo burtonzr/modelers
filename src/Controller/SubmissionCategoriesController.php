@@ -114,8 +114,6 @@ class SubmissionCategoriesController extends AppController {
                 }
             });
         }
-        //debug($query);
-          //  exit;
         $this->set('submissions', $this->paginate($query));
         $this->set('scales', $scales);
         $this->set('users', $users);

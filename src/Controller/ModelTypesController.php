@@ -23,6 +23,9 @@ class ModelTypesController extends AppController {
     }
 
     public function view($id = null) {
+        $this->paginate = [
+            'contain' => ['ModelTypes', 'Statuses'],
+        ];
         $modelType = $this->ModelTypes->get($id, [
             'contain' => ['Statuses', 'SubmissionCategories', 'SubmissionFields', 'Submissions'],
         ]);
@@ -34,6 +37,84 @@ class ModelTypesController extends AppController {
             'order' => array('id' => 'DESC')
         ))->toList();
         $this->set(compact('modelType', 'top3Submissions'));
+    }
+
+    public function search() {
+        $this->request->allowMethod('ajax');
+        $this->loadModel('Submissions');
+        $this->loadModel('Scales');
+        $this->loadModel('Users');
+        $this->loadModel('Manufacturers');
+
+        $scaleFilter        = $this->request->getQuery('scale');
+        $manufacturerFilter = $this->request->getQuery('manufacturer');
+        $categoryFilter     = $this->request->getQuery('category');
+        $scales             = $this->Scales->find('all')->order(['Scales.id' => 'ASC']);
+        $users              = $this->Users->find('all')->order(['Users.id' => 'ASC']);
+        $submissions        = $this->Submissions->find('all')->order(['Submissions.id' => 'DESC']);
+        $manufacturers      = $this->Manufacturers->find('all')->order(['Manufacturers.id' => 'ASC']);
+        if($scaleFilter === '0' && $manufacturerFilter === '0' && $categoryFilter === '0') {
+            $query = $submissions->find('all')->where(['model_type_id' => '1']); 
+        } else {
+            $query = $submissions->find('all')->where(function(QueryExpression $exp, Query $query) {
+                $scaleFilter        = $this->request->getQuery('scale');
+                $manufacturerFilter = $this->request->getQuery('manufacturer');
+                $categoryFilter     = $this->request->getQuery('category');
+                $count              = 0;
+                if($scaleFilter !== '0') {
+                    $count++;
+                }
+                if($manufacturerFilter !== '0') {
+                    $count++;
+                }
+                if($categoryFilter !== '0') {
+                    $count++;
+                }
+                $and_manufacturer = $query->newExpr()->add(['manufacturer_id = ' . $manufacturerFilter])->add(['model_type_id = ' . '1']);
+                $and_filter1      = $query->newExpr()->add(['scale_id = ' . $scaleFilter])->add(['manufacturer_id = ' . $manufacturerFilter])->add(['submission_category_id = ' . $categoryFilter])->add(['model_type_id = ' . '1']);
+                $and_filter2      = $query->newExpr()->add(['scale_id = ' . $scaleFilter])->add(['manufacturer_id = ' . $manufacturerFilter])->add(['model_type_id = ' . '1']);
+                $and_filter3      = $query->newExpr()->add(['scale_id = ' . $scaleFilter])->add(['submission_category_id = ' . $categoryFilter])->add(['model_type_id = ' . '1']);
+                $and_filter4      = $query->newExpr()->add(['manufacturer_id = ' . $manufacturerFilter])->add(['submission_category_id = ' . $categoryFilter])->add(['model_type_id = ' . '1']);
+                if($count === 1) {
+                    if($manufacturerFilter !== '0') {
+                        return $exp->or([
+                            $query->newExpr()->and([$and_manufacturer]),
+                        ]);
+                    }
+                    if($manufacturerFilter === '0') {
+                        return $exp->or([
+                            'submission_category_id = ' . $categoryFilter,
+                            'scale_id = ' . $scaleFilter
+                        ]); 
+                    }
+                } else if($count === 2) {
+                    if($scaleFilter !== '0' && $manufacturerFilter !== '0') {
+                        return $exp->or([
+                            $query->newExpr()->and([$and_filter2]),
+                        ]);
+                    }
+                    if($scaleFilter !== '0' && $categoryFilter !== '0') {
+                        return $exp->or([
+                            $query->newExpr()->and([$and_filter3]),
+                        ]);
+                    }
+                    if($manufacturerFilter !== 0 && $categoryFilter !== '0') {
+                        return $exp->or([
+                            $query->newExpr()->and([$and_filter4])
+                        ]);
+                    }
+                } else if($count === 3) {
+                    return $exp->or([
+                        $query->newExpr()->and([$and_filter1]),
+                    ]);
+                }
+            });
+        }
+        $this->set('submissions', $this->paginate($query));
+        $this->set('scales', $scales);
+        $this->set('users', $users);
+        $this->set('manufacturers', $manufacturers);
+        $this->set('_serialize', ['submissions']);
     }
 
     public function add() {
