@@ -38,6 +38,12 @@ ul {
     color: black;
 }
 
+.submission-categories-links {
+    text-decoration: none;
+    color: #0071BC;
+    cursor: pointer;
+}
+
 table, th, td {
     margin: auto;
     text-align: left;

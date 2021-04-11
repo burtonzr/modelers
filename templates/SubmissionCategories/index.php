@@ -38,7 +38,14 @@
                 <table>
                     <thead>
                         <tr>
-                            <th class="modelTypeTH">Naval</th>
+                            <th class="modelTypeTH">
+                                <p>
+                                    <?php 
+                                        echo $this->Html->link('Categories', array('controller' => 'ModelTypes', 'action' => 'index'), array('class' => 'submission-categories-links'));
+                                     ?>
+                                    - Naval
+                                </p>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
