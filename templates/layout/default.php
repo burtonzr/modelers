@@ -51,7 +51,7 @@
                     <li class="nav-item">
                         <a>
                             <?php 
-                                echo $this->Html->link('Gallery', array('controller' => 'SubmissionCategories', 'action' => 'index'), array('title' => 'Gallery', 'class' => 'nav-link'));
+                                echo $this->Html->link('Gallery', array('controller' => 'ModelTypes', 'action' => 'view', 1), array('title' => 'Gallery', 'class' => 'nav-link'));
                             ?>
                         </a>
                     </li>

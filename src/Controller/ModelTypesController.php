@@ -4,7 +4,10 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Cake\Event\EventInterface;
+use \Cake\Database\Expression\QueryExpression;
+use Cake\ORM\Query;
 use Cake\ORM\TableRegistry;
+use Cake\I18n\Time;
 
 class ModelTypesController extends AppController {
     
@@ -23,9 +26,7 @@ class ModelTypesController extends AppController {
     }
 
     public function view($id = null) {
-        $this->paginate = [
-            'contain' => ['ModelTypes', 'Statuses'],
-        ];
+        /*
         $modelType = $this->ModelTypes->get($id, [
             'contain' => ['Statuses', 'SubmissionCategories', 'SubmissionFields', 'Submissions'],
         ]);
@@ -37,6 +38,35 @@ class ModelTypesController extends AppController {
             'order' => array('id' => 'DESC')
         ))->toList();
         $this->set(compact('modelType', 'top3Submissions'));
+        */
+        $this->paginate = [
+            'contain' => ['ModelTypes', 'Statuses'],
+        ];
+        $this->loadModel('Submissions');
+        $this->loadModel('Scales');
+        $this->loadModel('Users');
+        $this->loadModel('Manufacturers');
+        $this->loadModel('SubmissionCategories');
+        $submissions          = $this->Submissions->find('all')->where(['model_type_id' => '1'])->order(['Submissions.id' => 'DESC']);
+        $scales               = $this->Scales->find('all')->order(['Scales.id' => 'ASC']);
+        $users                = $this->Users->find('all')->order(['Users.id' => 'ASC']);
+        $manufacturers        = $this->Manufacturers->find('all')->order(['Manufacturers.id' => 'ASC']);
+        $submissionCategories = $this->SubmissionCategories->find('all')->where(['model_type_id' => '1'])->order(['SubmissionCategories.title' => 'ASC']);
+        $filterScales         = $this->Scales->find('list', [
+            'keyField' => 'id',
+            'valueField' => 'scale'
+        ])->where(['model_type_id' => '1'])->toArray();
+        $filterManufacturer = $this->Manufacturers->find('list', [
+            'keyField' => 'id',
+            'valueField' => 'name'
+        ])->toArray();
+        $this->set('submissions', $this->paginate($submissions, ['limit' => '25']));
+        $this->set('scales', $scales);
+        $this->set('users', $users);
+        $this->set('manufacturers', $manufacturers);
+        $this->set('filterManufacturer', $filterManufacturer);
+        $this->set('filterScales', $filterScales);
+        $this->set(compact('submissionCategories'));
     }
 
     public function search() {

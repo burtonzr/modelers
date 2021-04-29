@@ -22,7 +22,8 @@ $routes->scope('/', function (RouteBuilder $builder) {
     $builder->connect('/users/login', ['controller' => 'Users', 'action' => 'login']);
     $builder->connect('/users/logout', ['controller' => 'Users', 'action' => 'logout']);
     $builder->connect('/users', ['controller' => 'Users', 'action' => 'index']);
-    $builder->connect('/naval', ['controller' => 'SubmissionCategories', 'action' => 'index']);
+    $builder->connect('/naval', ['controller' => 'ModelTypes', 'action' => 'view', 1]);
+    //$builder->connect('/naval', ['controller' => 'SubmissionCategories', 'action' => 'index']);
     //$builder->connect('/aircraft', ['controller' => 'SubmissionCategories', 'action' => 'index']);
     //$builder->connect('/automotive', ['controller' => 'SubmissionCategories', 'action' => 'index']);
     //$builder->connect('/armor', ['controller' => 'SubmissionCategories', 'action' => 'index']);
